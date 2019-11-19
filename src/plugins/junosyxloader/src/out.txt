@@ -1,0 +1,2 @@
+dcoaftr=3
+vcfkybd=10,vcfaftr=12,vcaaftr=0,envkybd=1,dcobnd=2,dcolfo=0,chorus=2,dcoenvd=0,pwpwm=110,pwmrate=64,dcoenv=1,vcffreq=77,vcfreso=0,vcfenv=3,vcfenvd=98,vcflfo=0,vcaenv=3,vcalevl=71,lforate=87,lfodely=46,sub=1,sub0=1,sub1=0,sub2=0,sub3=0,sub4=0,sub5=0,envt1=0,envl1=127,envt2=0,sawtooth=4,sawtooth0=0,sawtooth1=0,sawtooth2=0,sawtooth3=1,sawtooth4=0,sawtooth5=0,envl2=122,envt3=48,pulse=4,pulse0=0,pulse1=0,pulse2=0,pulse3=1,envl3=52,envt4=40,hpffreq=2,dcorng=3,sublevl=1,noislvl=1,crsrate=80,PresetName=P11-  PolySynth1
