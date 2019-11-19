@@ -1,10 +1,14 @@
 # june-21
-Alpha juno 2 emulator using CSound &amp; Cabbage
+Roland Roland Juno-1 / Juno-2 / MKS-50 emulator using ![CSound](https://csound.com/) &amp; ![Cabbage](https://www.cabbageaudio.com/)
 
 ![screenshot](src/xcfs/june-21.png)
 
+## Status 
+It's still a work in progress but the 
+
 ## requirement 
 CSound must be present in the system 
+
 
 # src
 source file & doc
