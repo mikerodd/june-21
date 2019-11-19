@@ -1,9 +1,10 @@
 # june-21
 Alpha juno 2 emulator using CSound &amp; Cabbage
 
+![screenshot](src/xcfs/june-21.png)
 
 ## requirement 
-csound must be present in the system 
+CSound must be present in the system 
 
 # src
 source file & doc
