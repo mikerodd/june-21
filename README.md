@@ -12,15 +12,3 @@ It's still a work in progress, so not all presets will work as in the real gear,
 Linux - CSound must be present in the system 
 Windows - a CSound runtime is in the distrib file
 
-# src
-source file & doc
-
-# distribLinux
-zip for 64bits Ubuntu. You can easily build for your distrib or platform with Cabbage
-
-# distribWindows
-zip for Windows 10, thanks to severak :-)
-
-# build
-Build script (rudimentary)
-
