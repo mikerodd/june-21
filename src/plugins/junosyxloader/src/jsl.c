@@ -113,7 +113,7 @@ void loadbank(char* pficname) {
   }
   
   if (strcmp(ficname, pficname) != 0) {
-    if ((fp1 = fopen(pficname, "r")) == NULL) return ;
+    if ((fp1 = fopen(pficname, "rb")) == NULL) return ;
     strcpy(ficname,pficname);
     ret =  fread(ficbuf, 1, 9000, fp1);
     fclose(fp1) ; 
