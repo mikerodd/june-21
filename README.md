@@ -18,3 +18,6 @@ source file & doc
 
 # distribLinux
 zip for 64bits Ubuntu. You can easily build for your distrib or platform with Cabbage
+
+# distribWindows
+zip for Windows 10, thanks to severak :-)
