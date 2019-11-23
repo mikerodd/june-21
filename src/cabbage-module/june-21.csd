@@ -261,7 +261,7 @@ label bounds(404, 20, 50, 12) text("light") align("right")
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
--n -d -+rtmidi=NULL -M0 -m0d --midi-key-cps=4 --midi-velocity-amp=5 --midi-velocity=6  --opcode-lib=./libjsl.so  ; OSX: libjsl.dylib; Windows: libjsl.dll
+-n -d -+rtmidi=NULL -M0 -m0d --midi-key-cps=4 --midi-velocity-amp=5 --midi-velocity=6  --opcode-lib=libjsl.so  ; OSX: libjsl.dylib; Windows: libjsl.dll
 </CsOptions>
 <CsInstruments>
 
