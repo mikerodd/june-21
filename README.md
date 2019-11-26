@@ -1,5 +1,5 @@
 # June-21
-Roland Roland Juno-1 / Juno-2 / MKS-50 emulator using [CSound](https://csound.com) &amp; [Cabbage](https://www.cabbageaudio.com/)
+Roland Juno-1 / Juno-2 / MKS-50 emulator using [CSound](https://csound.com) &amp; [Cabbage](https://www.cabbageaudio.com/)
 
 ![screenshot](src/xcfs/june-21.png)
 
