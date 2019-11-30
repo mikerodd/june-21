@@ -1,4 +1,3 @@
-  bounds(0, 0, 0, 0)
  /*
  This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,7 +15,7 @@
  
 <Cabbage>  
 bounds(0, 0, 0, 0)
-form caption("June 21"), size(800, 650), colour(26,26,26), pluginid("June-21") bundle("./imgs", "./presets","./libjsl.so", "libjsl.dll","june-21.txt")
+form caption("June 21"), size(800, 650), colour(26,26,26), pluginid("Junde-21") bundle("./imgs", "./presets","./libjsl.so", "libjsl.dll")
 
 keyboard bounds(148, 462, 579, 122)  
 
@@ -38,32 +37,32 @@ rslider bounds(8, 102, 44, 44), range(0, 127, 0, 1, 1),  channel("lforate"),  $r
 rslider bounds(56, 102, 44, 44), range(0, 127, 0, 1, 1),  channel("lfodely"),  $rsliderstyle 
 rslider bounds(188, 102, 44, 44), range(0, 127, 0, 1, 1), channel("dcolfo") ,  $rsliderstyle 
 rslider bounds(236, 102, 44, 44), range(0, 127, 0, 1, 1), , channel("dcoenvd"), $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(308, 222, 44, 44) range(0, 127, 0, 1, 1) channel("pwpwm")   $rsliderstyle 
-rslider bounds(356, 222, 44, 44) range(0, 127, 0, 1, 1) channel("pwmrate")  $rsliderstyle 
-rslider bounds(486, 222, 44, 44) range(0, 127, 0, 1, 1) channel("vcffreq")  $rsliderstyle 
-rslider bounds(534, 222, 44, 44) range(0, 127, 0, 1, 1) channel("vcfreso")  $rsliderstyle 
-rslider bounds(630, 222, 44, 45) range(0, 127, 0, 1, 1) channel("vcfenvd") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(308, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envt1")  $rsliderstyle 
+rslider bounds(310, 240, 44, 44) range(0, 127, 0, 1, 1) channel("pwpwm")   $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(358, 240, 44, 44) range(0, 127, 0, 1, 1) channel("pwmrate")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(488, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcffreq")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(536, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcfreso")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(632, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcfenvd") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(308, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envt1")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
 rslider bounds(404, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envt2")  $rsliderstyle 
 rslider bounds(500, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envt3")  $rsliderstyle 
 rslider bounds(596, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envt4")  $rsliderstyle 
 rslider bounds(236, 380, 44, 44) range(0, 127, 0, 1, 1) channel("crsrate")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(582, 222, 44, 44) range(0, 127, 0, 1, 1) channel("vcflfo")  $rsliderstyle 
-rslider bounds(740, 220, 48, 48) range(0, 15, 0, 1, 1) channel("vcfkybd")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(584, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcflfo")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(742, 240, 44, 44) range(0, 15, 0, 1, 1) channel("vcfkybd")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
 rslider bounds(644, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envkybd")  $rsliderstyle 
 rslider bounds(8, 378, 44, 44) range(0, 127, 0, 1, 1) channel("vcalevl") $rsliderstyle 
-rslider bounds(356, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl1") $rsliderstyle 
+rslider bounds(356, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl1") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
 rslider bounds(452, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl2") $rsliderstyle 
 rslider bounds(548, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl3") $rsliderstyle 
 
-rslider bounds(456, 8, 37, 37) range(0, 1, 0.5, 1, 0.01) channel("lid") $rsliderstyle 
+rslider bounds(456, 8, 37, 37) range(0.2, 1, 0.5, 1, 0.01) channel("lid") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
 
 
 
 
 
 vslider bounds(152, 96, 25, 66) range(0, 3, 0, 1, 1) channel("dcorng")   $vsliderstyle  
-vslider bounds(84, 200, 25, 104) range(0, 5, 0, 1, 1) channel("sawtooth") $vsliderstyle  
+vslider bounds(82, 200, 25, 104) range(0, 5, 0, 1, 1) channel("sawtooth") $vsliderstyle  
 vslider bounds(32, 200, 25, 66) range(0, 3, 0, 1, 1) channel("pulse") $vsliderstyle  
 vslider bounds(152, 200, 25, 104) range(0, 5, 0, 1, 1) channel("sub") $vsliderstyle  
 vslider bounds(312, 94, 25, 66) range(0, 3, 0, 1, 1) channel("dcoenv") $vsliderstyle  
@@ -71,12 +70,12 @@ vslider bounds(200, 210, 30, 65) range(0, 3, 0, 1, 1) channel("sublevl") $vslide
 vslider bounds(250, 210, 30, 67) range(0, 3, 0, 1, 1) channel("noislvl") $vsliderstyle  
 vslider bounds(84, 368, 31, 66) range(0, 3, 0, 1, 1) channel("vcaenv") $vsliderstyle  
 vslider bounds(200, 380, 31, 44) range(0, 1, 0, 1, 1) channel("chorus") $vsliderstyle  
-vslider bounds(706, 210, 25, 66) range(0, 3, 0, 1, 1) channel("vcfenv") $vsliderstyle  
-vslider bounds(424, 222, 32, 65) range(0, 3, 0, 1, 1) channel("hpffreq") $vsliderstyle  
+vslider bounds(708, 228, 25, 66) range(0, 3, 0, 1, 1) channel("vcfenv") $vsliderstyle  
+vslider bounds(426, 240, 32, 65) range(0, 3, 0, 1, 1) channel("hpffreq") $vsliderstyle  
 
-button bounds(406, 70, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("PRESET", "PRESET") channel("grpPreset") value(1) fontcolour:1(0, 0, 0, 255)
-button bounds(406, 94, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("MEMORY", "MEMORY") channel("grpMemory") fontcolour:1(0, 0, 0, 255)
-button bounds(406, 118, 52, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("FILE", "FILE") channel("grpCartridge")  fontcolour:1(0, 0, 0, 255) , 
+button bounds(406, 94, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("PRESET", "PRESET") channel("grpPreset") value(1) fontcolour:1(0, 0, 0, 255)
+button bounds(406, 118, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("MEMORY", "MEMORY") channel("grpMemory") fontcolour:1(0, 0, 0, 255)
+button bounds(406, 142, 52, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("FILE", "FILE") channel("grpCartridge")  fontcolour:1(0, 0, 0, 255) , 
 button bounds(18, 486, 51, 31) channel("OctDown") colour:1(255, 0, 0, 255) text("Down", "Down") radiogroup("oct") visible(0)
 button bounds(74, 486, 51, 31) channel("OctUp") text("Normal", "Normal") radiogroup("oct") colour:1(255, 0, 0, 255) visible(0)
 
@@ -84,11 +83,11 @@ button bounds(74, 486, 51, 31) channel("OctUp") text("Normal", "Normal") radiogr
 
 label bounds(194, 186, 40, 12), text("SUB"), 
 label bounds(242, 184, 50, 12) ,text("NOISE"), 
-label bounds(414, 208, 50, 12) text("HPF") 
+label bounds(416, 226, 50, 12) text("HPF") 
 label bounds(136, 78, 50, 12), text("RANGE")
 label bounds(284, 78, 60, 12), text("ENV MODE")
 label bounds(6, 466, 128, 16) text("OCT TRANSPOSE") visible(0)
-label bounds(698, 180, 40, 12) text("ENV")
+label bounds(700, 198, 40, 12) text("ENV")
 label bounds(62, 322, 50, 16) text("VCA")
 label bounds(200, 322, 80, 16) text("CHORUS")
 label bounds(16, 58, 80, 16) text("LFO")
@@ -103,17 +102,17 @@ label bounds(74, 184, 40, 12) text("TOOTH")
 label bounds(144, 184, 40, 12) text("SUB")
 label bounds(190, 196, 50, 12) text("LEVEL")
 label bounds(242, 196, 50, 12) text("LEVEL")
-label bounds(312, 204, 40, 12) text("PWM")
-label bounds(354, 194, 40, 12) text("PWM")
-label bounds(354, 204, 40, 13) text("RATE")
-label bounds(560, 154, 80, 16) text("VCF")
-label bounds(484, 204, 50, 12) text("FREQ")
-label bounds(534, 204, 50, 12) text("RES")
-label bounds(586, 204, 40, 12) text("LFO")
-label bounds(630, 204, 40, 12) text("ENV")
-label bounds(692, 192, 50, 12) text("MODE")
-label bounds(744, 184, 40, 12) text("KEY")
-label bounds(740, 196, 50, 12) text("FOLLOW")
+label bounds(314, 222, 40, 12) text("PWM")
+label bounds(356, 212, 40, 12) text("PWM")
+label bounds(356, 222, 40, 13) text("RATE")
+label bounds(562, 180, 80, 16) text("VCF")
+label bounds(486, 222, 50, 12) text("FREQ")
+label bounds(536, 222, 50, 12) text("RES")
+label bounds(588, 222, 40, 12) text("LFO")
+label bounds(632, 222, 40, 12) text("ENV")
+label bounds(694, 210, 50, 12) text("MODE")
+label bounds(746, 210, 40, 12) text("KEY")
+label bounds(742, 222, 50, 12) text("FOLLOW")
 label bounds(10, 360, 40, 12) text("LEVEL")
 label bounds(80, 340, 40, 12) text("ENV")
 label bounds(74, 352, 50, 12) text("MODE")
@@ -133,7 +132,7 @@ label bounds(640, 362, 50, 12) text("FOLLOW")
 
 groupbox bounds(496, 4, 297, 49),  outlinecolour(160, 160, 160, 0) {
 image     file("imgs/panel.png") bounds(0, 0, 295, 47)
-image     file("imgs/backlcd.png") alpha(0) bounds(0, 2, 295, 47) identchannel("backled")
+image     file("imgs/backlcd.png") alpha(0) bounds(0, 2, 295, 47) identchannel("backled") alpha(0.2)
 image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(3, 11, 18, 27) identchannel("pos0")
 image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(21, 11, 18, 27) identchannel("pos1")
 image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(39, 11, 18, 27) identchannel("pos2")
@@ -150,10 +149,14 @@ image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(222, 11, 18, 27) identch
 image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(240, 11, 18, 27) identchannel("pos13")
 image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(258, 11, 18, 27) identchannel("pos14")
 image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(276, 11, 18, 27) identchannel("pos15")
-image     file("imgs/alpha.png") bounds(0, 0, 295, 47) identchannel("light") alpha(0.7)
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(3, 37, 20, 5) identchannel("underline") crop(0,25, 40, 10) visible(0) 
+
+image     file("imgs/alpha.png") bounds(0, 0, 295, 47) identchannel("light") alpha(0.35)
 }
 
-groupbox bounds(493, 56, 305, 90),  outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0) {
+
+
+groupbox bounds(496, 86, 305, 90),  outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0) {
 button bounds(4, 19, 31, 17)  colour:0(118, 118, 118, 255) text("1", "1") colour:1(255, 0, 0, 255) channel("btb1") radiogroup("btbank") value(1)
 button bounds(41, 19, 31, 17)  colour:0(118, 118, 118, 255) text("2", "2") colour:1(255, 0, 0, 255) channel("btb2") radiogroup("btbank") 
 button bounds(78, 19, 31, 17) colour:0(118, 118, 118, 255) text("3", "3") colour:1(255, 0, 0, 255) channel("btb3") radiogroup("btbank") 
@@ -217,10 +220,10 @@ image bounds(62, 398, 25, 16) file("imgs/adsrn.png")
 image bounds(62, 414, 25, 16) file("imgs/gaten.png")
 
 
-image bounds(682, 208, 25, 16) file("imgs/adsrn.png")
-image bounds(682, 224, 25, 16) file("imgs/adsri.png")
-image bounds(682, 240, 25, 16) file("imgs/adsrn.png")
-label bounds(678, 256, 28, 12) text("dyn") align("right")
+image bounds(684, 226, 25, 16) file("imgs/adsrn.png")
+image bounds(684, 242, 25, 16) file("imgs/adsri.png")
+image bounds(684, 258, 25, 16) file("imgs/adsrn.png")
+label bounds(680, 274, 28, 12) text("dyn") align("right")
 
 
 
@@ -240,30 +243,44 @@ label bounds(234, 226, 20, 12) text("2") align("right")
 label bounds(234, 242, 20, 12) text("1") align("right")
 label bounds(234, 258, 20, 12) text("0") align("right")
 
-label bounds(408, 222, 20, 12) text("3") align("right")
-label bounds(408, 238, 20, 12) text("2") align("right")
-label bounds(408, 254, 20, 12) text("1") align("right")
-label bounds(408, 270, 20, 12) text("0") align("right")
+label bounds(410, 240, 20, 12) text("3") align("right")
+label bounds(410, 256, 20, 12) text("2") align("right")
+label bounds(410, 272, 20, 12) text("1") align("right")
+label bounds(410, 288, 20, 12) text("0") align("right")
 
-filebutton bounds(460, 118, 31, 21) mode("file") populate("*.SYX") text("...") channel ("openFile")
+filebutton bounds(462, 142, 31, 20)  populate("*.SYX") text("...", "...") channel("openFile") colour:0(118, 118, 118, 255)
 
-image bounds(716, 248, 20, 46)  file("imgs/dyn-link2.png")
+image bounds(718, 266, 20, 46)  file("imgs/dyn-link2.png")
 image bounds(322, 132, 20, 46)  file("imgs/dyn-link2.png")
 image bounds(98, 406, 20, 46)  file("imgs/dyn-link2.png")
 
 
 label bounds(254, 162, 70, 12) text("DYNAMICS") align("right")
-label bounds(648, 278, 70, 12) text("DYNAMICS") align("right")
+label bounds(650, 296, 70, 12) text("DYNAMICS") align("right")
 label bounds(30, 436, 70, 12) text("DYNAMICS") align("right")
 
 
 label bounds(404, 20, 50, 12) text("light") align("right")
+
+
+
+button bounds(406, 60, 45, 20) text("Copy", "Copy") channel("btcopy") identchannel("btcopyident") colour:0(118, 118, 118, 255) colour:1(118, 118, 118, 255)
+button bounds(450, 60, 42, 20) text("Paste", "Paste") channel("btpaste") identchannel("btpasteident") colour:0(118, 118, 118, 255) colour:1(120, 120, 120, 255)
+
+groupbox bounds(496, 52, 300, 32), outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0)   {
+hslider bounds(26, 8, 253, 20) range(0, 63, 0, 1, 1) channel("letter")  identchannel("letterident")
+button bounds(4, 8, 20, 20) text("<", "<") channel("left") latched(0)
+button bounds(280, 8, 20, 20) text(">", ">") channel("right") latched(0)
+
+}
+ 
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
--n -d -+rtmidi=NULL -M0 -m0d --midi-key-cps=4 --midi-velocity-amp=5 --midi-velocity=6  --opcode-lib=libjsl.so  ; OSX: libjsl.dylib; Windows: libjsl.dll
+-n -d -+rtmidi=NULL -M0 -m0d --midi-key-cps=4 --midi-velocity-amp=5 --midi-velocity=6  --opcode-lib=./libjsl.so  ; OSX: libjsl.dylib; Windows: libjsl.dll
 </CsOptions>
 <CsInstruments>
+; groupbox bounds(494, 52, 300, 29) ,  outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0) 
 
 ; Initialize the global variables. 
 sr=44100
@@ -435,6 +452,7 @@ gidcoenva[] fillarray  0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,
 // dco env "b" value                                              
 gidcoenvb[] fillarray  0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,2.132 ,2.1325625 ,2.133125 ,2.1336875 ,2.13425 ,2.1348125 ,2.135375 ,2.1359375 ,2.1365 ,2.1370625 ,2.137625 ,2.1381875 ,2.13875 ,2.1393125 ,2.139875 ,2.1404375 ,2.141 ,2.14082 ,2.14064 ,2.14046 ,2.14028 ,2.1401 ,2.13992 ,2.13974 ,2.13956 ,2.13938 ,2.1392 ,2.14048 ,2.14176 ,2.14304 ,2.14432 ,2.1456 ,2.14688 ,2.14816 ,2.14944 ,2.15072 ,2.152 ,2.1533 ,2.1546 ,2.1559 ,2.1572 ,2.1585 ,2.1598 ,2.1611 ,2.1624 ,2.1637 ,2.165 ,2.165832153 ,2.166664307 ,2.16749646 ,2.168328613 ,2.169160766 ,2.16999292 ,2.170825073 ,2.171657226 ,2.172489379 ,2.173321533 ,2.174153686 ,2.174985839 ,2.175817992 ,2.176650146 ,2.177482299 ,2.178314452 ,2.179146605
 
+gidcoenv[] = array(1)
 
 gicrsrate[] fillarray  0, 0.004839651931 ,0.005965252815 ,0.007090853698 ,0.008216454581 ,0.009342055464 ,0.01046765635 ,0.01159325723 ,0.01271885811 ,
                        0.013844459 ,0.01497005988 ,0.01609566076 ,0.01722126165 ,0.01834686253 ,0.01947246341 ,0.0205980643 ,0.02172366518 ,
@@ -470,16 +488,27 @@ gidynVcaRes[] fillarray 0.187 ,0.1928888889 ,0.1987777778 ,0.2046666667 ,0.21055
                         0.8602 ,0.8666 ,0.873 ,0.8794 ,0.8858 ,0.8922 ,0.8986 ,0.905 ,
                         0.9185714286 ,0.9321428571 ,0.9457142857 ,0.9592857143 ,0.9728571429 ,0.9864285714 ,1
 
+gichars[] fillarray 63,  62,  0, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,  0,  0,  0,  0,  0,  0,  0,
+                     0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                    20, 21, 22, 23, 24, 25,  0,  0,  0,  0,  0,  0, 26, 27, 28, 29, 30, 31, 32, 33,
+                    34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,  0,  0
 
+gScharju = "ABCDEFGHIJKLMNOPKRSTUVWXYZabcdefghijklmnopkrstuvwxyz0123456789 -"
 
 // amplitude per oscilators
 giAmp = 1
 
 
-
-// Amplitude of pwm oscilation as a ratio
-
-
+gkCopy = 1   // copy mode Copy at init
+gSBankPreset = "./presets/FACTORYA.SYX"
+gSBankMemory = "./presets/FACTORYB.SYX"
+gScurcart = "./presets/USERCART.SYX"
+gicurprog = 0
+gScurbank = gSBankPreset  ;"./presets/FACTORYA.SYX"
+giNameInput = 0  // Name input mode indicator
+gicurletter = 0  // current edited letter
+gSName = "             " // current tone name
+gSbufame = "             " // current tone name
 
 ;Author: Iain McCurdy (2012)
 ;http://iainmccurdy.org/csound.html
@@ -503,11 +532,58 @@ endop
 
 
 
+opcode loadarray, i[],S
+    Sfilename xin
+    iLen2 = 3
+    iLen init 0
+            
+    iOut2[] init 1
+    
+   fini Sfilename, 0,1 , iLen
+
+    if (iLen != 0) then 
+        iOut[] init iLen
+    endif 
+    printf_i "file %s, array len : %d \n",1, Sfilename, iLen
+    
+    iRng = 0
+    getdata:
+        iTmp init 0
+        
+        fini Sfilename, 0,1 , iTmp
+        iOut[iRng] = iTmp
+    loop_lt iRng, 1, iLen, getdata
+    ficlose Sfilename 
+    
+    xout iOut
+endop
 
 
+opcode dispLCD, i, S
+
+
+
+    Sdisp xin
+
+    iLid chnget "lid"
+    iLid3 = iLid * .6 + 0.4
+    
+    iIdent = 0
+    label3:
+        ideb strchar Sdisp , iIdent
+        SPos sprintf "pos%d",iIdent 
+        SChar  strsub Sdisp, iIdent, iIdent + 1
+        icropx = ((ideb -45) % 20) * 40
+        icropy = int((ideb -45)/ 20) * 60
+        SLetter sprintf "crop(%d, %d, 40, 60) alpha(%f) ", icropx, icropy, iLid
+        chnset SLetter,SPos
+    loop_le iIdent, 1, strlen(Sdisp), label3
+    xout 0
+
+endop
 
 // ----------------------------------------------------------------------------------------------------------------
-// Begin of instrument
+// Begin of main instrument
 // ----------------------------------------------------------------------------------------------------------------
 instr 1
   
@@ -518,13 +594,11 @@ instr 1
 iLfoRate        chnget "lforate"  
 iLfoDely        chnget "lfodely"  
 iPulse          chnget "pulse"
-//iPulse          = iPulse
 iSawtooth       chnget "sawtooth"
 iSawtooth       = iSawtooth
 iSub            chnget "sub"
 iSub             = iSub
 iSubLvl         chnget "sublevl" 
-//iSubLvl         = iSubLvl 
 kpwpwm          chnget "pwpwm"
 iNoisLvl        chnget "noislvl"
 iNoisLvl         = iNoisLvl
@@ -535,7 +609,6 @@ iDcoEnvd        chnget "dcoenvd"
 iDcoEnv         chnget "dcoenv"    
 iDcoEnv = 3 - iDcoEnv   // slide upside down
 iHpfFreq        chnget "hpffreq" 
-//iHpfFreq        = iHpfFreq
 iVcfFreq        chnget "vcffreq" 
 iVcfReso        chnget "vcfreso" 
 iVcfEnvd        chnget "vcfenvd" 
@@ -560,7 +633,6 @@ giPostAmp      chnget "vcalevl"
 giPreset       chnget "grpPreset"
 giMemory       chnget "grpMemory"
 giCartridge    chnget "grpCartridge"
-
 
 // ----------------------------------------------------------------------------------------------------------------
 // ENV Block 
@@ -623,27 +695,18 @@ endif
 
 // Note
 kNote           = p4 * (8  / (2^(iDcoRng + 2)))                        // Base note calculation : note * dcoRng correction 
+iNote = p4 * (8  / (2^(iDcoRng + 2)))
 kNote           = kNote  +  aLFO * (kNote * gilfovals[iDcoLfo] / 2)    // note + lfo oscilation
-if (iDcoEnvd != 0) then  // enveloppe impact pitch : use kEnvVCF   and this formula : (note/130.9)*power(10, b[dcoenv] +a[dcoenv]*(vcfenv - 10)/10) 
-
-    // TODO : fix dcoenv !
-    if (iDcoEnvd >= 64) then
-        printf_i "TODO : fix this... %d\n", 1,iDcoEnvd
     
-        if (iDcoEnv == 0) then    // Norm 
-            kNote           = (kNote/130.9) * pow(10,gidcoenvb[iDcoEnvd] + gidcoenva[iDcoEnvd]* ( kEnvVCF  - 10) / 10) 
-        elseif (iDcoEnv == 1) then // Inv 
-            kNote           = 2 * kNote - (kNote/130.9) * pow(10,gidcoenvb[iDcoEnvd] + gidcoenva[iDcoEnvd]* ( kEnvVCF  - 10) / 10)
-        elseif (iDcoEnv == 2) then // D-Norm 
-            kNote           = (kNote/130.9) * pow(10,gidcoenvb[iDcoEnvd] + gidcoenva[iDcoEnvd]* ( kEnvVCF  - 10) / 10) 
-        elseif (iDcoEnv == 3) then // D-Inv 
-            kNote           = 2 * kNote - (kNote/130.9) * pow(10,gidcoenvb[iDcoEnvd] + gidcoenva[iDcoEnvd]* ( kEnvVCF  - 10) / 10) 
-        endif
-    endif
-endif 
-
-
-//printf_i  ": kLfoPw %f,k kLFOPw : %f p5 %f kpwpwm : %d \n",1, kLfoPw  ,(kLfoPw)*1.99/127 ,p5,kpwpwm
+if (iDcoEnv == 0) then    // Norm 
+    kNote = kNote + (kNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
+elseif (iDcoEnv == 1) then // Inv 
+    kNote = kNote - (kNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
+elseif (iDcoEnv == 2) then // D-Norm 
+    kNote = kNote + (kNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
+elseif (iDcoEnv == 3) then // D-Inv 
+    kNote = kNote - (kNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
+endif
 
 
 
@@ -783,7 +846,7 @@ elseif (iVcfEnv == 2) then   // D-Norm
     // no dynamic for now
     aOutVCFBlock moogvcf aOutHPFBlock        , (1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)]   , iVcfReso/153
 elseif (iVcfEnv == 3) then   // dyn
-    aOutVCFBlock moogvcf aOutHPFBlock        , (1 + aLFO * iVcfLfo/127  ) * givcffreq[kVcfFeq]    , iVcfReso/153
+    aOutVCFBlock moogvcf aOutHPFBlock        , (1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq,127)]    , iVcfReso/153
 endif
 
 
@@ -843,47 +906,77 @@ outs        aoutChorusL * giPostAmp / 127, aoutChorusR * giPostAmp / 127
 thenend:      
 endin
 
-gicurprog = 0
-gScurbank = "./presets/FACTORYA.SYX"
-gScurcart = ""
     
 
+// ----------------------------------------------------------------------------------------------------------------
+// Update GUI
+// ----------------------------------------------------------------------------------------------------------------
 instr updateGUI
 
  
-   ktrig changed chnget:k("btb1"), chnget:k("btb2"), chnget:k("btb3"), chnget:k("btb4") , chnget:k("btb5"), chnget:k("btb6"), chnget:k("btb7"), chnget:k("btb8") , chnget:k("btn1"), chnget:k("btn2"), chnget:k("btn3"), chnget:k("btn4") , chnget:k("btn5"), chnget:k("btn6"), chnget:k("btn7"), chnget:k("btn8"),chnget:k("lid"), chnget:k("grpPreset"), chnget:k("grpMemory"), chnget:k("grpCartridge")
+    ktrig changed chnget:k("btb1"), chnget:k("btb2"), chnget:k("btb3"), chnget:k("btb4") , chnget:k("btb5"), chnget:k("btb6"), chnget:k("btb7"), chnget:k("btb8") , chnget:k("btn1"), chnget:k("btn2"), chnget:k("btn3"), chnget:k("btn4") , chnget:k("btn5"), chnget:k("btn6"), chnget:k("btn7"), chnget:k("btn8"),chnget:k("lid"), chnget:k("grpPreset"), chnget:k("grpMemory"), chnget:k("grpCartridge")
     
-   if ktrig == 1  then 
-        event "i", 1004, 0, .1
-  endif
-  
+    if ktrig == 1  then 
+        event "i", 1002, 0, 0           // Tone changed
+    endif
   
  
-   if changed:k(chnget:S("openFile")) == 1 then
-     event "i", 1004, 0, .1
-   endif
+    if changed:k(chnget:S("openFile")) == 1 then
+        event "i", 1004, 0, 0          // open a cartridge (.SYX file)
+    endif
+    
+    ktrig  changed  chnget:k("btcopy")  
+    if ktrig == 1 then
+        event "i",1005, 0, 0           // copy the current tone in the buffer
+    endif 
+
+    ktrig  changed  chnget:k("btpaste")  
+    if ktrig == 1 then
+        event "i",1006, 0, 0           // paste ther buffer in the current tone 
+    endif 
+        
+    ktrig changed  chnget:k("left"), chnget:k("right")
+    if ktrig == 1 then
+        event "i",1007, 0, 0           // change name of the current tone (into the buffer) 
+    endif 
+
+    ktrig changed chnget:k("letter") 
+    if ktrig == 1 then
+        event "i",1008, 0, 0, 200           // change name of the current tone (into the buffer)  200 => modify letter in name 
+    endif 
+            
 endin
 
+
+// ----------------------------------------------------------------------------------------------------------------
+// Open File 
+// ----------------------------------------------------------------------------------------------------------------
 instr 1004
-    SName  = "                                                    "
-    iIdent = 1
-    gicurprog = 0
-    iBank = 0 
 
     STmp  chnget "openFile"
     if (strcmp(STmp,gScurcart) != 0) then 
         gScurcart = STmp
         chnset  1 ,  "grpCartridge"
     endif
+    event "i", 1002, 0, 0
     
+endin    
+    // get current bank
+    
+instr 1002
+    iIdent = 1
+    gicurprog = 0
+    iBank = 0 
+    kblink = 0
+
     iTmp chnget "grpPreset"
     if (iTmp == 1) then
-        gScurbank = "./presets/FACTORYA.SYX"
+        gScurbank =  gSBankPreset  
         iBank = 0
     endif 
     iTmp chnget "grpMemory"
     if (iTmp == 1) then
-        gScurbank = "./presets/FACTORYB.SYX"
+        gScurbank = gSBankMemory  
         iBank = 1
     endif 
     iTmp chnget "grpCartridge"
@@ -892,9 +985,7 @@ instr 1004
         iBank = 2
     endif 
     
-    // get current bank
-    
-    
+            
     labelb1:
         Sbt sprintf "btb%d",iIdent 
         ideb  chnget Sbt 
@@ -914,7 +1005,8 @@ instr 1004
     //printf_i "Current prog : %d\n", 1, gicurprog
     
     
-    SName getjuname gScurbank,gicurprog  ,iBank  ; use of plugins to get the tone name from the midi bulk dump from synth
+    gSName getjuname gScurbank,gicurprog  ,iBank  ; use of plugin to get the tone name from the midi bulk dump from synth
+    //printf_i"init gsname to %s\n",1, gSName
 
     iLid chnget "lid"
     iLid = iLid * 0.7
@@ -926,18 +1018,8 @@ instr 1004
     chnset SDisplay, "backled"
 
                                     
-    iLid3 = iLid * .6 + 0.4
-    iIdent = 0
-    label3:
-        ideb strchar SName, iIdent
-        SPos sprintf "pos%d",iIdent 
-        SChar  strsub SName, iIdent, iIdent + 1
-        icropx = ((ideb -45) % 20) * 40
-        icropy = int((ideb -45)/ 20) * 60
-        SLetter sprintf "crop(%d, %d, 40, 60) alpha(%f) ", icropx, icropy, iLid3
-        chnset SLetter,SPos
-    loop_le iIdent, 1, strlen(SName), label3
-   
+    iLid3 dispLCD gSName
+    
    
    
     iParm  getjuparm gScurbank, gicurprog, "dcoaftr"
@@ -964,14 +1046,12 @@ instr 1004
     chnset iParm, "pwmrate"
     iParm  getjuparm gScurbank, gicurprog, "dcoenv"
     iParm  = 3 - iParm     // in order to have the slide "upside down"
-//    printf_i "dcoenv parm:%d\n",1, iParm
     chnset iParm, "dcoenv"
     iParm  getjuparm gScurbank, gicurprog, "vcffreq"
     chnset iParm, "vcffreq"
     iParm  getjuparm gScurbank, gicurprog, "vcfreso"
     chnset iParm, "vcfreso"
     iParm  getjuparm gScurbank, gicurprog, "vcfenv"
-//    printf_i "vcfenv parm:%d\n",1, iParm
     iParm  = 3 - iParm     // in order to have the slide "upside down"
     chnset iParm, "vcfenv"
     iParm  getjuparm gScurbank, gicurprog, "vcfenvd"
@@ -979,7 +1059,6 @@ instr 1004
     iParm  getjuparm gScurbank, gicurprog, "vcflfo"
     chnset iParm, "vcflfo"
     iParm  getjuparm gScurbank, gicurprog, "vcaenv"
-//    printf_i "vcaenv parm:%d\n",1, iParm
     iParm  = 3 - iParm     // in order to have the slide "upside down"
     chnset iParm, "vcaenv"
     iParm  getjuparm gScurbank, gicurprog, "vcalevl"
@@ -1019,9 +1098,189 @@ instr 1004
     iParm  getjuparm gScurbank, gicurprog, "crsrate"
     chnset iParm, "crsrate"
     
-        
+    gicurletter  = 0
+    event_i "i",1007, 0, 0
     
 end2:    
+endin 
+
+// ----------------------------------------------------------------------------------------------------------------
+// Copy the current tone into the buffer
+// ----------------------------------------------------------------------------------------------------------------
+instr 1005
+    ; we're in copy mode 
+     printf_i "copy mode cart:%s, proc:%d\n", 1, gScurbank, gicurprog
+     iParm  setjuparm gScurbank, gicurprog, "vcalevl", 10
+
+    iParm  chnget "lforate"  
+    iParm2  setjuparm gScurbank, gicurprog, "lforate", iParm
+    iParm  chnget "lfodely"  
+    printf_i "lfodely : %d\n",1, iParm
+    iParm2  setjuparm gScurbank, gicurprog, "lfodely", iParm
+    iParm  chnget "pulse"
+    iParm2  setjuparm gScurbank, gicurprog, "pulse", iParm
+    iParm  chnget "sawtooth"
+    iParm2  setjuparm gScurbank, gicurprog, "sawtooth", iParm
+    iParm chnget "sub"
+    iParm2  setjuparm gScurbank, gicurprog, "sub", iParm
+    iParm chnget "sublevl" 
+    iParm2  setjuparm gScurbank, gicurprog, "sublevl", iParm
+    iParm chnget "pwpwm"
+    iParm2  setjuparm gScurbank, gicurprog, "pwpwm", iParm
+    iParm chnget "noislvl"
+    iParm2  setjuparm gScurbank, gicurprog, "noislvl", iParm
+    iParm chnget "pwmrate"
+    iParm2  setjuparm gScurbank, gicurprog, "pwmrate", iParm
+    iParm chnget "dcorng"
+    iParm2  setjuparm gScurbank, gicurprog, "dcorng", iParm
+    iParm chnget "dcolfo"
+    iParm2  setjuparm gScurbank, gicurprog, "dcolfo", iParm
+    iParm chnget "dcoenvd"
+    iParm2  setjuparm gScurbank, gicurprog, "dcoenvd", iParm
+    iParm chnget "dcoenv"    
+    iParm = 3 - iParm // slide upside down
+    iParm2  setjuparm gScurbank, gicurprog, "dcoenv", iParm
+    iParm chnget "hpffreq" 
+    iParm2  setjuparm gScurbank, gicurprog, "hpffreq", iParm
+    iParm chnget "vcffreq" 
+    iParm2  setjuparm gScurbank, gicurprog, "vcffreq", iParm
+    iParm chnget "vcfreso" 
+    iParm2  setjuparm gScurbank, gicurprog, "vcfreso", iParm
+    iParm chnget "vcfenvd" 
+    iParm2  setjuparm gScurbank, gicurprog, "vcfenvd", iParm
+    iParm chnget "vcfenv" 
+    iParm  = 3 - iParm // slide upside down
+    iParm2  setjuparm gScurbank, gicurprog, "vcfenv", iParm
+    iParm chnget "vcfkybd"
+    iParm2  setjuparm gScurbank, gicurprog, "vcfkybd", iParm
+    iParm chnget "vcflfo" 
+    iParm2  setjuparm gScurbank, gicurprog, "vcflfo", iParm
+    iParm chnget "vcaenvd" 
+    iParm2  setjuparm gScurbank, gicurprog, "vcaenvd", iParm
+    iParm chnget "vcaenv" 
+    iParm  = 3 - iParm // slide upside down
+    iParm2  setjuparm gScurbank, gicurprog, "vcaenv", iParm
+    iParm chnget "envt1"
+    iParm2  setjuparm gScurbank, gicurprog, "envt1", iParm
+    iParm chnget "envt2"
+    iParm2  setjuparm gScurbank, gicurprog, "envt2", iParm
+    iParm chnget "envt3"
+    iParm2  setjuparm gScurbank, gicurprog, "envt3", iParm
+    iParm chnget "envt4"
+    iParm2  setjuparm gScurbank, gicurprog, "envt4", iParm
+    iParm chnget "envl1"
+    iParm2  setjuparm gScurbank, gicurprog, "envl1", iParm
+    iParm chnget "envl2"
+    iParm2  setjuparm gScurbank, gicurprog, "envlé", iParm
+    iParm chnget "envl3"
+    iParm2  setjuparm gScurbank, gicurprog, "envl3", iParm
+    iParm chnget "chorus"
+    iParm2  setjuparm gScurbank, gicurprog, "chorus", iParm
+    iParm chnget "crsrate"
+    iParm2  setjuparm gScurbank, gicurprog, "crsrate", iParm
+    iParm chnget "vcalevl"
+    iParm2  setjuparm gScurbank, gicurprog, "vcalevl", iParm
+    
+    Stmp strsub gSName, 6
+    gSbufname strcpy Stmp
+         
+    gkCopy = 0
+
+endin 
+
+// ----------------------------------------------------------------------------------------------------------------
+// Paste the buffer into the current tone 
+// ----------------------------------------------------------------------------------------------------------------
+instr 1006
+    if ((strcmp(gScurbank,gSBankPreset) != 0) && (strcmp(gScurbank,gSBankPreset) != 0)) then        
+        
+          ; this is the cartridge, let's go ! 
+        //printf_i "paste mode cart:%s, proc:%d\n", 1, gScurbank, gicurprog
+        Stmp strsub gSName, 6
+        printf_i "call jupaste bank:'%s', prog:%d, name:'%s'\n", 1, gScurbank, gicurprog, gSbufname
+        
+        iTmp jupaste gScurbank, gicurprog, gSbufname
+        printf_i "return %d\n", 1, iTmp
+        gkCopy = 1
+        event_i "i", 1002, 0, 0
+
+        
+    endif
+endin
+
+instr 1007 
+ // bounds(3, 37, 20, 5)  underline
+// gicurletter = 0  // current edited letter
+ 
+  
+    iTmp chnget "left"
+    if ((iTmp == 1) && (gicurletter > 0))  then 
+        gicurletter = gicurletter - 1
+    endif 
+    iTmp chnget "right"
+    if ((iTmp == 1) && (gicurletter < 11))  then 
+        gicurletter = gicurletter + 1
+    endif 
+    
+
+    if ((gicurletter == 0) || (gicurletter == 11)) then 
+        Stmp sprintf "visible(0) bounds(%d, 37, 20, 5)",3 + 18 * (gicurletter + 5)
+        chnset Stmp , "underline"
+        chnset "visible(0)", "letterident"
+    else
+        Stmp sprintf "visible(1) bounds(%d, 37, 20, 5)",3 + 18 * (gicurletter + 5)
+        chnset Stmp , "underline"
+        chnset "visible(1)", "letterident"
+    endif   
+    
+    event_i "i",1008, 0, 0,100           // change name of the current tone (into the buffer) 
+
+endin
+
+instr 1008
+
+    islival chnget  "letter"
+    
+    Sslival strsub gScharju, islival, islival + 1
+    SChar  strsub gSName, gicurletter + 5, gicurletter + 6
+    // printf_i "letter from slider : %s, letter in name : %s\n",1, Sslival, SChar
+
+    if (p4  == 100) then
+        // put slider to letter
+        ichr strchar gSName, gicurletter + 5
+
+        //printf_i "p4 : %d\n",1,p4
+        if (ichr == 32) then 
+            icar = 1  
+        else 
+            icar = ichr - 45;
+        endif 
+        //printf_i "curletter : %d  chr:%d (%s) target : %d %d\n", 1, gicurletter, ichr, SChar, icar, gichars[icar]
+        chnset gichars[icar], "letter"
+    elseif ((p4 == 200) && (strcmp(Sslival,SChar) != 0)) && (gicurletter > 0) && (gicurletter < 16) then 
+    
+        printf_i "p4 : %d\n",1,p4
+        Stmp strsub gSName, 0, gicurletter + 5
+        Stmp2 strcat Stmp, Sslival 
+        Stmp strsub gSName, gicurletter + 6
+        if (strlen(Stmp) == 0) then 
+            gSName  = Stmp2
+        else 
+            gSName  strcat, Stmp2, Stmp
+        endif 
+        printf_i "p4 : %d  => '%s' end : '%s' '%s'\n",1,p4, gSName, Stmp2, Stmp
+        islival dispLCD gSName
+        
+    
+    endif
+          
+endin
+
+instr 3   // init 
+
+gidcoenv[] loadarray "dat/gidcoenv.dat"
+//itmp initjubuf
+
 endin 
 
   
@@ -1029,6 +1288,7 @@ endin
 <CsScore>
 ;causes Csound to run for about 7000 years...
 i 2  0 [3600*24*7] ;read var stored in instr1
+i 3 0 0 
 f0 z
 
 </CsScore>
