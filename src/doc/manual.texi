@@ -1,0 +1,399 @@
+\input texinfo
+@setfilename June-21-Manual
+@settitle June-21 Manual 1.0
+@afourpaper
+@tex
+\global\urefurlonlylinktrue
+\global\def\urlcolor{0 0 1}   % blue
+@end tex
+
+@copying
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+This software use VST sdkSDK which is @copyright{}  2019, Steinberg Media
+Technologies GmbH,All Rights Reserved  
+
+Copyright @copyright{} 2019 Michel Rodriguez
+@end copying
+
+
+@titlepage
+@title June-21 Manual
+@subtitle a June 1 / 2 / MKS-50 emulation VST using CSound & Cabbage
+
+@center @image{cover,15cm,,,.png}
+
+@author Michel Rodriguez
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+
+@end titlepage
+
+@contents
+
+@ifnottex
+@node Top
+@top June-21 Manual 1.0
+This documentation covers the use of the June-21 VST synthetizer, a open source Alpha Juno-1/2 emulation.
+The text and schematics are partly inspired by the original documentation
+@end ifnottex
+
+
+
+@menu
+* Introduction::
+* Installation::  Explain how to install on GNU/Linux and Windows
+* Synth Description::
+* Settings::
+* Using Tones::
+@end menu
+
+@node Introduction
+@chapter Introduction
+This documentation covers the use of the June-21 VST synthetizer, a open source Roland Juno-1 / Juno-2 / MKS-50 emulator using
+CSound (@url{https://csound.com}) and Cabbage (@url{https://www.cabbageaudio.com/}).
+
+June-21 can read and play Juno 1 / 2 MKS-50 presets. The emulator includes Juno 2 factory "Preset" and "Memory" bank tones.
+Many tones can be found on the web, in a form of a @file{.SYX} bulk dump extracted from synths.
+
+
+The text and schematics are partly inspired by the original Juno-2 documentation.
+
+The look of the GUI is obviously inspired by the Roland PG-300.
+
+@b{Nota Bene:} June-21 is still in development and is not a perfect emulator, so some tones can be far from the real thing and some won't work
+(but some can be very accurate and pleasing!). As of now (Dec 2019) 2 things are not implemented :
+@itemize @bullet
+@item @b{Dynamics on VCF} : not done yet
+@item @b{Aftertouch} : won't be done (at least by me) as my own Juno-2's aftertouch is not working.
+@end itemize
+
+@i{Have fun !}
+
+
+@node Installation
+@chapter Installation
+
+The latest version of June-21 can be found at
+@url{https://github.com/mikerodd/june-21}
+
+@section Using distributions
+There are ready-to-use distribution available :
+@itemize @bullet
+@item @file{vst-june-21-linux.zip} : VST@footnote{Virtual Studio Technology (VST) is an audio plug-in software interface that integrates software synthesizer and effects in digital audio workstations, created by Steinberg.} distribution for GNU/Linux
+@item @file{standalone-june-21-windows64.zip} : Standalone distribution for Windows 64-bits
+@end itemize
+
+
+
+@subsection Windows Installation
+Download and unzip the appropriate file, execute @file{june-21.exe} 
+
+@subsection GNU/Linux Installation
+Download and unzip the appropriate file, use @file{june-21.so} in your DAW or your favorite VST container. 
+
+@section Using Cabbage
+If you want to test/modify June-21, you can use Cabbage and open @file{june-21.csd} as you would do with any other Cabbage source files.
+
+Note that a custom plugin is included, @file{libjsl} (source available in the @file{plugins/junosyxloader} section of the repository).
+This plugin interacts with the @file{.SYX} files (load tone, modify tone), it's a plain C program, you will need @file{CMake} and @file{CSound} headers
+installed in order to recompile it.
+
+@node Synth Description
+@chapter Synth Description
+
+June-21 consists of several blocks as shown below. Each blocs of the synth section is controlled by
+relevant tone-color parameters
+
+@image{blockdiagram,15cm,,,.png}
+
+@itemize @bullet
+@item @image{one,0.4cm,,,.png} @b{DCO (Digitally Controlled Osillator)}
+
+DCO is the digitally controled oscillator that controls the pitch and generates the waveforms that are the sound source of the synthesizer.
+
+@item @image{two,0.4cm,,,.png} @b{HPF (High Pass Filter)}
+
+The HPF is a filter that passes high frequency harmonics and cuts off the lower ones. This changes the waveform and controls the tone color.
+
+@item @image{three,0.4cm,,,.png} @b{VCF (Voltage Controlled Filter)}
+
+Each VCF lets lower frequency harmonics of the input signal pass and cuts off the higher ones. In other words, it is a usual low pass filter.
+By controlling the cutoff point and resonance, the waveform changes, thereby the tone color alters.
+
+@item @image{four,0.4cm,,,.png} @b{VCA (Voltage Controlled Amplifier)}
+
+After filtered in the VCF, the signal is fed to the VCA where the volume (amplitude) of the sound is controlled.
+
+@item @image{five,0.4cm,,,.png} @b{CHORUS}
+
+The chorus duplicates the signal with a pitch change, giving a rich and shimmering quality.
+
+@item @image{six,0.4cm,,,.png} @b{LFO (Low Frequency Oscillator)}
+
+This oscillator generates extremely low frequency, so produces a vibrato or growl effect by controlling the DCO or VCF.
+
+@item @image{seven,0.4cm,,,.png} @b{ENV (Envelop Generator)}
+
+This generates the control voltage (Envelope) which controls the DCO, VCF and VCA, therefore
+alters the pitch, tone color and volume in each note.
+@end itemize
+
+@node Settings
+@chapter Settings
+
+@section DCO Block (Digitally Controlled Oscillator)
+
+@center @image{dcoblock,10cm,,,.png}
+
+
+@subsection DCO Range
+@image{dcorng,1cm,,,.png}
+This is to change the pitch range of the DCO in exact one octave steps from 4' to 32' (4', 8', 16', 32').
+8' is standard.
+
+@subsection DCO LFO Depth
+@image{dcolfo,1cm,,,.png}
+When the LFO is controlling the pitch of the DCO, this adjusts the depth of the vibrato effect
+in the range of 0 to 127.
+
+@subsection DCO ENV Depth
+@image{dcoenv,1cm,,,.png}
+When the ENV is controlling the pitch of the DCO, this parameter sets the depth of the modulation in
+the range of 0 to 127.
+
+@subsection DCO ENV Mode
+@image{dcoenvd,1.77cm,,,.png}
+this selects the polarity of the envelope curve that controls the DCO.
+Usually @image{adsrn,0.5cm,,,.png} may by used. In @image{adsri,0.5cm,,,.png} mode,
+ADSR pattern will be inverted.
+
+@itemize @bullet
+@item @b{Normal} @image{adsrn,0.5cm,,,.png} : ENV serves to increase the DCO's pitch.
+@item @b{Invert} @image{adsri,0.5cm,,,.png} : ENV serves to decrease the DCO's pitch.
+@item @b{Normal with Dynamics} @image{adsrn,0.5cm,,,.png} : ENV with Dynamics serves to increase the DCO's pitch.
+@item @b{Invert with Dynamics} @image{adsri,0.5cm,,,.png} : ENV with Dynamics serves to decrease the DCO's pitch.
+@end itemize
+
+@subsection Pulse
+@image{pulse,1.187cm,,,.png}
+Pulse wave selected, according the selection, 3 different pulses are generated. The pulse @image{pulse3,0.5cm,,,.png} can
+be set at DCO PW/PWM Depth.
+
+@subsection Sawtooth
+@image{sawtooth,1.187cm,,,.png}
+Sawtooth wave selected, according the selection, 5 different pulses are generated. The sawtooth @image{sawtooth3,0.5cm,,,.png} can
+be set at DCO PW/PWM Depth.
+
+@subsection Sub
+@image{sub,1.375cm,,,.png}
+This selects the waveform of the Sub Oscillator that generates a pitch one or two octaves lower than the pulse ware or the
+sawtooth wave.
+
+@subsection Sub Oscillator Waveform
+@image{sub,1.375cm,,,.png}
+This selects the waveform of the Sub Oscillator that generates a pitch one or two octaves lower than the pulse ware or the
+sawtooth wave.
+
+@itemize
+@item @image{sub1,0.5cm,,,.png}, @image{sub2,0.5cm,,,.png}, @image{sub3,0.5cm,,,.png} and @image{sub4,0.4cm,,,.png} are one octave lower
+@item @image{sub5,0.5cm,,,.png} and @image{sub2,0.6cm,,,.png} are two octave lower
+@end itemize
+
+
+@subsection Sub Oscillator Level
+@image{sublevl,1cm,,,.png}
+This sets the volume of the Sub Oscillator from 0 to 3. At 0 there is no oscillation.
+
+@subsection DCO Noise Level
+@image{noislvl,1cm,,,.png}
+This sets the volume of the White Noise, 0 to 3 are valide, at 0, there is no Noise generated.
+
+@subsection DCO PW/PWM Depth
+@image{pwpwm,1cm,,,.png}
+This parameter works only on the Pulse Wave 3 or the Sawtooth Wave 3. The pulse width of a wave can be determined by the value
+from 0 to 127.
+
+@subsection DCO PW/PWM Depth
+@image{pwmrate,1cm,,,.png}
+This parameter works only on the Pulse Wave 3 or the Sawtooth Wave 3. The rate of the LFO modulation that changes the pulse
+width of the waveform ca be set. 0 to 127 are the values valid for this parameter. At 0, however, the pulse width is not
+modulated by the LFO but set at the PW/PWM Depth. When this parameter is set to a value other than 0, the pulse width set with
+the DCO PW/PWM Depth is the widest pulse made by the LFO modulation.
+
+@section HPF Block (High Pass Filter)
+@image{hpfblock,1cm,,,.png}
+
+This parameter changes the cutoff point of the HPF:
+
+@itemize @bullet
+@item @b{0} :The lower frequencies are emphasized (High Shelving at ~106Hz)
+@item @b{1} : HPF is off
+@item @b{2} : Cutoff point is set at lower frequency (~124 Hz)
+@item @b{3} : Cutoff point is set at higet than 2  (~220 Hz). The produced sound is harder and thinner 
+@end itemize
+
+@section VCF Block (Voltage Controlled Filter)
+@center @image{vcfblock,6.583cm,,,.png}
+
+
+@subsection VCF Cutoff Requency
+@image{vcffreq,1cm,,,.png}
+This is for changing the cutoff point of the VCF. As you decrease the value, the cutoff frequency will
+come down, and the waveform gradually becomes approximation of a sine wave, then the sound will fade out.
+0 to 127 are valid for this parameter.
+
+@center@image{vcfcutoffdiag,16cm,,,.png}
+
+@subsection VCF Resonance
+@image{vcfreso,1cm,,,.png}
+This parameter emphasizes the cutoff point set at the VCF Cutoff Frequency. 
+0 to 127 are valid for this parameter
+
+@subsection VCF LFO
+@image{vcflfo,1cm,,,.png}
+This parameter sets the depth of the LFO modulation that changes the cutoff point of the
+VCF (growl effect). 0 to 127 are valid for this parameter.
+
+@subsection VCF Env
+@image{vcfenv,1cm,,,.png}
+This parameter controls the cutoff point of the VCF in each not with the ENV curve set in the
+ENV section. As you increase the value, tone color within one note changes mor drastically.
+0 to 127 are valid for this parameter.
+
+@subsection VCF Env
+@image{vcfenvd,1.75cm,,,.png}
+This is to select the polarity ot the Envelope curve that controls the cutoff point of the VCF.
+Usually, @image{adsrn,0.5cm,,,.png} may be used, in @image{adsri,0.5cm,,,.png} mode, ADSR pattern will
+be inverted.
+
+@itemize @bullet
+@item @b{Normal} @image{adsrn,0.5cm,,,.png} : ENV serves to increase the VCF's cutoff point.
+@item @b{Invert} @image{adsri,0.5cm,,,.png} : ENV serves to decrease the VCF's cutoff point.
+@item @b{Normal with Dynamics} @image{adsrn,0.5cm,,,.png} : ENV with Dynamics serves to increase the VCF's cutoff point.
+@item @b{dyn} : This mode is rather special ; the ENV has nothing to do with the VCF's cutoff point and the Dynamics directly
+works to increase the VCF's cutoff point.
+@end itemize
+
+
+@section VCA Block (Voltage Controlled Amplifier)
+@center @image{vcablock,3.416cm,,,.png}
+
+@subsection VCA Level
+@image{vcalevl,1cm,,,.png}
+
+This is for changing the volume, and can be effeively used when writing a tone color.
+When the value is set too high, sound may be distorted.
+
+@subsection VCA ENV Mode
+@image{vcaenvd,1.93cm,,,.png}
+
+This is to select whether to control the VCA by the signal from the ENV or by the Gate
+signal (Key On/Off signal).
+
+@center @image{vcadiag,10cm,,,.png}
+
+@itemize @bullet
+@item @b{ENV} @image{adsrn,0.5cm,,,.png} : ENV changes the volume.
+@item @b{Gate} @image{gaten,0.5cm,,,.png} : Gate signal changes the volume.
+@item @b{ENV} @image{adsrn,0.5cm,,,.png} : ENV with Dynamics changes the volume.
+@item @b{Gate} @image{gaten,0.5cm,,,.png} : Gate signal with Dynamics changes the volume.
+
+@end itemize
+
+@section CHORUS Block
+@center @image{chorus,2.6cm,,,.png}
+
+@subsection Chorus On/Off
+This turns on or off the Chorus effect.
+
+@subsection Chorus Rate
+This parameter determines the rate of the horus effect from 0 to 127.
+
+
+@section LFO Block (Low Frequency Oscillator)
+@center @image{lfoblock,2.25cm,,,.png}
+
+@subsection LFO Rate
+This parameter changes the rate of the LO modulation. 0 to 127 are valid for this parameter
+
+@subsection LFO Delay Time
+This parameter sets the time needed for the LFO modulation to work from the moment
+the key is played.
+0 to 126 are valid for this parameter
+
+
+
+@section ENV Block (Envelope Generator)
+@center @image{envblock,8.437cm,,,.png}
+
+@subsection Envelope definition
+The parameters of this part defines the ADSR envelope, 0 to 127 are valid for all parameters :
+
+@center @image{envdiag,8.437cm,,,.png}
+
+@subsection ENV Keyboard Follower
+the time required for the envelope to complete its curve can be changed depending on which key is pressed.
+O to 15 are valid for this parameter.
+There is no change of the time at all when it is set to 0, but as the value is increased, envelope time
+become shorter with higher key pressed.
+
+
+
+@node Using Tones
+@chapter Using Tones
+
+@center @image{usingbulkdump,8.25cm,,,.png}
+
+@section Tone organisation
+There are 8 tones per banks and 8 banks in a group (64 tones per group). Groups are usually extracted from
+Junos via a Bulk Data Transfer resulting on a binary file known as SysEx file (short @file{.SYX}) for
+Midi System Exclusive messages.
+
+June-21 includes the two factory presets of the Juno 2 and a blank group :
+
+@itemize @bullet
+@item @b{PRESET} : Contains the factory preset of the Juno 2 (@file{presets/FACTORYA.SYX})
+@item @b{MEMORY} : Contains the factory memory of the Juno 2 (@file{presets/FACTORYB.SYX})
+@item @b{FILE} : mapped to an empty cartridge in order to store user tones (@file{presets§/USERCART.SYX})
+@end itemize
+
+You can change tone using @b{1} to @b{8} bank or number buttons and @b{PRESET}, @b{MEMORY} and @b{FILE}.
+
+@section Change Tone name
+@image{chname1,8.27cm,,,.png}
+You can modify the tone name by using @b{<} and @b{>} to navigate through the name. The green slider can be used to
+change the underscored character.
+
+@section Save Tone
+To save a tone, 3 steps :
+@itemize @bullet
+@item use the @b{Copy} button. June-21 transfers all parameters in a buffer.
+@item Select a destination Tone. If you want to overwrite current tone, just stay in this tone
+@item Use the @b{Paste} button, your buffer is saved on the current tone of the @file{.SYX} file.
+@end itemize
+
+@b{Nota Bene} : There is no mecanism protecting the factory presets ! 
+
+@section Use other Tones
+
+You can download a lot of @file{.SYX} files on the internet ! Here is very interesting source :  @url{http://www.llamamusic.com/mks50/mks-50_patches.html}
+
+Once you have a @file{.SYX} file you want to try, use the @b{...} button to load it as a file.
+
+@b{Nota Bene} : June-21 is not a finished emulator, so some tones might not sound as expected...
+
+
+
+
+@bye

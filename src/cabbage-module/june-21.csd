@@ -1,4 +1,4 @@
- /*
+/*
  This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -22,7 +22,7 @@ keyboard bounds(148, 462, 579, 122)
 
 
 image bounds(0, 0, 800, 450) file("imgs/background.svg") 
-image bounds(10, 4, 300, 45) file("imgs/june-21.png")
+image bounds(50, 4, 300, 45) file("imgs/june-21.png")
 
 
 
@@ -55,7 +55,7 @@ rslider bounds(356, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl1") $rslide
 rslider bounds(452, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl2") $rsliderstyle 
 rslider bounds(548, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl3") $rsliderstyle 
 
-rslider bounds(456, 8, 37, 37) range(0.2, 1, 0.5, 1, 0.01) channel("lid") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(453, 4, 47, 46) range(0.2, 1, 0.5, 1, 0.01) channel("lid") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255) text("light")
 
 
 
@@ -260,7 +260,7 @@ label bounds(650, 296, 70, 12) text("DYNAMICS") align("right")
 label bounds(30, 436, 70, 12) text("DYNAMICS") align("right")
 
 
-label bounds(404, 20, 50, 12) text("light") align("right")
+
 
 
 
@@ -274,6 +274,7 @@ button bounds(280, 8, 20, 20) text(">", ">") channel("right") latched(0)
 
 }
  
+button bounds(408, 12, 48, 28) text("Panic", "Panic", "") colour:0(255, 0, 0, 255) channel("btpanic") colour:1(255, 0, 0, 255) latched(0)
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
@@ -404,8 +405,8 @@ gienvt1[] fillarray     0.004187 * giFac, 0.004487 * giFac, 0.004809 * giFac, 0.
                         1.071773 * giFac, 1.148698 * giFac, 1.231144 * giFac, 1.319508 * giFac, 1.414214 * giFac, 1.515717 * giFac, 1.624505 * giFac, 1.741101 * giFac, 1.866066 * giFac, 2.000000 * giFac, 
                         2.143547 * giFac, 2.297397 * giFac, 2.462289 * giFac, 2.639016 * giFac, 2.828427 * giFac, 3.031433 * giFac, 3.249010 * giFac, 3.482202 * giFac, 3.732132 * giFac, 4.000000 * giFac, 
                         4.287094 * giFac, 4.594793 * giFac, 4.924578 * giFac, 5.278032 * giFac, 5.656854 * giFac, 6.062866 * giFac, 6.498019 * giFac, 6.964405 * giFac, 7.464264 * giFac, 8.000000 * giFac, 
-                        8.574188 * giFac, 9.189587 * giFac, 9.849155 * giFac, 10.556063 * giFac, 11.313709 * giFac, 12.125733 * giFac, 12.996038 * giFac, 13.928809 * giFac, 14.928528 * giFac, 
-                        16.000000 * giFac, 17.148375 * giFac, 18.379174 * giFac, 19.698311 * giFac, 21.112127 * giFac, 22.627417 * giFac, 24.251465 * giFac, 25.992077
+                        8.574188 * giFac, 9.189587 * giFac, 9.849155 * giFac, 10.556063 * giFac, 11.313709 * giFac, 12.125733 * giFac, 12.996038 * giFac, 13.928809 * giFac, 14.928528 * giFac, 16.000000 * giFac, 
+                        17.148375 * giFac, 18.379174 * giFac, 19.698311 * giFac, 21.112127 * giFac, 22.627417 * giFac, 24.251465 * giFac, 25.992077 * giFac, 26.992077 * giFac
 
 // env T3
 gienvt3[] fillarray     0.090000 * giFac, 0.097000 * giFac, 0.104000 * giFac, 0.111000 * giFac, 0.118000 * giFac, 0.125000 * giFac, 0.132000 * giFac, 0.139000 * giFac, 
@@ -423,7 +424,7 @@ gienvt3[] fillarray     0.090000 * giFac, 0.097000 * giFac, 0.104000 * giFac, 0.
                         11.864000 * giFac, 12.328000 * giFac, 12.792000 * giFac, 13.256000 * giFac, 13.720000 * giFac, 14.447500 * giFac, 15.175000 * giFac, 15.902500 * giFac, 
                         16.630000 * giFac, 17.357500 * giFac, 18.085000 * giFac, 18.812500 * giFac, 19.540000 * giFac, 20.267500 * giFac, 20.995000 * giFac, 22.048500 * giFac, 
                         23.102000 * giFac, 24.155500 * giFac, 25.209000 * giFac, 26.262500 * giFac, 27.316000 * giFac, 28.369500 * giFac, 29.423000 * giFac, 30.476500 * giFac, 
-                        31.530000 * giFac, 32.394286 * giFac, 33.258571 * giFac, 34.122857 * giFac, 34.987143 * giFac, 35.851429 * giFac, 36.715714 * giFac, 37.580000
+                        31.530000 * giFac, 32.394286 * giFac, 33.258571 * giFac, 34.122857 * giFac, 34.987143 * giFac, 35.851429 * giFac, 36.715714 * giFac, 37.580000 * giFac
 
 
 // ent T4 values 0-127 
@@ -644,7 +645,7 @@ krel init 0
   krel release ;outputs release-stage flag (0 or 1 values)
   if (krel == 1) kgoto rel ;if in release-stage goto release section
         if (iEnvL1 > iEnvL2) then 
-            //kEnv linsegr 0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2*(iEnvL1-iEnvL2)], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
+            //  kEnv linsegr 0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2*(iEnvL1-iEnvL2)], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
             kEnv  linsegr  0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
         else
    //    kEnv linsegr 0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2*(iEnvL1-iEnvL2)/127], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
@@ -812,6 +813,8 @@ aOsc4   noise  iNoisLvl / 3, -0.9
 ; Output VCO Block
 aOutVcoblock    =  aOsc1 * .25 + aOsc2 * .25 + aOsc3 * .25 + aOsc4 * .25
 
+//aTmpOut = aOutVcoblock    
+//goto theend
 
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -829,26 +832,32 @@ elseif (iHpfFreq == 3) then
 endif
 
 
-
+//aTmpOut = aOutHPFBlock        
+//goto theend
 
 
 // ----------------------------------------------------------------------------------------------------------------
 // VCF Block
 // ----------------------------------------------------------------------------------------------------------------
-//printf_i "note : %f , new note : %f   formule : %f,   iDcoRng: %d\n", 1, p4, p4 * (8  / (2^(iDcoRng + 1))),round(10 * log2(p4 / (261.7 * (8  / (2^(iDcoRng + 1))))) * iVcfKybd / 18), iDcoRng
+//printf_i "note : %f , new note : %f   formule : %f,   iDcoRng: %d\n", 1, p4, p4 * (8  / (2^(iDcoRng + 2))),round(10 * log2(p4 / (261.7 * (8  / (2^(iDcoRng + 1))))) * iVcfKybd / 18), iDcoRng
 // kVcfFeq = iVcfFreq + round(10 * log2(kNote / 130.9) * iVcfKybd / 18)
-kVcfFeq = iVcfFreq + round(10 * log2(p4 / (130.9 * (8  / (2^(iDcoRng + 2))))) * iVcfKybd / 18)
+//kVcfFeq = iVcfFreq + round(10 * log2(p4 / (130.9 * (8  / (2^(iDcoRng + 2))))) * iVcfKybd / 18)
+kVcfFeq = iVcfFreq + round(10 * log2(p4 / 261.62) * iVcfKybd / 18)
+afreqLim = 10000
 if (iVcfEnv == 0) then       // Normal
-    aOutVCFBlock moogvcf aOutHPFBlock        , (1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)], iVcfReso/153
+    aOutVCFBlock moogvcf aOutHPFBlock        , min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)]), iVcfReso/153
 elseif (iVcfEnv == 1) then   // Inverted
-    aOutVCFBlock moogvcf aOutHPFBlock        , (1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq - iVcfEnvd * kEnvVCF / 256, 127)]    , iVcfReso/153
+    aOutVCFBlock moogvcf aOutHPFBlock        , min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq - iVcfEnvd * kEnvVCF / 256, 127)]), iVcfReso/153
 elseif (iVcfEnv == 2) then   // D-Norm
     // no dynamic for now
-    aOutVCFBlock moogvcf aOutHPFBlock        , (1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)]   , iVcfReso/153
+    aOutVCFBlock moogvcf aOutHPFBlock ,       min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)])  , iVcfReso/153
 elseif (iVcfEnv == 3) then   // dyn
-    aOutVCFBlock moogvcf aOutHPFBlock        , (1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq,127)]    , iVcfReso/153
+    aOutVCFBlock moogvcf aOutHPFBlock        , min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq,127)]), iVcfReso/153
 endif
 
+
+//aTmpOut = aOutVCFBlock        
+//goto theend
 
 // ----------------------------------------------------------------------------------------------------------------
 // VCA Block
@@ -867,17 +876,25 @@ elseif (iVcaEnv == 3) then
     aOutVCABlock = aOutVCFBlock * kEnvG * gidynVcaRes[p6]    // DGT  
 endif
 
+//aTmpOut = aOutVCABlock 
+//goto theend
+
 
 
 // ----------------------------------------------------------------------------------------------------------------
 // adjustement filter & offset
 // ----------------------------------------------------------------------------------------------------------------
 // cutoff : 108 parametric gain : 1.93 Q: 0.707 output amp 0.707 0(peaking) skip 0 
-aTmp dcblock2 aOutVCABlock // DC Offset correction
-aTmp2 butterlp aTmp, 9220     // filter some high freqs not present in the Juno
+//aTmp dcblock2 aOutVCABlock // DC Offset correction
+//aTmp2 butterlp aTmp, 9220     // filter some high freqs not present in the Juno
 //aTmp3 pareq aTmp2,108, 1.93, 0.707, 1
-aTmp3 = aTmp2 
-aoutPostFilter = aTmp3
+//aTmp3 = aTmp2 
+
+//aTmpOut = aTmp 
+//goto theend
+
+
+aoutPostFilter = aOutVCABlock 
 
 
 
@@ -896,15 +913,22 @@ else
     aoutChorusR = aoutPostFilter
 endif 
 
+theend:      
 
 // ----------------------------------------------------------------------------------------------------------------
 // Output
 // ----------------------------------------------------------------------------------------------------------------
-outs        aoutChorusL * giPostAmp / 127, aoutChorusR * giPostAmp / 127
+outs        aoutChorusL * giPostAmp * 1.2 / 127 , aoutChorusR * giPostAmp *1.2 / 127
 
+//goto reallyend
+//aTmpOut=  0
 
-thenend:      
-endin
+theend:      
+
+//outs  aTmpOut * giPostAmp * 1.2 /127, aTmpOut * giPostAmp * 1.2 /127        
+
+//reallyend:
+endin 
 
     
 
@@ -945,6 +969,11 @@ instr updateGUI
         event "i",1008, 0, 0, 200           // change name of the current tone (into the buffer)  200 => modify letter in name 
     endif 
             
+    ktrig changed chnget:k("btpanic")
+    if ktrig == 1 then
+        turnoff2 1,0,0
+    endif 
+    
 endin
 
 
@@ -1171,7 +1200,7 @@ instr 1005
     iParm chnget "envl1"
     iParm2  setjuparm gScurbank, gicurprog, "envl1", iParm
     iParm chnget "envl2"
-    iParm2  setjuparm gScurbank, gicurprog, "envlé", iParm
+    iParm2  setjuparm gScurbank, gicurprog, "envl2", iParm
     iParm chnget "envl3"
     iParm2  setjuparm gScurbank, gicurprog, "envl3", iParm
     iParm chnget "chorus"

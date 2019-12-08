@@ -347,7 +347,7 @@ int dump_char(char* mybuf, int l) {
 }
 
 int initjubuf(CSOUND *csound) {
-  printf("Delete internal buffer\n");
+  /*  printf("Delete internal buffer\n"); */
   memset(savebuf,TONE_SIZE,sizeof(char));
   return OK;
 
@@ -498,8 +498,8 @@ int setjuparm(CSOUND *csound, setjuparm_t* p) {
   offset = get_offset(*p->tone, p->paramname->data);
   offsettone = get_offset(-1, p->paramname->data);
   newval = (int) (*p->newval);
-  printf(" file : <%s>, tone : %d, param: <%s> offset  :%d  offsettone:%d  newval ==> %d\n",
-	 p->ficname->data, (int)*p->tone, p->paramname->data,offset,offsettone,newval);
+  /*  printf(" file : <%s>, tone : %d, param: <%s> offset  :%d  offsettone:%d  newval ==> %d\n",
+      p->ficname->data, (int)*p->tone, p->paramname->data,offset,offsettone,newval); */
 
   /* byte 0 */
   if (strcmp(p->paramname->data,"dcoaftr") == 0) {
@@ -852,7 +852,7 @@ int setjuparm(CSOUND *csound, setjuparm_t* p) {
     WRITE_BYTE_TONEBUF(offsettone, value )
   }
   
-  dump_char(savebuf,TONE_SIZE);
+  /*   dump_char(savebuf,TONE_SIZE); */
   return OK; 
 }
 
