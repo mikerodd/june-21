@@ -275,6 +275,7 @@ button bounds(280, 8, 20, 20) text(">", ">") channel("right") latched(0)
 }
  
 button bounds(408, 12, 48, 28) text("Panic", "Panic", "") colour:0(255, 0, 0, 255) channel("btpanic") colour:1(255, 0, 0, 255) latched(0)
+hslider bounds(52, 596, 256, 50) range(0, 1, 0, 1, 0.001) channel("test")
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
@@ -285,7 +286,7 @@ button bounds(408, 12, 48, 28) text("Panic", "Panic", "") colour:0(255, 0, 0, 25
 
 ; Initialize the global variables. 
 sr=44100
-kr=4410
+;kr=441
 ksmps = 10
 nchnls = 2
 0dbfs = 1
@@ -494,22 +495,19 @@ gichars[] fillarray 63,  62,  0, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,  0,  0,
                     20, 21, 22, 23, 24, 25,  0,  0,  0,  0,  0,  0, 26, 27, 28, 29, 30, 31, 32, 33,
                     34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,  0,  0
 
-gScharju = "ABCDEFGHIJKLMNOPKRSTUVWXYZabcdefghijklmnopkrstuvwxyz0123456789 -"
 
-// amplitude per oscilators
-giAmp = 1
-
-
-gkCopy = 1   // copy mode Copy at init
 gSBankPreset = "./presets/FACTORYA.SYX"
 gSBankMemory = "./presets/FACTORYB.SYX"
 gScurcart = "./presets/USERCART.SYX"
-gicurprog = 0
-gScurbank = gSBankPreset  ;"./presets/FACTORYA.SYX"
-giNameInput = 0  // Name input mode indicator
-gicurletter = 0  // current edited letter
-gSName = "             " // current tone name
-gSbufame = "             " // current tone name
+gScharju = "ABCDEFGHIJKLMNOPKRSTUVWXYZabcdefghijklmnopkrstuvwxyz0123456789 -"  // letters ordered as in Juno's
+giAmp = 1                                                                      // amplitude per oscilators
+gkCopy = 1                                                                     // copy mode Copy at init
+gicurprog = 0                                                                  // current program, 0 at init
+gScurbank = gSBankPreset                                                       // current bank, preset at init
+giNameInput = 0                                                                // Name input mode indicator
+gicurletter = 0                                                                // current edited letter
+gSName = "             "                                                       // current tone name
+gSbufame = "             "                                                     // current tone name in buffer
 
 ;Author: Iain McCurdy (2012)
 ;http://iainmccurdy.org/csound.html
@@ -533,6 +531,9 @@ endop
 
 
 
+// ----------------------------------------------------------------------------------------------------------------
+// Load an array from a file, first number in file is the number of records in the file
+// ----------------------------------------------------------------------------------------------------------------
 opcode loadarray, i[],S
     Sfilename xin
     iLen2 = 3
@@ -540,17 +541,15 @@ opcode loadarray, i[],S
             
     iOut2[] init 1
     
-   fini Sfilename, 0,1 , iLen
+    fini Sfilename, 0,1 , iLen
 
     if (iLen != 0) then 
         iOut[] init iLen
     endif 
-    printf_i "file %s, array len : %d \n",1, Sfilename, iLen
-    
+    //printf_i "file %s, array len : %d \n",1, Sfilename, iLen
     iRng = 0
     getdata:
         iTmp init 0
-        
         fini Sfilename, 0,1 , iTmp
         iOut[iRng] = iTmp
     loop_lt iRng, 1, iLen, getdata
@@ -560,10 +559,10 @@ opcode loadarray, i[],S
 endop
 
 
+// ----------------------------------------------------------------------------------------------------------------
+// Display LCD characters, use channel "lid" and identchannels pos[1-16] 
+// ----------------------------------------------------------------------------------------------------------------
 opcode dispLCD, i, S
-
-
-
     Sdisp xin
 
     iLid chnget "lid"
@@ -590,7 +589,7 @@ instr 1
   
 
 // ----------------------------------------------------------------------------------------------------------------
-; Gets
+// Gets
 // ----------------------------------------------------------------------------------------------------------------
 iLfoRate        chnget "lforate"  
 iLfoDely        chnget "lfodely"  
@@ -642,21 +641,23 @@ giCartridge    chnget "grpCartridge"
 //printf_i "courbe : %f %f %f %f %f %f %f \n",1, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2]*(iEnvL1-iEnvL2), iEnvL2, gienvt1[iEnvT3], iEnvL3, gienvt1[iEnvT4]
 
 krel init 0
-  krel release ;outputs release-stage flag (0 or 1 values)
-  if (krel == 1) kgoto rel ;if in release-stage goto release section
-        if (iEnvL1 > iEnvL2) then 
-            //  kEnv linsegr 0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2*(iEnvL1-iEnvL2)], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
-            kEnv  linsegr  0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
-        else
-   //    kEnv linsegr 0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2*(iEnvL1-iEnvL2)/127], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
-            kEnv linsegr 0, gienvt1[iEnvT1*iEnvL1/127], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
-        endif 
+krel release ;outputs release-stage flag (0 or 1 values)
+if (krel == 1) kgoto rel ;if in release-stage goto release section
+    if (iEnvL1 > iEnvL2) then 
+        //  kEnv linsegr 0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2*(iEnvL1-iEnvL2)], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
+        kEnv  linsegr  0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
+//        printf_i "courbe : t1:%f l1:%f t2:%f l2:%f t3:%f l3:%f t4:%f \n",1, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4]
+    else
+//    kEnv linsegr 0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2*(iEnvL1-iEnvL2)/127], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
+        kEnv linsegr 0, gienvt1[iEnvT1*iEnvL1/127], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
+//        printf_i "courbe : t1:%f l1:%f t2:%f l2:%f t3:%f l3:%f t4:%f \n",1,gienvt1[iEnvT1*iEnvL1/127], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4]
+    endif 
   
-    //kEnv  linsegr  0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
-    kEnvL = kEnv / 127
-    kEnvVCF = kEnv
-    kEnvG  linsegr 0, 0.0001, 1,0,0
-    kgoto done
+//kEnv  linsegr  0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
+kEnvL = kEnv / 127
+kEnvVCF = kEnv
+kEnvG  linsegr 0, 0.0001, 1,0,0
+kgoto done
     
 rel:
     kres expon 1, gienvt4[iEnvT4], 0.01
@@ -699,16 +700,20 @@ kNote           = p4 * (8  / (2^(iDcoRng + 2)))                        // Base n
 iNote = p4 * (8  / (2^(iDcoRng + 2)))
 kNote           = kNote  +  aLFO * (kNote * gilfovals[iDcoLfo] / 2)    // note + lfo oscilation
     
+//printf_i "inote : %f",1,iNote
 if (iDcoEnv == 0) then    // Norm 
     kNote = kNote + (kNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
-elseif (iDcoEnv == 1) then // Inv 
-    kNote = kNote - (kNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
+//    printk 0.1, kNote + gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd]     
+elseif (iDcoEnv == 1) then // Inv : 
+    kNote = kNote - (iNote/(130.9 * 8)) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
+//    printk 0.1, kNote-(iNote/130.9) *gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd]
 elseif (iDcoEnv == 2) then // D-Norm 
     kNote = kNote + (kNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
+//    printk 0.1, kNote + gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd]     
 elseif (iDcoEnv == 3) then // D-Inv 
-    kNote = kNote - (kNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
+    kNote = kNote - (kNote/(130.9* 8)) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
+//    printk 0.1, kNote - gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd]     
 endif
-
 
 
 
@@ -717,7 +722,7 @@ if (iPulse == 0) then
     aOsc1 = 0
 else
     if (iPulse == 1) then
-        aTmp  vco2  giAmp , kNote,10,0,0,0.45  // Square 
+        aTmp  vco2  giAmp , kNote,10,0,0  // Square 
         aTmp = - aTmp
     elseif (iPulse == 2) then 
         aTmp   vco2  giAmp, kNote,2,0.75
@@ -820,7 +825,6 @@ aOutVcoblock    =  aOsc1 * .25 + aOsc2 * .25 + aOsc3 * .25 + aOsc4 * .25
 // ----------------------------------------------------------------------------------------------------------------
 // HPF Block
 // ----------------------------------------------------------------------------------------------------------------
-
 if (iHpfFreq == 0) then
     aOutHPFBlock        pareq aOutVcoblock,106, 2, 0.7071067812
 elseif (iHpfFreq == 1) then
@@ -841,19 +845,30 @@ endif
 // ----------------------------------------------------------------------------------------------------------------
 //printf_i "note : %f , new note : %f   formule : %f,   iDcoRng: %d\n", 1, p4, p4 * (8  / (2^(iDcoRng + 2))),round(10 * log2(p4 / (261.7 * (8  / (2^(iDcoRng + 1))))) * iVcfKybd / 18), iDcoRng
 // kVcfFeq = iVcfFreq + round(10 * log2(kNote / 130.9) * iVcfKybd / 18)
-//kVcfFeq = iVcfFreq + round(10 * log2(p4 / (130.9 * (8  / (2^(iDcoRng + 2))))) * iVcfKybd / 18)
+//kVcfFeq = iVcfFreq + round(10 * log2(p4 / (130.9 * (8  / (2^(iDcoRng + 2))))) * iVcfKybd / 18)    
+
 kVcfFeq = iVcfFreq + round(10 * log2(p4 / 261.62) * iVcfKybd / 18)
 afreqLim = 10000
 if (iVcfEnv == 0) then       // Normal
-    aOutVCFBlock moogvcf aOutHPFBlock        , min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)]), iVcfReso/153
+      kcutoff= min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)])
 elseif (iVcfEnv == 1) then   // Inverted
-    aOutVCFBlock moogvcf aOutHPFBlock        , min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq - iVcfEnvd * kEnvVCF / 256, 127)]), iVcfReso/153
+      kcutoff= min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq - iVcfEnvd * kEnvVCF / 256, 127)])
 elseif (iVcfEnv == 2) then   // D-Norm
     // no dynamic for now
-    aOutVCFBlock moogvcf aOutHPFBlock ,       min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)])  , iVcfReso/153
+    kcutoff= min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)])
 elseif (iVcfEnv == 3) then   // dyn
+    kcutoff = min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq,127)])
     aOutVCFBlock moogvcf aOutHPFBlock        , min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq,127)]), iVcfReso/153
 endif
+
+/*
+aOutVCFBlock moogvcf aOutHPFBlock        , kcutoff, iVcfReso/153
+*/
+
+atmp moogvcf aOutHPFBlock        , kcutoff , 0
+aOutVCFBlock reson atmp ,1.25*kcutoff , kcutoff * 8  / iVcfReso, 2
+
+
 
 
 //aTmpOut = aOutVCFBlock        
