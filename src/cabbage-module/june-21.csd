@@ -49,13 +49,14 @@ rslider bounds(596, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envt4")  $rslid
 rslider bounds(236, 380, 44, 44) range(0, 127, 0, 1, 1) channel("crsrate")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
 rslider bounds(584, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcflfo")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
 rslider bounds(742, 240, 44, 44) range(0, 15, 0, 1, 1) channel("vcfkybd")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(644, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envkybd")  $rsliderstyle 
+rslider bounds(644, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envkybd")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
 rslider bounds(8, 378, 44, 44) range(0, 127, 0, 1, 1) channel("vcalevl") $rsliderstyle 
 rslider bounds(356, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl1") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
 rslider bounds(452, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl2") $rsliderstyle 
 rslider bounds(548, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl3") $rsliderstyle 
 
 rslider bounds(453, 4, 47, 46) range(0.2, 1, 0.5, 1, 0.01) channel("lid") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255) text("light")
+rslider bounds(740, 380, 44, 44) range(0, 12, 0, 1, 1) channel("dcobnd") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
 
 
 
@@ -275,7 +276,9 @@ button bounds(280, 8, 20, 20) text(">", ">") channel("right") latched(0)
 }
  
 button bounds(408, 12, 48, 28) text("Panic", "Panic", "") colour:0(255, 0, 0, 255) channel("btpanic") colour:1(255, 0, 0, 255) latched(0)
-hslider bounds(52, 596, 256, 50) range(0, 1, 0, 1, 0.001) channel("test")
+
+label bounds(732, 352, 60, 12) text("BENDER")
+label bounds(742, 364, 40, 12) text("RANGE")
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
@@ -628,6 +631,7 @@ iEnvL2          chnget "envl2"
 iEnvL3          chnget "envl3"
 iChorus         chnget "chorus"
 iCrsRate        chnget "crsrate"
+iDcoBnd         chnget "dcobnd"
 
 giPostAmp      chnget "vcalevl"
 giPreset       chnget "grpPreset"
@@ -695,24 +699,21 @@ endif
 
 //printf_i "iDcoEnvd :%d   , gidcoenvb[iDcoEnvd]:%f  idcoenva[iDcoEnvd] :%f \n",1,iDcoEnvd,gidcoenvb[iDcoEnvd],gidcoenva[iDcoEnvd] 
 
+kbnd pchbend 0, iDcoBnd / 12
+
 // Note
 kNote           = p4 * (8  / (2^(iDcoRng + 2)))                        // Base note calculation : note * dcoRng correction 
 iNote = p4 * (8  / (2^(iDcoRng + 2)))
-kNote           = kNote  +  aLFO * (kNote * gilfovals[iDcoLfo] / 2)    // note + lfo oscilation
+kNote           = (kNote  +  aLFO * (kNote * gilfovals[iDcoLfo] / 2)) * powoftwo(kbnd)   // note + lfo oscilation
     
-//printf_i "inote : %f",1,iNote
 if (iDcoEnv == 0) then    // Norm 
-    kNote = kNote + (kNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
-//    printk 0.1, kNote + gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd]     
+    kNote = kNote + (iNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
 elseif (iDcoEnv == 1) then // Inv : 
     kNote = kNote - (iNote/(130.9 * 8)) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
-//    printk 0.1, kNote-(iNote/130.9) *gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd]
 elseif (iDcoEnv == 2) then // D-Norm 
-    kNote = kNote + (kNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
-//    printk 0.1, kNote + gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd]     
+    kNote = kNote + (iNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
 elseif (iDcoEnv == 3) then // D-Inv 
-    kNote = kNote - (kNote/(130.9* 8)) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
-//    printk 0.1, kNote - gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd]     
+    kNote = kNote - (iNote/(130.9* 8)) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
 endif
 
 
@@ -843,9 +844,6 @@ endif
 // ----------------------------------------------------------------------------------------------------------------
 // VCF Block
 // ----------------------------------------------------------------------------------------------------------------
-//printf_i "note : %f , new note : %f   formule : %f,   iDcoRng: %d\n", 1, p4, p4 * (8  / (2^(iDcoRng + 2))),round(10 * log2(p4 / (261.7 * (8  / (2^(iDcoRng + 1))))) * iVcfKybd / 18), iDcoRng
-// kVcfFeq = iVcfFreq + round(10 * log2(kNote / 130.9) * iVcfKybd / 18)
-//kVcfFeq = iVcfFreq + round(10 * log2(p4 / (130.9 * (8  / (2^(iDcoRng + 2))))) * iVcfKybd / 18)    
 
 kVcfFeq = iVcfFreq + round(10 * log2(p4 / 261.62) * iVcfKybd / 18)
 afreqLim = 10000
@@ -861,9 +859,6 @@ elseif (iVcfEnv == 3) then   // dyn
     aOutVCFBlock moogvcf aOutHPFBlock        , min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq,127)]), iVcfReso/153
 endif
 
-/*
-aOutVCFBlock moogvcf aOutHPFBlock        , kcutoff, iVcfReso/153
-*/
 
 atmp moogvcf aOutHPFBlock        , kcutoff , 0
 aOutVCFBlock reson atmp ,1.25*kcutoff , kcutoff * 8  / iVcfReso, 2
@@ -897,23 +892,6 @@ endif
 
 
 // ----------------------------------------------------------------------------------------------------------------
-// adjustement filter & offset
-// ----------------------------------------------------------------------------------------------------------------
-// cutoff : 108 parametric gain : 1.93 Q: 0.707 output amp 0.707 0(peaking) skip 0 
-//aTmp dcblock2 aOutVCABlock // DC Offset correction
-//aTmp2 butterlp aTmp, 9220     // filter some high freqs not present in the Juno
-//aTmp3 pareq aTmp2,108, 1.93, 0.707, 1
-//aTmp3 = aTmp2 
-
-//aTmpOut = aTmp 
-//goto theend
-
-
-aoutPostFilter = aOutVCABlock 
-
-
-
-// ----------------------------------------------------------------------------------------------------------------
 // Chorus block
 // ----------------------------------------------------------------------------------------------------------------
 if (iChorus == 1) then 
@@ -922,10 +900,10 @@ if (iChorus == 1) then
     ktrem	rspline	0,-1,0.1,0.5
     ktrem	pow	2,ktrem
     
-    aoutChorusL,aoutChorusR 	StChorus	aoutPostFilter  ,aoutPostFilter , gicrsrate[iCrsRate], ktrem/2	, aoffset, 0.5, 0.5
+    aoutChorusL,aoutChorusR 	StChorus	aOutVCABlock ,aOutVCABlock , gicrsrate[iCrsRate], ktrem/2	, aoffset, 0.5, 0.5
 else
-    aoutChorusL = aoutPostFilter
-    aoutChorusR = aoutPostFilter
+    aoutChorusL = aOutVCABlock 
+    aoutChorusR = aOutVCABlock 
 endif 
 
 theend:      
@@ -941,8 +919,6 @@ outs        aoutChorusL * giPostAmp * 1.2 / 127 , aoutChorusR * giPostAmp *1.2 /
 theend:      
 
 //outs  aTmpOut * giPostAmp * 1.2 /127, aTmpOut * giPostAmp * 1.2 /127        
-
-//reallyend:
 endin 
 
     
@@ -1068,6 +1044,8 @@ instr 1002
    
     iParm  getjuparm gScurbank, gicurprog, "dcoaftr"
     chnset iParm, "dcoaftr"
+    iParm  getjuparm gScurbank, gicurprog, "dcobnd"
+    chnset iParm, "dcobnd"
     iParm  getjuparm gScurbank, gicurprog, "vcfkybd"
     chnset iParm, "vcfkybd"
     iParm  getjuparm gScurbank, gicurprog, "vcfaftr"
@@ -1179,6 +1157,8 @@ instr 1005
     iParm2  setjuparm gScurbank, gicurprog, "dcorng", iParm
     iParm chnget "dcolfo"
     iParm2  setjuparm gScurbank, gicurprog, "dcolfo", iParm
+    iParm chnget "dcobnd"
+    iParm2  setjuparm gScurbank, gicurprog, "dcobnd", iParm
     iParm chnget "dcoenvd"
     iParm2  setjuparm gScurbank, gicurprog, "dcoenvd", iParm
     iParm chnget "dcoenv"    
