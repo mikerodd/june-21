@@ -174,7 +174,7 @@ the range of 0 to 127.
 
 @subsection DCO ENV Mode
 @image{dcoenvd,1.77cm,,,.png}
-this selects the polarity of the envelope curve that controls the DCO.
+This selects the polarity of the envelope curve that controls the DCO.
 Usually @image{adsrn,0.5cm,,,.png} may by used. In @image{adsri,0.5cm,,,.png} mode,
 ADSR pattern will be inverted.
 
@@ -184,6 +184,14 @@ ADSR pattern will be inverted.
 @item @b{Normal with Dynamics} @image{adsrn,0.5cm,,,.png} : ENV with Dynamics serves to increase the DCO's pitch.
 @item @b{Invert with Dynamics} @image{adsri,0.5cm,,,.png} : ENV with Dynamics serves to decrease the DCO's pitch.
 @end itemize
+
+@subsection DCO Bender Range
+@image{dcobnd,1cm,,,.png}
+
+This  sets the maximum effect of the Picth Bender caused by moving the Pitch Bender/Modulation lever, 0 to 12
+are valid for this parameter, and 1 is semi-tone, therefore 12 is an otave.
+
+
 
 @subsection Pulse
 @image{pulse,1.187cm,,,.png}
