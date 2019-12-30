@@ -1,5 +1,6 @@
 ---
 title: June-21
+description: and Alpha-Juno 2 emulator using CSound & Cabbage
 layout: default
 ---
 ![screenshot](images/june-21.png)
