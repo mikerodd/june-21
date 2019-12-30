@@ -22,7 +22,7 @@
           <h2>{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
         </header>
         <section id="downloads" class="clearfix">
-          <a href="{{ page.title }}" id="download-exe" class="button"><span>Download .exe</span></a>
+          <a href="{{ page.currentwinrelease_url  }}" id="download-exe" class="button"><span>Download .exe</span></a>
           <a href="{{ page.currentlinuxrelease_url }}" id="download-zip" class="button"><span>Download .zip</span></a>
 	{% if site.github.public %}
 	  {% if site.github.is_project_page %}
