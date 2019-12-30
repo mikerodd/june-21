@@ -2,7 +2,7 @@
 title: June-21
 layout: default
 ---
-![screenshot](../src/xcfs/june-21.png)
+![screenshot](../images/june-21.png)
 ## Status 
 June-21 can read and play Juno 1 / 2 MKS-50 presets. The emulator includes Juno 2 factory "Preset" and "Memory". 
 
