@@ -15,7 +15,7 @@
  
 <Cabbage>  
 bounds(0, 0, 0, 0)
-form caption("June 21"), size(800, 650), colour(26,26,26), pluginid("Junde-21") bundle("./imgs", "./presets","./libjsl.so", "libjsl.dll")
+form caption("June-21 v{VERSION}"), size(800, 650), colour(26,26,26), pluginid("June-21") bundle("./imgs", "./presets","./libjsl.so", "libjsl.dll")
 
 keyboard bounds(148, 462, 579, 122)  
 
@@ -279,10 +279,12 @@ button bounds(408, 12, 48, 28) text("Panic", "Panic", "") colour:0(255, 0, 0, 25
 
 label bounds(732, 352, 60, 12) text("BENDER")
 label bounds(742, 364, 40, 12) text("RANGE")
+
+checkbox bounds(28, 538, 100, 30) channel("test") text("oldvcf") visible(0)
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
--n -d -+rtmidi=NULL -M0 -m0d --midi-key-cps=4 --midi-velocity-amp=5 --midi-velocity=6  --opcode-lib=./libjsl.so  ; OSX: libjsl.dylib; Windows: libjsl.dll
+-n -d -+rtmidi=NULL -M0 -m0d --midi-key=4  --midi-velocity=6  --opcode-lib=./libjsl.so ; OSX: libjsl.dylib; Windows: libjsl.dll
 </CsOptions>
 <CsInstruments>
 ; groupbox bounds(494, 52, 300, 29) ,  outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0) 
@@ -644,32 +646,40 @@ giCartridge    chnget "grpCartridge"
 //kres expon ia, idur, ib
 //printf_i "courbe : %f %f %f %f %f %f %f \n",1, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2]*(iEnvL1-iEnvL2), iEnvL2, gienvt1[iEnvT3], iEnvL3, gienvt1[iEnvT4]
 
-krel init 0
-krel release ;outputs release-stage flag (0 or 1 values)
-if (krel == 1) kgoto rel ;if in release-stage goto release section
+
+//krel init 0
+//krel release ;outputs release-stage flag (0 or 1 values)
+//if (krel == 1) kgoto rel ;if in release-stage goto release section
     if (iEnvL1 > iEnvL2) then 
-        //  kEnv linsegr 0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2*(iEnvL1-iEnvL2)], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
-        kEnv  linsegr  0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
-//        printf_i "courbe : t1:%f l1:%f t2:%f l2:%f t3:%f l3:%f t4:%f \n",1, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4]
+        //kEnv  linsegr  0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
+        kEnv  transegr      0, gienvt1[iEnvT1],  0, 
+                       iEnvL1, gienvt1[iEnvT2],  0, 
+                       iEnvL2, gienvt3[iEnvT3], -4,
+                       iEnvL3, gienvt4[iEnvT4], -4,
+                       0
+                       
     else
-//    kEnv linsegr 0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2*(iEnvL1-iEnvL2)/127], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
-        kEnv linsegr 0, gienvt1[iEnvT1*iEnvL1/127], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
-//        printf_i "courbe : t1:%f l1:%f t2:%f l2:%f t3:%f l3:%f t4:%f \n",1,gienvt1[iEnvT1*iEnvL1/127], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4]
+        //kEnv linsegr 0, gienvt1[iEnvT1*iEnvL1/127], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
+        kEnv transegr     0, gienvt1[iEnvT1*iEnvL1/127],  0,
+                     iEnvL1, gienvt1[iEnvT2]           ,  0,
+                     iEnvL2, gienvt4[iEnvT3]           , -4,
+                     iEnvL3, gienvt4[iEnvT4]           , -4,
+                     0
+        
     endif 
-  
-//kEnv  linsegr  0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
 kEnvL = kEnv / 127
 kEnvVCF = kEnv
-kEnvG  linsegr 0, 0.0001, 1,0,0
-kgoto done
+kEnvG  linsegr 0, 0.0001, 1,0.02,0
+/* kgoto done
     
 rel:
     kres expon 1, gienvt4[iEnvT4], 0.01
+    kresg expon 1, 0.01, 0.001
     kEnvL = kEnv * kres / 127
     kEnvVCF = kEnv * kres
-    kEnvG = 0 
+    kEnvG = kresg 
 done:
-
+*/
 
 // ----------------------------------------------------------------------------------------------------------------
 // LFO Block
@@ -702,8 +712,9 @@ endif
 kbnd pchbend 0, iDcoBnd / 12
 
 // Note
-kNote           = p4 * (8  / (2^(iDcoRng + 2)))                        // Base note calculation : note * dcoRng correction 
-iNote = p4 * (8  / (2^(iDcoRng + 2)))
+inotefreq  = cpsmidinn(p4)
+kNote           =  inotefreq * (8  / (2^(iDcoRng + 2)))                        // Base note calculation : note * dcoRng correction 
+iNote = inotefreq * (8  / (2^(iDcoRng + 2)))
 kNote           = (kNote  +  aLFO * (kNote * gilfovals[iDcoLfo] / 2)) * powoftwo(kbnd)   // note + lfo oscilation
     
 if (iDcoEnv == 0) then    // Norm 
@@ -744,7 +755,7 @@ else
     aSaw1 vco2  giAmp, kNote ,0
     
     if (iSawtooth == 1) then
-        aTmp           =  - aSaw1   // TEST 
+        aTmp           =  - aSaw1   
         
     elseif (iSawtooth  == 2) then
         aSquare1x2      vco2  1,kNote * 2, 10     // note * 2  
@@ -814,7 +825,7 @@ if (iNoisLvl == 0) then
 else
     kNoisLvl  = (2^(kNoisLvl)) / 8
 endif
-aOsc4   noise  iNoisLvl / 3, -0.9
+aOsc4   noise  iNoisLvl / 6, -0.9
 
 ; Output VCO Block
 aOutVcoblock    =  aOsc1 * .25 + aOsc2 * .25 + aOsc3 * .25 + aOsc4 * .25
@@ -845,9 +856,16 @@ endif
 // VCF Block
 // ----------------------------------------------------------------------------------------------------------------
 
-kVcfFeq = iVcfFreq + round(10 * log2(p4 / 261.62) * iVcfKybd / 18)
+//Old block
+
+ioldvcf chnget "test"
+
+
+if (ioldvcf == 1) then 
+kVcfFeq = iVcfFreq + round(10 * log2(inotefreq  / 261.62) * iVcfKybd / 18)
 afreqLim = 10000
 if (iVcfEnv == 0) then       // Normal
+      //kcutoff= min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)])
       kcutoff= min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)])
 elseif (iVcfEnv == 1) then   // Inverted
       kcutoff= min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq - iVcfEnvd * kEnvVCF / 256, 127)])
@@ -860,9 +878,36 @@ elseif (iVcfEnv == 3) then   // dyn
 endif
 
 
-atmp moogvcf aOutHPFBlock        , kcutoff , 0
-aOutVCFBlock reson atmp ,1.25*kcutoff , kcutoff * 8  / iVcfReso, 2
+else
 
+//  kx = <cutoff Freq> + <lfo impact> + <env impact (with or without dynamics> + <key follow impact> + correction
+if (iVcfEnv == 0) then       // Normal
+    kx = (iVcfFreq + (  aLFO * iVcfLfo / 4  + kEnvVCF * iVcfEnvd / 127)  + (p4 - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
+elseif (iVcfEnv == 1) then   // Inverted
+    kx = (iVcfFreq - ( aLFO * iVcfLfo / 4 + kEnvVCF * iVcfEnvd / 127)  + (p4 - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
+
+elseif (iVcfEnv == 2) then   // D-Norm
+    kx = (iVcfFreq + ( aLFO * iVcfLfo / 4 +  (p6 / 127) * kEnvVCF * iVcfEnvd / 127)  + (p4 - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
+elseif (iVcfEnv == 3) then   // dyn
+    kx = (iVcfFreq + ( aLFO * iVcfLfo / 4  + (p6 / 220) *  iVcfEnvd )  + (p4 - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
+endif
+
+
+
+kcutoff = 100 * pow(2 , kx)
+
+
+if kcutoff < 20 then
+    kcutoff= 20
+endif
+if kcutoff> 10000 then
+   kcutoff = 10000
+endif
+
+endif
+
+atmp moogvcf aOutHPFBlock        , kcutoff , 0
+aOutVCFBlock reson atmp ,1.25 * kcutoff, kcutoff* 8  / iVcfReso, 2
 
 
 
@@ -873,8 +918,6 @@ aOutVCFBlock reson atmp ,1.25*kcutoff , kcutoff * 8  / iVcfReso, 2
 // VCA Block
 // ----------------------------------------------------------------------------------------------------------------
 
-//iTest chnget "test"
-//printf_i "p5 : %f  => %d p6 : %d\n", 1,p5, round(p5 * 127),p6
 
 if (iVcaEnv == 0) then
     aOutVCABlock = aOutVCFBlock * kEnvL // Normal

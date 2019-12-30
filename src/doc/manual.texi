@@ -19,7 +19,7 @@ furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
 
-This software use VST sdkSDK which is @copyright{}  2019, Steinberg Media
+This software use VST SDK which is @copyright{}  2019, Steinberg Media
 Technologies GmbH,All Rights Reserved  
 
 Copyright @copyright{} 2019 Michel Rodriguez
@@ -72,11 +72,8 @@ The text and schematics are partly inspired by the original Juno-2 documentation
 The look of the GUI is obviously inspired by the Roland PG-300.
 
 @b{Nota Bene:} June-21 is still in development and is not a perfect emulator, so some tones can be far from the real thing and some won't work
-(but some can be very accurate and pleasing!). As of now (Dec 2019) 2 things are not implemented :
-@itemize @bullet
-@item @b{Dynamics on VCF} : not done yet
-@item @b{Aftertouch} : won't be done (at least by me) as my own Juno-2's aftertouch is not working.
-@end itemize
+(but some can be very accurate and pleasing!). As of now (Dec 2019) one things is implemented : @b{Aftertouch}. It won't be done (at least by me) as
+my own Juno-2's aftertouch is not working.
 
 @i{Have fun !}
 
@@ -245,7 +242,7 @@ the DCO PW/PWM Depth is the widest pulse made by the LFO modulation.
 This parameter changes the cutoff point of the HPF:
 
 @itemize @bullet
-@item @b{0} :The lower frequencies are emphasized (High Shelving at ~106Hz)
+@item @b{0} : The lower frequencies are emphasized (High Shelving at ~106Hz)
 @item @b{1} : HPF is off
 @item @b{2} : Cutoff point is set at lower frequency (~124 Hz)
 @item @b{3} : Cutoff point is set at higet than 2  (~220 Hz). The produced sound is harder and thinner 
