@@ -17,7 +17,6 @@ The look of the GUI is obviously inspired by the Roland PG-300.
 ** Nota Bene:** June-21 is still in development and is not a perfect emulator, so some tones can be far from the real thing and some won't work
 (but some can be very accurate and pleasing!). As of now (Dec 2019) some things are not implemented :
 
-* **Dynamics on VCF** : not done yet
 * **Bender** : bender done but no modulation yet
 * **Portamento, chord memory, octave transpose** : not done yet
 * **Aftertouch** : won't be done (at least by me) as my own Juno-2's aftertouch is not working.
