@@ -1,0 +1,4 @@
+@import "{{ site.theme }}";
+
+#download-tar-gz span {
+  background: transparent url(../images/exe-icon.png) 12px 50% no-repeat;
