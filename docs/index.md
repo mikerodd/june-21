@@ -30,12 +30,9 @@ The look of the GUI is obviously inspired by the Roland PG-300.
 You can also look at the [current issues](https://github.com/mikerodd/june-21/issues)
 
 
-*Have fun*
-
-
-
-
 
 ## requirement 
 Linux - CSound must be present in the system 
 Windows - a CSound runtime is in the distrib file
+
+
