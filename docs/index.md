@@ -12,7 +12,8 @@ currentlinuxrelease_url: https://github.com/mikerodd/june-21/releases/download/v
 June-21 is an open source [VST plugin](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) emulation of the [Roland Alpha Juno syntheziser series](https://en.wikipedia.org/wiki/Roland_Alpha_Juno).
 
 ## Sound Demos
-<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/736262815&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+(sorry for the tempo :-/) 
+<iframe width="100%" height="150" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/736262815&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
 
 
 ## Status 
