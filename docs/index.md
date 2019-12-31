@@ -14,7 +14,7 @@ June-21 is an open source [VST plugin](https://en.wikipedia.org/wiki/Virtual_Stu
 ## Status 
 June-21 can read and play Juno 1 / 2 MKS-50 presets. The emulator includes Juno 2 factory tones : "Preset" and "Memory". 
 
-You can also find many presets here : http://www.llamamusic.com/mks50/mks-50_patches.html, you can test them with June-21 !
+You can also find many presets [here](http://www.llamamusic.com/mks50/mks-50_patches.html), you can test them with June-21 !
 
 It's still a work in progress, so not all presets will work as in the real gear, some presets might not be working.
 
