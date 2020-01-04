@@ -32,7 +32,6 @@ image bounds(50, 4, 300, 45) file("imgs/june-21.png")
 
 
 
-
 rslider bounds(8, 102, 44, 44), range(0, 127, 0, 1, 1),  channel("lforate"),  $rsliderstyle 
 rslider bounds(56, 102, 44, 44), range(0, 127, 0, 1, 1),  channel("lfodely"),  $rsliderstyle 
 rslider bounds(188, 102, 44, 44), range(0, 127, 0, 1, 1), channel("dcolfo") ,  $rsliderstyle 
@@ -55,7 +54,7 @@ rslider bounds(356, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl1") $rslide
 rslider bounds(452, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl2") $rsliderstyle 
 rslider bounds(548, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl3") $rsliderstyle 
 
-rslider bounds(0, 0, 47, 16) range(0.2, 1, 0.5, 1, 0.01) channel("lid") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255) text("light") visible(0)
+rslider bounds(0, 0, 47, 31) range(0.2, 1, 0.5, 1, 0.01) channel("lid") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255) text("light") visible(0)
 rslider bounds(740, 380, 44, 44) range(0, 12, 0, 1, 1) channel("dcobnd") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
 
 
@@ -281,12 +280,18 @@ label bounds(732, 352, 60, 12) text("BENDER")
 label bounds(742, 364, 40, 12) text("RANGE")
 
 
-combobox bounds(726, 476, 71, 16) text("6 (juno)", "8", "16", "32")
+combobox bounds(726, 476, 71, 16) text("6 (juno)", "8", "16", "32") channel("maxvoice")
 label bounds(726, 462, 52, 12) text("# voices")
+label bounds(726, 496, 42, 12) text("used:")
+
+
+
+label bounds(768, 496, 31, 12) identchannel("voicecount") text("0")
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
--n -d -+rtmidi=NULL -M0 -m0d --midi-key=4  --midi-velocity=5  --opcode-lib=./libjsl.so ; OSX: libjsl.dylib; Windows: libjsl.dll
+-n -d -+rtmidi=NULL -M0 -m0d --midi-key-cps=4  --midi-velocity=5  --opcode-lib=./libjsl.so ; OSX: libjsl.dylib; Windows: libjsl.dll
+-n -d -+rtmidi=NULL -M0 -m0d --opcode-lib=./libjsl.so  ;--midi-key=4 --midi-velocity-amp=5
 </CsOptions>
 <CsInstruments>
 ; groupbox bounds(494, 52, 300, 29) ,  outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0) 
@@ -298,10 +303,14 @@ ksmps = 10
 nchnls = 2
 0dbfs = 1
 
+
+
 // ---------------------------------------------------------------------------------------------------------------
 // Global variables
 // ---------------------------------------------------------------------------------------------------------------
 
+
+maxalloc 100, 1 // Only one MIDI listener
 
 // Values of lfo amplitude in % of frequency when applied to DCO from 0-127 for "DCO LFO"
 // NB : I  interpolated those values from my 30 years old Juno-2, results weren't stable between measures...
@@ -479,6 +488,24 @@ gichars[] fillarray 63,  62,  0, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,  0,  0,
                     34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,  0,  0
 
 
+givcfenvdl[] fillarray 0,	0.232,	0.328,	0.392,	0.468,	0.564,	0.62,	0.712,	0.772,	0.792,	0.852,	0.9,	0.924,	0.976,	1,	1
+givcfenvdu[] fillarray 0, 0.012, 0.044, 0.06, 0.0888, 0.12, 0.16, 0.208, 0.272, 0.332, 0.4, 0.48, 0.56, 0.728, 0.964,1
+
+
+gkpitchb = 0           // Pitchbend
+gkvibrat = 0           // vibrato
+gkmaxvoices = 6
+gkvoices[] fillarray -1, -1, -1, -1, -1, -1, -1, -1, 
+                     -1, -1, -1, -1, -1, -1, -1, -1,
+                     -1, -1, -1, -1, -1, -1, -1, -1,
+                     -1, -1, -1, -1, -1, -1, -1, -1
+gkmidinotes[]   fillarray -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+                          -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+                          -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,                           
+                          -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+
+
+
 gSBankPreset = "./presets/FACTORYA.SYX"
 gSBankMemory = "./presets/FACTORYB.SYX"
 gScurcart = "./presets/USERCART.SYX"
@@ -569,7 +596,7 @@ endop
 // Begin of Synth
 // ----------------------------------------------------------------------------------------------------------------
 opcode June21,a,kk
-    knum,kvel xin
+    kcps,kvel xin
 
   
 
@@ -652,6 +679,7 @@ if (iLfoDely > 10) then
 else 
     itmp = 0 
 endif 
+
 kLfo            linseg 0,gilfodels[iLfoDely] , 0,itmp ,1 // Delay for LFO1 
 aLFO            lfo kLfo, gilforate[iLfoRate], 1                                // Rate for LFO 
 
@@ -671,13 +699,12 @@ endif
 // ----------------------------------------------------------------------------------------------------------------
 
 
-kbnd pchbend 0, iDcoBnd / 12
+kbnd = gkpitchb * iDcoBnd / (12 * 64)
 
 // Note
-inotefreq  = cpsmidinn(i(knum))
-kNote           =  inotefreq * (8  / (2^(iDcoRng + 2)))                        // Base note calculation : note * dcoRng correction 
-iNote = inotefreq * (8  / (2^(iDcoRng + 2)))
-kNote           = (kNote  +  aLFO * (kNote * gilfovals[iDcoLfo] / 2)) * powoftwo(kbnd)   // note + lfo oscilation
+kNote           =  kcps * (8  / (2^(iDcoRng + 2)))                        // Base note calculation : note * dcoRng correction 
+iNote = i(kcps) * (8  / (2^(iDcoRng + 2)))
+kNote           = (kNote  +  aLFO * (kNote * (gilfovals[iDcoLfo] + gkvibrat/1500) / 2)) * powoftwo(kbnd)   // note + lfo oscilation
     
 if (iDcoEnv == 0) then    // Norm 
     kNote = kNote + (iNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
@@ -782,11 +809,6 @@ if (kSubLevel != 0) then
 endif 
 
 ; -- Noise part
-if (iNoisLvl == 0) then 
-    kNoisLvl  = 0
-else
-    kNoisLvl  = (2^(kNoisLvl)) / 8
-endif
 aOsc4   noise  iNoisLvl / 6, -0.9
 
 ; Output VCO Block
@@ -817,25 +839,26 @@ endif
 // ----------------------------------------------------------------------------------------------------------------
 // VCF Block
 // ----------------------------------------------------------------------------------------------------------------
+//  kx = <cutoff Freq> + <lfo impact> + <env impact (with or without dynamics> + + correction
+//  <key follow impact>  : a ration of the frequency
 
-
-
-
-//  kx = <cutoff Freq> + <lfo impact> + <env impact (with or without dynamics> + <key follow impact> + correction
 if (iVcfEnv == 0) then       // Normal
-    kx = (iVcfFreq + (  aLFO * iVcfLfo / 4  + kEnvVCF * iVcfEnvd / 127)  + (knum - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
+    kx1 = (iVcfFreq + (  aLFO * iVcfLfo / 4  + kEnvVCF * iVcfEnvd / 127)) / 12   - 3.2 
 elseif (iVcfEnv == 1) then   // Inverted
-    kx = (iVcfFreq - ( aLFO * iVcfLfo / 4 + kEnvVCF * iVcfEnvd / 127)  + (knum - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
-
+    kx1 = (iVcfFreq - ( aLFO * iVcfLfo / 4 + kEnvVCF * iVcfEnvd / 127)) / 12   - 3.2 
 elseif (iVcfEnv == 2) then   // D-Norm
-    kx = (iVcfFreq + ( aLFO * iVcfLfo / 4 +  (kvel / 127) * kEnvVCF * iVcfEnvd / 127)  + (knum - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
+    kx1 = (iVcfFreq + ( aLFO * iVcfLfo / 4 +  (kvel / 127) * kEnvVCF * iVcfEnvd / 127)) / 12   - 3.2 
 elseif (iVcfEnv == 3) then   // dyn
-    kx = (iVcfFreq + ( aLFO * iVcfLfo / 4  + (kvel / 220) *  iVcfEnvd )  + (knum - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
+    kx1 = (iVcfFreq + ( aLFO * iVcfLfo / 4  + (kvel / 220) *  iVcfEnvd )) / 12   - 3.2 
 endif
 
+if kcps > 261.63 then        // Keyboard impact curves are not the same between lower than C4 and upper than C4 (C4 is the pivot)
+    kx2 = (givcfenvdu[iVcfKybd] * (kcps - 261.63) + 261.63)/261.63
+else 
+    kx2 = (givcfenvdl[iVcfKybd] * (kcps - 261.63) + 261.63)/261.63
+endif 
 
-
-kcutoff = 100 * pow(2 , kx)
+kcutoff = 100 * powoftwo( kx1) * kx2 
 
 
 if kcutoff < 20 then
@@ -844,7 +867,6 @@ endif
 if kcutoff> 10000 then
    kcutoff = 10000
 endif
-
 
 atmp moogvcf aOutHPFBlock        , kcutoff , 0
 aOutVCFBlock reson atmp ,1.25 * kcutoff, kcutoff* 8  / iVcfReso, 2
@@ -890,29 +912,18 @@ endop
 
 
 // ----------------------------------------------------------------------------------------------------------------
-//MIDI waveguide from Iain Mc Curdy examples
+// Dummy instrument
 // ----------------------------------------------------------------------------------------------------------------
- /* instr	1	;triggered by midi 
-    
-iHandle nstance 2, 0, 0.1 , p4, p5
-endin */
+instr	1	// Dummy (to capture Cabbage Midi)
+    // Nothing ...
+endin 
 
 // ----------------------------------------------------------------------------------------------------------------
 // One note 
 // ----------------------------------------------------------------------------------------------------------------
-instr	1	// Main instrument
-    gkNoteTrig init 1
-    givel		veloc	0,1	;read in midi note velocity
-
-
+instr	2	// Main instrument
     asuml June21, p4, p5
-           
     chnmix asuml, "tochorus"
-
-    kactive	active	p1 		;...check number of active midi notes 
-    printk 0.1, kactive
-        
-
 endin
     
         
@@ -931,7 +942,7 @@ instr EFFECT
 
     if (kchorus == 1) then 
         aoffset = 0
-        aoutChorusL,aoutChorusR 	StChorus	asuml ,asuml , gicrsrate[kCrsRate], 0.2	, aoffset, 0.4, 0.2
+        aoutChorusL,aoutChorusR 	StChorus	asuml ,asuml , gicrsrate[kCrsRate], 0.2	, aoffset, 0.5, 0.5
 	    outs aoutChorusL,aoutChorusR 	
     else
 	    outs asuml , asuml
@@ -940,7 +951,76 @@ instr EFFECT
     chnclear "tochorus"
 endin 
                         
-                    
+                                                                                                      
+// ----------------------------------------------------------------------------------------------------------------
+// Midi listener (inspired/copied from Iain McCurdy
+// ----------------------------------------------------------------------------------------------------------------
+instr	100	// Midi Listener
+    ichan  = 0 
+    insno = 2                                           ; The main instrument
+    kvoice = -1
+    
+	kstatus, kchan, kdata1, kdata2  midiin				;READ IN MIDI  kdata1 : note, kdata2 : velo
+	
+	kmaxvoice chnget "maxvoice" 
+	
+	if (kmaxvoice == 1) then
+	    gkmaxvoices = 6 
+	else 
+	    gkmaxvoices  = powoftwo(kmaxvoice + 1)
+    endif 
+	
+	if (kchan == ichan || ichan == 0) then			    ;IF A MESSAGE ON THE CORRECT CHANNEL HAS BEEN RECEIVED (OR ON ANY CHANNEL IF CHANNEL WAS DEFINED AS ZERO)
+        if (kstatus == 144) then						;IF MIDI MESSAGE IS A NOTE...
+	        if (kdata2 > 0) then						;IF VELOCITY IS MORE THAN ZERO, I.E. NOT A NOTE OFF
+                kdx = 0                                 ; Get an available voice (if any) 
+                kvoice = -1 
+                loop:
+                    if (gkvoices[kdx] == -1) then
+                        kvoice = kdx
+                        goto endloop
+                    endif 
+                loop_lt kdx, 1, gkmaxvoices, loop
+                endloop:
+	            if (kvoice != -1) then                  ; Can we play this note ? 
+	                gkvoices[kvoice] = kdata1
+	                gkmidinotes[kdata1] = kvoice 
+	                ktmp = kvoice
+	 	            event "i",insno +(kdata1 * 0.001), 0, -1, cpsmidinn(kdata1), kdata2	;TRIGGER INSTRUMENT WITH A HELD NOTE. NOTE NUMBER TRANSMITTED AS p4, VELOCITY AS p5
+                endif
+	        else								        ;OTHERWISE (I.E. MUST BE A NOTE OFF / ZERO VELOCITY)
+                kvoice  = gkmidinotes[kdata1] 
+	            if (kvoice != -1) then 
+	                kbranch = 4
+	                gkvoices[kvoice] = -1
+                    gkmidinotes[kdata1] = - 1 
+	                turnoff2	insno + (kdata1 * 0.001), 4, 1			;TURN OFF INSTRUMENT WITH THIS SPECIFIC FRACTIONAL NOTE NUMBER
+                endif 
+	        endif								
+	    elseif kstatus==128 then					    ;IF MESSAGE USES A 'NOTE OFF' STATUS BYTE (128)
+	        turnoff2	insno+(kdata1*0.001),4,1	    ;TURN OFF INSTRUMENT WITH THIS SPECIFIC FRACTIONAL NOTE NUMBER
+            kvoice  = gkmidinotes[kdata1] 
+	        printk 0.5, kdata1
+	        if (kvoice != -1) then 
+	            gkvoices[kvoice] = -1
+                gkmidinotes[kdata1] = - 1 
+            endif 
+        elseif (kstatus == 224) then                    ; Pitch bend
+            gkpitchb = (kdata2 & 127) - 64
+        elseif ((kstatus == 176) && (kdata1 == 1))  then                       ; vibrato
+            gkvibrat = kdata2
+	    endif								;END OF CONDITIONAL BRANCH
+	
+	endif								;END OF CONDITIONAL BRANCH
+
+    //printk 0.5, cpsmidinn(kdata1)
+    kactive	active	insno  		;...check number of active midi notes 
+    SIdent sprintfk "text(%d)", kactive
+    chnset SIdent, "voicecount"
+
+endin 
+
+                                                              
 
 // ----------------------------------------------------------------------------------------------------------------
 // Update GUI
@@ -1317,7 +1397,7 @@ instr 1008 // Change name of the current tone (into the buffer)  200 => modify l
           
 endin
 
-instr 3   // init 
+instr 3   // init data 
 
 gidcoenv[] loadarray "dat/gidcoenv.dat"
 //itmp initjubuf
@@ -1327,9 +1407,12 @@ endin
   
 </CsInstruments>
 <CsScore>
-i "EFFECT" 0 z   ;causes Csound to run for about 7000 years...
+i 100 0 3600            ; run midi scanning for 1 hour
+i "EFFECT" 0 z          ;causes Csound to run for about 7000 years...
 i "updateGUI"  0 [3600*24*7] ;read var stored in instr1
 i 3 0 0 
+
+
 f0 z
 
 </CsScore>
