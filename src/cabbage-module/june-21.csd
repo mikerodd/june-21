@@ -1,4 +1,4 @@
-/*
+/* bounds(0, 0, 0, 0)
  This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -15,9 +15,9 @@
  
 <Cabbage>  
 bounds(0, 0, 0, 0)
-form caption("June-21 v{VERSION}"), size(800, 650), colour(26,26,26), pluginid("June-21") bundle("./imgs", "./presets","./libjsl.so", "libjsl.dll")
+form caption("June-21 v{VERSION}"), size(800, 580), colour(26,26,26), pluginid("June-21") bundle("./imgs", "./presets","./libjsl.so", "libjsl.dll")
 
-keyboard bounds(148, 462, 579, 122)  
+keyboard bounds(90, 454, 588, 122)  
 
 
 
@@ -55,7 +55,7 @@ rslider bounds(356, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl1") $rslide
 rslider bounds(452, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl2") $rsliderstyle 
 rslider bounds(548, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl3") $rsliderstyle 
 
-rslider bounds(453, 4, 47, 46) range(0.2, 1, 0.5, 1, 0.01) channel("lid") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255) text("light")
+rslider bounds(0, 0, 47, 16) range(0.2, 1, 0.5, 1, 0.01) channel("lid") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255) text("light") visible(0)
 rslider bounds(740, 380, 44, 44) range(0, 12, 0, 1, 1) channel("dcobnd") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
 
 
@@ -77,8 +77,8 @@ vslider bounds(426, 240, 32, 65) range(0, 3, 0, 1, 1) channel("hpffreq") $vslide
 button bounds(406, 94, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("PRESET", "PRESET") channel("grpPreset") value(1) fontcolour:1(0, 0, 0, 255)
 button bounds(406, 118, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("MEMORY", "MEMORY") channel("grpMemory") fontcolour:1(0, 0, 0, 255)
 button bounds(406, 142, 52, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("FILE", "FILE") channel("grpCartridge")  fontcolour:1(0, 0, 0, 255) , 
-button bounds(18, 486, 51, 31) channel("OctDown") colour:1(255, 0, 0, 255) text("Down", "Down") radiogroup("oct") visible(0)
-button bounds(74, 486, 51, 31) channel("OctUp") text("Normal", "Normal") radiogroup("oct") colour:1(255, 0, 0, 255) visible(0)
+
+
 
 
 
@@ -87,7 +87,7 @@ label bounds(242, 184, 50, 12) ,text("NOISE"),
 label bounds(416, 226, 50, 12) text("HPF") 
 label bounds(136, 78, 50, 12), text("RANGE")
 label bounds(284, 78, 60, 12), text("ENV MODE")
-label bounds(6, 466, 128, 16) text("OCT TRANSPOSE") visible(0)
+
 label bounds(700, 198, 40, 12) text("ENV")
 label bounds(62, 322, 50, 16) text("VCA")
 label bounds(200, 322, 80, 16) text("CHORUS")
@@ -275,16 +275,18 @@ button bounds(280, 8, 20, 20) text(">", ">") channel("right") latched(0)
 
 }
  
-button bounds(408, 12, 48, 28) text("Panic", "Panic", "") colour:0(255, 0, 0, 255) channel("btpanic") colour:1(255, 0, 0, 255) latched(0)
+button bounds(408, 12, 82, 34) text("Panic !", "Panic !", "") colour:0(255, 0, 0, 255) channel("btpanic") colour:1(255, 0, 0, 255) latched(0)
 
 label bounds(732, 352, 60, 12) text("BENDER")
 label bounds(742, 364, 40, 12) text("RANGE")
 
-checkbox bounds(28, 538, 100, 30) channel("test") text("oldvcf") visible(0)
+
+combobox bounds(726, 476, 71, 16) text("6 (juno)", "8", "16", "32")
+label bounds(726, 462, 52, 12) text("# voices")
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
--n -d -+rtmidi=NULL -M0 -m0d --midi-key=4  --midi-velocity=6  --opcode-lib=./libjsl.so ; OSX: libjsl.dylib; Windows: libjsl.dll
+-n -d -+rtmidi=NULL -M0 -m0d --midi-key=4  --midi-velocity=5  --opcode-lib=./libjsl.so ; OSX: libjsl.dylib; Windows: libjsl.dll
 </CsOptions>
 <CsInstruments>
 ; groupbox bounds(494, 52, 300, 29) ,  outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0) 
@@ -379,58 +381,40 @@ gipwmrate[] fillarray 0.000000, 0.002994, 0.005988, 0.008982, 0.011976, 0.014970
 
 
 
-// vcffreq values 0-127
-givcffreq[] fillarray   11.528952, 11.747088, 11.965224, 12.18336, 12.401496, 12.619632, 12.837768, 13.055904, 
-                        13.27404, 13.492176, 13.710312, 14.3935066, 15.0767012, 15.7598958, 16.4430904, 17.126285, 
-                        17.8094796, 18.4926742, 19.1758688, 19.8590634, 20.542258, 22.3658941, 24.1895302, 26.0131663, 
-                        27.8368024, 29.6604385, 31.4840746, 33.3077107, 35.1313468, 36.9549829, 38.778619, 41.8103215, 
-                        44.842024, 47.8737265, 50.905429, 53.9371315, 56.968834, 60.0005365, 63.032239, 66.0639415, 
-                        69.095644, 76.8269366, 84.5582292, 92.2895218, 100.0208144, 107.752107, 115.4833996, 123.2146922, 
-                        130.9459848, 138.6772774, 146.40857, 162.7906082, 179.1726464, 195.5546846, 211.9367228, 228.318761, 
-                        244.7007992, 261.0828374, 277.4648756, 293.8469138, 310.228952, 331.3801396, 352.5313272, 373.6825148, 
-                        394.8337024, 415.98489, 437.1360776, 458.2872652, 479.4384528, 500.5896404, 521.740828, 584.6627719, 
-                        647.5847157, 710.5066596, 773.4286034, 836.3505473, 899.2724911, 962.194435, 1025.116379, 1088.038323, 
-                        1150.960267, 1293.452801, 1435.945335, 1578.437869, 1720.930403, 1863.422937, 2005.915472, 2148.408006, 
-                        2290.90054, 2433.393074, 2575.885608, 2757.56804, 2939.250473, 3120.932905, 3302.615337, 3484.297769, 
-                        3665.980201, 3847.662633, 4029.345065, 4211.027497, 4392.70993, 4903.120438, 5413.530946, 5923.941455, 
-                        6434.351963, 6944.762471, 7455.17298, 7965.583488, 8475.993997, 8986.404505, 9496.815013, 10007.22552, 
-                        10517.63603, 11062.20447, 11606.7729, 12151.34134, 12695.90977, 13240.47821, 13785.04664, 14329.61508, 
-                        14874.18351, 15276.22656, 15678.26961, 16080.31266, 16482.35571, 16884.39876, 17286.44181, 17688.48486
-                      
 
 
-giFac = 1
-gienvt1[] fillarray     0.004187 * giFac, 0.004487 * giFac, 0.004809 * giFac, 0.005154 * giFac, 0.005524 * giFac, 0.005921 * giFac, 0.006346 * giFac, 0.006801 * giFac, 0.007289 * giFac, 0.007812 * giFac, 
-                        0.008373 * giFac, 0.008974 * giFac, 0.009618 * giFac, 0.010309 * giFac, 0.011049 * giFac, 0.011842 * giFac, 0.012691 * giFac, 0.013602 * giFac, 0.014579 * giFac, 0.015625 * giFac, 
-                        0.016746 * giFac, 0.017948 * giFac, 0.019237 * giFac, 0.020617 * giFac, 0.022097 * giFac, 0.023683 * giFac, 0.025383 * giFac, 0.027205 * giFac, 0.029157 * giFac, 0.031250 * giFac, 
-                        0.033493 * giFac, 0.035897 * giFac, 0.038473 * giFac, 0.041235 * giFac, 0.044194 * giFac, 0.047366 * giFac, 0.050766 * giFac, 0.054409 * giFac, 0.058315 * giFac, 0.062500 * giFac, 
-                        0.066986 * giFac, 0.071794 * giFac, 0.076947 * giFac, 0.082469 * giFac, 0.088388 * giFac, 0.094732 * giFac, 0.101532 * giFac, 0.108819 * giFac, 0.116629 * giFac, 0.125000 * giFac, 
-                        0.133972 * giFac, 0.143587 * giFac, 0.153893 * giFac, 0.164938 * giFac, 0.176777 * giFac, 0.189465 * giFac, 0.203063 * giFac, 0.217638 * giFac, 0.233258 * giFac, 0.250000 * giFac, 
-                        0.267943 * giFac, 0.287175 * giFac, 0.307786 * giFac, 0.329877 * giFac, 0.353553 * giFac, 0.378929 * giFac, 0.406126 * giFac, 0.435275 * giFac, 0.466516 * giFac, 0.500000 * giFac, 
-                        0.535887 * giFac, 0.574349 * giFac, 0.615572 * giFac, 0.659754 * giFac, 0.707107 * giFac, 0.757858 * giFac, 0.812252 * giFac, 0.870551 * giFac, 0.933033 * giFac, 1.000000 * giFac, 
-                        1.071773 * giFac, 1.148698 * giFac, 1.231144 * giFac, 1.319508 * giFac, 1.414214 * giFac, 1.515717 * giFac, 1.624505 * giFac, 1.741101 * giFac, 1.866066 * giFac, 2.000000 * giFac, 
-                        2.143547 * giFac, 2.297397 * giFac, 2.462289 * giFac, 2.639016 * giFac, 2.828427 * giFac, 3.031433 * giFac, 3.249010 * giFac, 3.482202 * giFac, 3.732132 * giFac, 4.000000 * giFac, 
-                        4.287094 * giFac, 4.594793 * giFac, 4.924578 * giFac, 5.278032 * giFac, 5.656854 * giFac, 6.062866 * giFac, 6.498019 * giFac, 6.964405 * giFac, 7.464264 * giFac, 8.000000 * giFac, 
-                        8.574188 * giFac, 9.189587 * giFac, 9.849155 * giFac, 10.556063 * giFac, 11.313709 * giFac, 12.125733 * giFac, 12.996038 * giFac, 13.928809 * giFac, 14.928528 * giFac, 16.000000 * giFac, 
-                        17.148375 * giFac, 18.379174 * giFac, 19.698311 * giFac, 21.112127 * giFac, 22.627417 * giFac, 24.251465 * giFac, 25.992077 * giFac, 26.992077 * giFac
+gienvt1[] fillarray     0.004187, 0.004487, 0.004809, 0.005154, 0.005524, 0.005921, 0.006346, 0.006801, 0.007289, 0.007812, 
+                        0.008373, 0.008974, 0.009618, 0.010309, 0.011049, 0.011842, 0.012691, 0.013602, 0.014579, 0.015625, 
+                        0.016746, 0.017948, 0.019237, 0.020617, 0.022097, 0.023683, 0.025383, 0.027205, 0.029157, 0.031250, 
+                        0.033493, 0.035897, 0.038473, 0.041235, 0.044194, 0.047366, 0.050766, 0.054409, 0.058315, 0.062500, 
+                        0.066986, 0.071794, 0.076947, 0.082469, 0.088388, 0.094732, 0.101532, 0.108819, 0.116629, 0.125000, 
+                        0.133972, 0.143587, 0.153893, 0.164938, 0.176777, 0.189465, 0.203063, 0.217638, 0.233258, 0.250000, 
+                        0.267943, 0.287175, 0.307786, 0.329877, 0.353553, 0.378929, 0.406126, 0.435275, 0.466516, 0.500000, 
+                        0.535887, 0.574349, 0.615572, 0.659754, 0.707107, 0.757858, 0.812252, 0.870551, 0.933033, 1.000000, 
+                        1.071773, 1.148698, 1.231144, 1.319508, 1.414214, 1.515717, 1.624505, 1.741101, 1.866066, 2.000000, 
+                        2.143547, 2.297397, 2.462289, 2.639016, 2.828427, 3.031433, 3.249010, 3.482202, 3.732132, 4.000000, 
+                        4.287094, 4.594793, 4.924578, 5.278032, 5.656854, 6.062866, 6.498019, 6.964405, 7.464264, 8.000000, 
+                        8.574188, 9.189587, 9.849155, 10.556063, 11.313709, 12.125733, 12.996038, 13.928809, 14.928528, 16.000000, 
+                        17.148375, 18.379174, 19.698311, 21.112127, 22.627417, 24.251465, 25.992077, 26.992077
 
 // env T3
-gienvt3[] fillarray     0.090000 * giFac, 0.097000 * giFac, 0.104000 * giFac, 0.111000 * giFac, 0.118000 * giFac, 0.125000 * giFac, 0.132000 * giFac, 0.139000 * giFac, 
-                        0.146000 * giFac, 0.153000 * giFac, 0.160000 * giFac, 0.164000 * giFac, 0.168000 * giFac, 0.172000 * giFac, 0.176000 * giFac, 0.180000 * giFac, 
-                        0.184000 * giFac, 0.188000 * giFac, 0.192000 * giFac, 0.196000 * giFac, 0.200000 * giFac, 0.205000 * giFac, 0.210000 * giFac, 0.215000 * giFac, 
-                        0.220000 * giFac, 0.225000 * giFac, 0.230000 * giFac, 0.235000 * giFac, 0.240000 * giFac, 0.245000 * giFac, 0.250000 * giFac, 0.258000 * giFac, 
-                        0.266000 * giFac, 0.274000 * giFac, 0.282000 * giFac, 0.290000 * giFac, 0.298000 * giFac, 0.306000 * giFac, 0.314000 * giFac, 0.322000 * giFac, 
-                        0.330000 * giFac, 0.348000 * giFac, 0.366000 * giFac, 0.384000 * giFac, 0.402000 * giFac, 0.420000 * giFac, 0.438000 * giFac, 0.456000 * giFac, 
-                        0.474000 * giFac, 0.492000 * giFac, 0.510000 * giFac, 0.539000 * giFac, 0.568000 * giFac, 0.597000 * giFac, 0.626000 * giFac, 0.655000 * giFac, 
-                        0.684000 * giFac, 0.713000 * giFac, 0.742000 * giFac, 0.771000 * giFac, 0.800000 * giFac, 0.858000 * giFac, 0.916000 * giFac, 0.974000 * giFac, 
-                        1.032000 * giFac, 1.090000 * giFac, 1.148000 * giFac, 1.206000 * giFac, 1.264000 * giFac, 1.322000 * giFac, 1.380000 * giFac, 1.545000 * giFac, 
-                        1.710000 * giFac, 1.875000 * giFac, 2.040000 * giFac, 2.205000 * giFac, 2.370000 * giFac, 2.535000 * giFac, 2.700000 * giFac, 2.865000 * giFac, 
-                        3.030000 * giFac, 3.595000 * giFac, 4.160000 * giFac, 4.725000 * giFac, 5.290000 * giFac, 5.855000 * giFac, 6.420000 * giFac, 6.985000 * giFac, 
-                        7.550000 * giFac, 8.115000 * giFac, 8.680000 * giFac, 9.224000 * giFac, 9.768000 * giFac, 10.312000 * giFac, 10.856000 * giFac, 11.400000 * giFac, 
-                        11.864000 * giFac, 12.328000 * giFac, 12.792000 * giFac, 13.256000 * giFac, 13.720000 * giFac, 14.447500 * giFac, 15.175000 * giFac, 15.902500 * giFac, 
-                        16.630000 * giFac, 17.357500 * giFac, 18.085000 * giFac, 18.812500 * giFac, 19.540000 * giFac, 20.267500 * giFac, 20.995000 * giFac, 22.048500 * giFac, 
-                        23.102000 * giFac, 24.155500 * giFac, 25.209000 * giFac, 26.262500 * giFac, 27.316000 * giFac, 28.369500 * giFac, 29.423000 * giFac, 30.476500 * giFac, 
-                        31.530000 * giFac, 32.394286 * giFac, 33.258571 * giFac, 34.122857 * giFac, 34.987143 * giFac, 35.851429 * giFac, 36.715714 * giFac, 37.580000 * giFac
+gienvt3[] fillarray     0.090000, 0.097000, 0.104000, 0.111000, 0.118000, 0.125000, 0.132000, 0.139000, 
+                        0.146000, 0.153000, 0.160000, 0.164000, 0.168000, 0.172000, 0.176000, 0.180000, 
+                        0.184000, 0.188000, 0.192000, 0.196000, 0.200000, 0.205000, 0.210000, 0.215000, 
+                        0.220000, 0.225000, 0.230000, 0.235000, 0.240000, 0.245000, 0.250000, 0.258000, 
+                        0.266000, 0.274000, 0.282000, 0.290000, 0.298000, 0.306000, 0.314000, 0.322000, 
+                        0.330000, 0.348000, 0.366000, 0.384000, 0.402000, 0.420000, 0.438000, 0.456000, 
+                        0.474000, 0.492000, 0.510000, 0.539000, 0.568000, 0.597000, 0.626000, 0.655000, 
+                        0.684000, 0.713000, 0.742000, 0.771000, 0.800000, 0.858000, 0.916000, 0.974000, 
+                        1.032000, 1.090000, 1.148000, 1.206000, 1.264000, 1.322000, 1.380000, 1.545000, 
+                        1.710000, 1.875000, 2.040000, 2.205000, 2.370000, 2.535000, 2.700000, 2.865000, 
+                        3.030000, 3.595000, 4.160000, 4.725000, 5.290000, 5.855000, 6.420000, 6.985000, 
+                        7.550000, 8.115000, 8.680000, 9.224000, 9.768000, 10.312000, 10.856000, 11.400000, 
+                        11.864000, 12.328000, 12.792000, 13.256000, 13.720000, 14.447500, 15.175000, 15.902500, 
+                        16.630000, 17.357500, 18.085000, 18.812500, 19.540000, 20.267500, 20.995000, 22.048500, 
+                        23.102000, 24.155500, 25.209000, 26.262500, 27.316000, 28.369500, 29.423000, 30.476500, 
+                        31.530000, 32.394286, 33.258571, 34.122857, 34.987143, 35.851429, 36.715714, 37.580000
+
 
 
 // ent T4 values 0-127 
@@ -452,12 +436,6 @@ gienvt4[] fillarray     0.007000, 0.009300, 0.011600, 0.013900, 0.016200, 0.0185
                         31.830000, 32.902857, 33.975714, 35.048571, 36.121429, 37.194286, 38.267143, 39.340000
 
 
-
-// dco env "a" value 
-gidcoenva[] fillarray  0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0.01475 ,0.015234375 ,0.01571875 ,0.016203125 ,0.0166875 ,0.017171875 ,0.01765625 ,0.018140625 ,0.018625 ,0.019109375 ,0.01959375 ,0.020078125 ,0.0205625 ,0.021046875 ,0.02153125 ,0.022015625 ,0.0225 ,0.023075 ,0.02365 ,0.024225 ,0.0248 ,0.025375 ,0.02595 ,0.026525 ,0.0271 ,0.027675 ,0.02825 ,0.028995 ,0.02974 ,0.030485 ,0.03123 ,0.031975 ,0.03272 ,0.033465 ,0.03421 ,0.034955 ,0.0357 ,0.03665 ,0.0376 ,0.03855 ,0.0395 ,0.04045 ,0.0414 ,0.04235 ,0.0433 ,0.04425 ,0.0452 ,0.04620105882 ,0.04720211765 ,0.04820317647 ,0.04920423529 ,0.05020529412 ,0.05120635294 ,0.05220741176 ,0.05320847059 ,0.05420952941 ,0.05521058824 ,0.05621164706 ,0.05721270588 ,0.05821376471 ,0.05921482353 ,0.06021588235 ,0.06121694118 ,0.062218 
-
-// dco env "b" value                                              
-gidcoenvb[] fillarray  0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,2.132 ,2.1325625 ,2.133125 ,2.1336875 ,2.13425 ,2.1348125 ,2.135375 ,2.1359375 ,2.1365 ,2.1370625 ,2.137625 ,2.1381875 ,2.13875 ,2.1393125 ,2.139875 ,2.1404375 ,2.141 ,2.14082 ,2.14064 ,2.14046 ,2.14028 ,2.1401 ,2.13992 ,2.13974 ,2.13956 ,2.13938 ,2.1392 ,2.14048 ,2.14176 ,2.14304 ,2.14432 ,2.1456 ,2.14688 ,2.14816 ,2.14944 ,2.15072 ,2.152 ,2.1533 ,2.1546 ,2.1559 ,2.1572 ,2.1585 ,2.1598 ,2.1611 ,2.1624 ,2.1637 ,2.165 ,2.165832153 ,2.166664307 ,2.16749646 ,2.168328613 ,2.169160766 ,2.16999292 ,2.170825073 ,2.171657226 ,2.172489379 ,2.173321533 ,2.174153686 ,2.174985839 ,2.175817992 ,2.176650146 ,2.177482299 ,2.178314452 ,2.179146605
 
 gidcoenv[] = array(1)
 
@@ -571,7 +549,7 @@ opcode dispLCD, i, S
     Sdisp xin
 
     iLid chnget "lid"
-    iLid3 = iLid * .6 + 0.4
+    iLid3 = iLid  * .6 + 0.4
     
     iIdent = 0
     label3:
@@ -580,7 +558,7 @@ opcode dispLCD, i, S
         SChar  strsub Sdisp, iIdent, iIdent + 1
         icropx = ((ideb -45) % 20) * 40
         icropy = int((ideb -45)/ 20) * 60
-        SLetter sprintf "crop(%d, %d, 40, 60) alpha(%f) ", icropx, icropy, iLid
+        SLetter sprintf "crop(%d, %d, 40, 60)", icropx, icropy
         chnset SLetter,SPos
     loop_le iIdent, 1, strlen(Sdisp), label3
     xout 0
@@ -588,9 +566,11 @@ opcode dispLCD, i, S
 endop
 
 // ----------------------------------------------------------------------------------------------------------------
-// Begin of main instrument
+// Begin of Synth
 // ----------------------------------------------------------------------------------------------------------------
-instr 1
+opcode June21,a,kk
+    knum,kvel xin
+
   
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -631,8 +611,6 @@ iEnvT4          chnget "envt4"
 iEnvL1          chnget "envl1"
 iEnvL2          chnget "envl2"
 iEnvL3          chnget "envl3"
-iChorus         chnget "chorus"
-iCrsRate        chnget "crsrate"
 iDcoBnd         chnget "dcobnd"
 
 giPostAmp      chnget "vcalevl"
@@ -645,11 +623,6 @@ giCartridge    chnget "grpCartridge"
 // ----------------------------------------------------------------------------------------------------------------
 //kres expon ia, idur, ib
 //printf_i "courbe : %f %f %f %f %f %f %f \n",1, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2]*(iEnvL1-iEnvL2), iEnvL2, gienvt1[iEnvT3], iEnvL3, gienvt1[iEnvT4]
-
-
-//krel init 0
-//krel release ;outputs release-stage flag (0 or 1 values)
-//if (krel == 1) kgoto rel ;if in release-stage goto release section
     if (iEnvL1 > iEnvL2) then 
         //kEnv  linsegr  0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
         kEnv  transegr      0, gienvt1[iEnvT1],  0, 
@@ -670,16 +643,6 @@ giCartridge    chnget "grpCartridge"
 kEnvL = kEnv / 127
 kEnvVCF = kEnv
 kEnvG  linsegr 0, 0.0001, 1,0.02,0
-/* kgoto done
-    
-rel:
-    kres expon 1, gienvt4[iEnvT4], 0.01
-    kresg expon 1, 0.01, 0.001
-    kEnvL = kEnv * kres / 127
-    kEnvVCF = kEnv * kres
-    kEnvG = kresg 
-done:
-*/
 
 // ----------------------------------------------------------------------------------------------------------------
 // LFO Block
@@ -707,12 +670,11 @@ endif
 // DCO Block
 // ----------------------------------------------------------------------------------------------------------------
 
-//printf_i "iDcoEnvd :%d   , gidcoenvb[iDcoEnvd]:%f  idcoenva[iDcoEnvd] :%f \n",1,iDcoEnvd,gidcoenvb[iDcoEnvd],gidcoenva[iDcoEnvd] 
 
 kbnd pchbend 0, iDcoBnd / 12
 
 // Note
-inotefreq  = cpsmidinn(p4)
+inotefreq  = cpsmidinn(i(knum))
 kNote           =  inotefreq * (8  / (2^(iDcoRng + 2)))                        // Base note calculation : note * dcoRng correction 
 iNote = inotefreq * (8  / (2^(iDcoRng + 2)))
 kNote           = (kNote  +  aLFO * (kNote * gilfovals[iDcoLfo] / 2)) * powoftwo(kbnd)   // note + lfo oscilation
@@ -856,40 +818,19 @@ endif
 // VCF Block
 // ----------------------------------------------------------------------------------------------------------------
 
-//Old block
-
-ioldvcf chnget "test"
 
 
-if (ioldvcf == 1) then 
-kVcfFeq = iVcfFreq + round(10 * log2(inotefreq  / 261.62) * iVcfKybd / 18)
-afreqLim = 10000
-if (iVcfEnv == 0) then       // Normal
-      //kcutoff= min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)])
-      kcutoff= min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)])
-elseif (iVcfEnv == 1) then   // Inverted
-      kcutoff= min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq - iVcfEnvd * kEnvVCF / 256, 127)])
-elseif (iVcfEnv == 2) then   // D-Norm
-    // no dynamic for now
-    kcutoff= min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq + iVcfEnvd * kEnvVCF / 256, 127)])
-elseif (iVcfEnv == 3) then   // dyn
-    kcutoff = min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq,127)])
-    aOutVCFBlock moogvcf aOutHPFBlock        , min(afreqLim ,(1 + aLFO * iVcfLfo/127  ) * givcffreq[min(kVcfFeq,127)]), iVcfReso/153
-endif
-
-
-else
 
 //  kx = <cutoff Freq> + <lfo impact> + <env impact (with or without dynamics> + <key follow impact> + correction
 if (iVcfEnv == 0) then       // Normal
-    kx = (iVcfFreq + (  aLFO * iVcfLfo / 4  + kEnvVCF * iVcfEnvd / 127)  + (p4 - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
+    kx = (iVcfFreq + (  aLFO * iVcfLfo / 4  + kEnvVCF * iVcfEnvd / 127)  + (knum - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
 elseif (iVcfEnv == 1) then   // Inverted
-    kx = (iVcfFreq - ( aLFO * iVcfLfo / 4 + kEnvVCF * iVcfEnvd / 127)  + (p4 - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
+    kx = (iVcfFreq - ( aLFO * iVcfLfo / 4 + kEnvVCF * iVcfEnvd / 127)  + (knum - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
 
 elseif (iVcfEnv == 2) then   // D-Norm
-    kx = (iVcfFreq + ( aLFO * iVcfLfo / 4 +  (p6 / 127) * kEnvVCF * iVcfEnvd / 127)  + (p4 - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
+    kx = (iVcfFreq + ( aLFO * iVcfLfo / 4 +  (kvel / 127) * kEnvVCF * iVcfEnvd / 127)  + (knum - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
 elseif (iVcfEnv == 3) then   // dyn
-    kx = (iVcfFreq + ( aLFO * iVcfLfo / 4  + (p6 / 220) *  iVcfEnvd )  + (p4 - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
+    kx = (iVcfFreq + ( aLFO * iVcfLfo / 4  + (kvel / 220) *  iVcfEnvd )  + (knum - 60)  * iVcfKybd / 18 ) / 12   - 3.2 
 endif
 
 
@@ -904,7 +845,6 @@ if kcutoff> 10000 then
    kcutoff = 10000
 endif
 
-endif
 
 atmp moogvcf aOutHPFBlock        , kcutoff , 0
 aOutVCFBlock reson atmp ,1.25 * kcutoff, kcutoff* 8  / iVcfReso, 2
@@ -924,9 +864,9 @@ if (iVcaEnv == 0) then
 elseif (iVcaEnv == 1) then
     aOutVCABlock = aOutVCFBlock * kEnvG   // GT
 elseif (iVcaEnv  == 2) then 
-    aOutVCABlock = aOutVCFBlock * kEnvL * gidynVcaRes[p6]      // D-Normal  
+    aOutVCABlock = aOutVCFBlock * kEnvL * gidynVcaRes[kvel]      // D-Normal  
 elseif (iVcaEnv == 3) then 
-    aOutVCABlock = aOutVCFBlock * kEnvG * gidynVcaRes[p6]    // DGT  
+    aOutVCABlock = aOutVCFBlock * kEnvG * gidynVcaRes[kvel]    // DGT  
 endif
 
 //aTmpOut = aOutVCABlock 
@@ -934,37 +874,73 @@ endif
 
 
 
-// ----------------------------------------------------------------------------------------------------------------
-// Chorus block
-// ----------------------------------------------------------------------------------------------------------------
-if (iChorus == 1) then 
-    krate = gicrsrate[iCrsRate]
-    aoffset = 0
-    ktrem	rspline	0,-1,0.1,0.5
-    ktrem	pow	2,ktrem
-    
-    aoutChorusL,aoutChorusR 	StChorus	aOutVCABlock ,aOutVCABlock , gicrsrate[iCrsRate], ktrem/2	, aoffset, 0.5, 0.5
-else
-    aoutChorusL = aOutVCABlock 
-    aoutChorusR = aOutVCABlock 
-endif 
 
-theend:      
 
 // ----------------------------------------------------------------------------------------------------------------
 // Output
 // ----------------------------------------------------------------------------------------------------------------
-outs        aoutChorusL * giPostAmp * 1.2 / 127 , aoutChorusR * giPostAmp *1.2 / 127
+xout	aOutVCABlock  * giPostAmp * 1.2 / 127 
 
-//goto reallyend
-//aTmpOut=  0
 
 theend:      
 
 //outs  aTmpOut * giPostAmp * 1.2 /127, aTmpOut * giPostAmp * 1.2 /127        
-endin 
+endop
 
+
+
+// ----------------------------------------------------------------------------------------------------------------
+//MIDI waveguide from Iain Mc Curdy examples
+// ----------------------------------------------------------------------------------------------------------------
+ /* instr	1	;triggered by midi 
     
+iHandle nstance 2, 0, 0.1 , p4, p5
+endin */
+
+// ----------------------------------------------------------------------------------------------------------------
+// One note 
+// ----------------------------------------------------------------------------------------------------------------
+instr	1	// Main instrument
+    gkNoteTrig init 1
+    givel		veloc	0,1	;read in midi note velocity
+
+
+    asuml June21, p4, p5
+           
+    chnmix asuml, "tochorus"
+
+    kactive	active	p1 		;...check number of active midi notes 
+    printk 0.1, kactive
+        
+
+endin
+    
+        
+        
+
+// ----------------------------------------------------------------------------------------------------------------
+// Chorus block
+// ----------------------------------------------------------------------------------------------------------------
+instr EFFECT
+    asuml chnget "tochorus"
+    denorm asuml
+    
+    kchorus     chnget "chorus"
+    kCrsRate    chnget "crsrate"
+    aoffset = 0
+
+    if (kchorus == 1) then 
+        aoffset = 0
+        aoutChorusL,aoutChorusR 	StChorus	asuml ,asuml , gicrsrate[kCrsRate], 0.2	, aoffset, 0.4, 0.2
+	    outs aoutChorusL,aoutChorusR 	
+    else
+	    outs asuml , asuml
+    endif 
+
+    chnclear "tochorus"
+endin 
+                        
+                    
 
 // ----------------------------------------------------------------------------------------------------------------
 // Update GUI
@@ -980,27 +956,27 @@ instr updateGUI
   
  
     if changed:k(chnget:S("openFile")) == 1 then
-        event "i", 1004, 0, 0          // open a cartridge (.SYX file)
+        event "i", 1004, 0, 0          // Open a cartridge (.SYX file)
     endif
     
     ktrig  changed  chnget:k("btcopy")  
     if ktrig == 1 then
-        event "i",1005, 0, 0           // copy the current tone in the buffer
+        event "i",1005, 0, 0           // Copy the current tone in the buffer
     endif 
 
     ktrig  changed  chnget:k("btpaste")  
     if ktrig == 1 then
-        event "i",1006, 0, 0           // paste ther buffer in the current tone 
+        event "i",1006, 0, 0           // Paste the buffer in the current tone 
     endif 
         
     ktrig changed  chnget:k("left"), chnget:k("right")
     if ktrig == 1 then
-        event "i",1007, 0, 0           // change name of the current tone (into the buffer) 
+        event "i",1007, 0, 0           // Change name of the current tone (into the buffer) 
     endif 
 
     ktrig changed chnget:k("letter") 
     if ktrig == 1 then
-        event "i",1008, 0, 0, 200           // change name of the current tone (into the buffer)  200 => modify letter in name 
+        event "i",1008, 0, 0, 200      // Change name of the current tone (into the buffer)  200 => modify letter in name 
     endif 
             
     ktrig changed chnget:k("btpanic")
@@ -1014,7 +990,7 @@ endin
 // ----------------------------------------------------------------------------------------------------------------
 // Open File 
 // ----------------------------------------------------------------------------------------------------------------
-instr 1004
+instr 1004  // open a cartridge (.SYX file)
 
     STmp  chnget "openFile"
     if (strcmp(STmp,gScurcart) != 0) then 
@@ -1024,9 +1000,10 @@ instr 1004
     event "i", 1002, 0, 0
     
 endin    
-    // get current bank
+
+
     
-instr 1002
+instr 1002 // Tone changed
     iIdent = 1
     gicurprog = 0
     iBank = 0 
@@ -1065,7 +1042,6 @@ instr 1002
         endif
     loop_le iIdent, 1, 8, labelb2
 
-    //printf_i "Current prog : %d\n", 1, gicurprog
     
     
     gSName getjuname gScurbank,gicurprog  ,iBank  ; use of plugin to get the tone name from the midi bulk dump from synth
@@ -1172,7 +1148,7 @@ endin
 // ----------------------------------------------------------------------------------------------------------------
 // Copy the current tone into the buffer
 // ----------------------------------------------------------------------------------------------------------------
-instr 1005
+instr 1005 // Copy the current tone in the buffer
     ; we're in copy mode 
      printf_i "copy mode cart:%s, proc:%d\n", 1, gScurbank, gicurprog
      iParm  setjuparm gScurbank, gicurprog, "vcalevl", 10
@@ -1258,7 +1234,7 @@ endin
 // ----------------------------------------------------------------------------------------------------------------
 // Paste the buffer into the current tone 
 // ----------------------------------------------------------------------------------------------------------------
-instr 1006
+instr 1006   // Paste the buffer in the current tone 
     if ((strcmp(gScurbank,gSBankPreset) != 0) && (strcmp(gScurbank,gSBankPreset) != 0)) then        
         
           ; this is the cartridge, let's go ! 
@@ -1275,7 +1251,7 @@ instr 1006
     endif
 endin
 
-instr 1007 
+instr 1007   // Change name of the current tone (into the buffer) 
  // bounds(3, 37, 20, 5)  underline
 // gicurletter = 0  // current edited letter
  
@@ -1304,7 +1280,7 @@ instr 1007
 
 endin
 
-instr 1008
+instr 1008 // Change name of the current tone (into the buffer)  200 => modify letter in name 
 
     islival chnget  "letter"
     
@@ -1337,8 +1313,6 @@ instr 1008
         endif 
         printf_i "p4 : %d  => '%s' end : '%s' '%s'\n",1,p4, gSName, Stmp2, Stmp
         islival dispLCD gSName
-        
-    
     endif
           
 endin
@@ -1353,8 +1327,8 @@ endin
   
 </CsInstruments>
 <CsScore>
-;causes Csound to run for about 7000 years...
-i 2  0 [3600*24*7] ;read var stored in instr1
+i "EFFECT" 0 z   ;causes Csound to run for about 7000 years...
+i "updateGUI"  0 [3600*24*7] ;read var stored in instr1
 i 3 0 0 
 f0 z
 

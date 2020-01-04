@@ -242,7 +242,7 @@ the DCO PW/PWM Depth is the widest pulse made by the LFO modulation.
 This parameter changes the cutoff point of the HPF:
 
 @itemize @bullet
-@item @b{0} : The lower frequencies are emphasized (High Shelving at ~106Hz)
+@item @b{0} : The lower frequencies are emphasized (High Shelving at ~106Hz)            
 @item @b{1} : HPF is off
 @item @b{2} : Cutoff point is set at lower frequency (~124 Hz)
 @item @b{3} : Cutoff point is set at higet than 2  (~220 Hz). The produced sound is harder and thinner 
