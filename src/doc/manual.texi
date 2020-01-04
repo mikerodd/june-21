@@ -399,6 +399,294 @@ Once you have a @file{.SYX} file you want to try, use the @b{...} button to load
 @b{Nota Bene} : June-21 is not a finished emulator, so some tones might not sound as expected...
 
 
+@node Preset and Memory Tone List
+@chapter Preset and Memory Tone List
+
+@section Preset Tones
+
+MKS-50 Factory Presets (A Group) / Alpha Juno-1 and Alpha Juno-2 Factory Presets (ROM)
+
+
+@multitable @columnfractions .08 .25 .08 0.25 0.08 0.25
+@item #
+@tab Tone Name
+@tab #
+@tab Tone Name
+@tab #
+@tab Tone Name
+@item @code{P-11}
+@tab @code{PolySynth1   }
+@tab @code{P-12}
+@tab @code{JazzGuitar   }
+@tab @code{P-13}
+@tab @code{Xylophone   }
+@item @code{P-14}
+@tab @code{Low String  }
+@tab @code{P-15}
+@tab @code{LeadSynth1   }
+@tab @code{P-16}
+@tab @code{ChorusGuit   }
+@item @code{P-17}
+@tab @code{SynthBass1   }
+@tab @code{P-18}
+@tab @code{ElectroDrm   }
+@tab @code{P-21}
+@tab @code{HighString   }
+@item @code{P-22}
+@tab @code{TeknoStrng   }
+@tab @code{P-23}
+@tab @code{StringOrgn   }
+@tab @code{P-24}
+@tab @code{FastString   }
+@item @code{P-25}
+@tab @code{LongString   }
+@tab @code{P-26}
+@tab @code{Cello   }
+@tab @code{P-27}
+@tab @code{SoloViolin   }
+@item @code{P-28}
+@tab @code{Pizzicato   }
+@tab @code{P-31}
+@tab @code{Piano 1  }
+@tab @code{P-32}
+@tab @code{E Piano 1 }
+@item @code{P-33}
+@tab @code{E Piano 2 }
+@tab @code{P-34}
+@tab @code{Piano 2  }
+@tab @code{P-35}
+@tab @code{E Piano 3 }
+@item @code{P-36}
+@tab @code{Clav   }
+@tab @code{P-37}
+@tab @code{Harpsichrd   }
+@tab @code{P-38}
+@tab @code{PianoPad   }
+@item @code{P-41}
+@tab @code{Organ 1  }
+@tab @code{P-42}
+@tab @code{Organ 2  }
+@tab @code{P-43}
+@tab @code{CheesyOrgn   }
+@item @code{P-44}
+@tab @code{PipeOrgan1   }
+@tab @code{P-45}
+@tab @code{PipeOrgan2   }
+@tab @code{P-46}
+@tab @code{VoicePad   }
+@item @code{P-47}
+@tab @code{sinusoidal   }
+@tab @code{P-48}
+@tab @code{Voices 1  }
+@tab @code{P-51}
+@tab @code{Brass 1  }
+@item @code{P-52}
+@tab @code{Syn Rise  }
+@tab @code{P-53}
+@tab @code{Spit Valve  }
+@tab @code{P-54}
+@tab @code{Fat Synth  }
+@item @code{P-55}
+@tab @code{Arpeggiatr   }
+@tab @code{P-56}
+@tab @code{Velo-Reso1   }
+@tab @code{P-57}
+@tab @code{Big Brass  }
+@item @code{P-58}
+@tab @code{Pad 1  }
+@tab @code{P-61}
+@tab @code{LeadSynth2   }
+@tab @code{P-62}
+@tab @code{LeadSynth3   }
+@item @code{P-63}
+@tab @code{Flute   }
+@tab @code{P-64}
+@tab @code{LeadSynth4   }
+@tab @code{P-65}
+@tab @code{Sax   }
+@item @code{P-66}
+@tab @code{E Bass 1 }
+@tab @code{P-67}
+@tab @code{SynthBass2   }
+@tab @code{P-68}
+@tab @code{SequencrBs   }
+@item @code{P-71}
+@tab @code{Bells 1  }
+@tab @code{P-72}
+@tab @code{BellChime1   }
+@tab @code{P-73}
+@tab @code{BellChime2   }
+@item @code{P-74}
+@tab @code{Syn-Bello   }
+@tab @code{P-75}
+@tab @code{Marimba   }
+@tab @code{P-76}
+@tab @code{Syn Koto  }
+@item @code{P-77}
+@tab @code{StlDrumBnd   }
+@tab @code{P-78}
+@tab @code{Harp   }
+@tab @code{P-81}
+@tab @code{Tron Blast  }
+@item @code{P-82}
+@tab @code{NoiseShots   }
+@tab @code{P-83}
+@tab @code{TwiliteZne   }
+@tab @code{P-84}
+@tab @code{Scratchin   }
+@item @code{P-85}
+@tab @code{Syn Echo  }
+@tab @code{P-86}
+@tab @code{PolePositn   }
+@tab @code{P-87}
+@tab @code{--U-F-O--   }
+@item @code{P-88}
+@tab @code{Timps   }
+@end multitable
+
+@page
+
+@section Memory Tones
+MKS-50 Factory Presets (B Group) / Alpha Juno-1 and Alpha Juno-2 Factory Presets (RAM)
+
+
+@multitable @columnfractions .08 .25 .08 0.25 0.08 0.25
+@item #
+@tab Tone Name
+@tab #
+@tab Tone Name
+@tab #
+@tab Tone Name
+@item @code{M-11}
+@tab @code{Brass 2  }
+@tab @code{M-12}
+@tab @code{Brass 3  }
+@tab @code{M-13}
+@tab @code{BrassHorns   }
+@item @code{M-14}
+@tab @code{FatBrass 1  }
+@tab @code{M-15}
+@tab @code{Trumpets   }
+@tab @code{M-16}
+@tab @code{BrassSwell   }
+@item @code{M-17}
+@tab @code{PolySynth2   }
+@tab @code{M-18}
+@tab @code{PolySynth3   }
+@tab @code{M-21}
+@tab @code{BowdStrngs   }
+@item @code{M-22}
+@tab @code{RichStrngs   }
+@tab @code{M-23}
+@tab @code{Orchestra   }
+@tab @code{M-24}
+@tab @code{SynOrchsta   }
+@item @code{M-25}
+@tab @code{StrngSweep   }
+@tab @code{M-26}
+@tab @code{SoloVioln2   }
+@tab @code{M-27}
+@tab @code{DblBasses   }
+@item @code{M-28}
+@tab @code{Ominous   }
+@tab @code{M-31}
+@tab @code{Piano 3  }
+@tab @code{M-32}
+@tab @code{E Piano 4 }
+@item @code{M-33}
+@tab @code{Loud-Piano   }
+@tab @code{M-34}
+@tab @code{Piano-FX   }
+@tab @code{M-35}
+@tab @code{Clavichord   }
+@item @code{M-36}
+@tab @code{Harpsi 2  }
+@tab @code{M-37}
+@tab @code{AccGuitar   }
+@tab @code{M-38}
+@tab @code{BassPiano   }
+@item @code{M-41}
+@tab @code{Organ 3  }
+@tab @code{M-42}
+@tab @code{Organ 4  }
+@tab @code{M-43}
+@tab @code{ChowaOrgan   }
+@item @code{M-44}
+@tab @code{PipeOrgan3   }
+@tab @code{M-45}
+@tab @code{Accordion   }
+@tab @code{M-46}
+@tab @code{Vocorder   }
+@item @code{M-47}
+@tab @code{Voices 2  }
+@tab @code{M-48}
+@tab @code{Harmonica   }
+@tab @code{M-51}
+@tab @code{SynthSweep   }
+@item @code{M-52}
+@tab @code{Poly Pulse  }
+@tab @code{M-53}
+@tab @code{CosmoSweep   }
+@tab @code{M-54}
+@tab @code{ChrusPluck   }
+@item @code{M-55}
+@tab @code{Bells 2  }
+@tab @code{M-56}
+@tab @code{Vibe   }
+@tab @code{M-57}
+@tab @code{Koto   }
+@item @code{M-58}
+@tab @code{BellChime3   }
+@tab @code{M-61}
+@tab @code{Lead 5  }
+@tab @code{M-62}
+@tab @code{Lead 6  }
+@item @code{M-63}
+@tab @code{Inv-Solo   }
+@tab @code{M-64}
+@tab @code{Clarinet   }
+@tab @code{M-65}
+@tab @code{Oboe   }
+@item @code{M-66}
+@tab @code{SynthBass3   }
+@tab @code{M-67}
+@tab @code{SynthBass4   }
+@tab @code{M-68}
+@tab @code{UpriteBass   }
+@item @code{M-71}
+@tab @code{Machines   }
+@tab @code{M-72}
+@tab @code{EchoXplosn   }
+@tab @code{M-73}
+@tab @code{ooops   }
+@item @code{M-74}
+@tab @code{Jet Chord  }
+@tab @code{M-75}
+@tab @code{Take-Off   }
+@tab @code{M-76}
+@tab @code{Whistle   }
+@item @code{M-77}
+@tab @code{Surprise   }
+@tab @code{M-78}
+@tab @code{Oct Jump  }
+@tab @code{M-81}
+@tab @code{Jet   }
+@item @code{M-82}
+@tab @code{Helicopter   }
+@tab @code{M-83}
+@tab @code{DogsBark   }
+@tab @code{M-84}
+@tab @code{WET   }
+@item @code{M-85}
+@tab @code{ooohSCARY   }
+@tab @code{M-86}
+@tab @code{What the  }
+@tab @code{M-87}
+@tab @code{SynthToms   }
+@item @code{M-88}
+@tab @code{Kick   }
+@end multitable
+
 
 
 @bye
