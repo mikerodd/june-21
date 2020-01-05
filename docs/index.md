@@ -1,6 +1,6 @@
 ---
 title: June-21
-description: an Alpha-Juno 2 emulator using CSound & Cabbage
+description: an Alpha Juno MKS-50 emulator using CSound & Cabbage
 layout: default
 currentwinrelease_url: https://github.com/mikerodd/june-21/releases/download/v0.9.2/June-21_x64_0.9.2_Setup.exe
 currentlinuxrelease_url: https://github.com/mikerodd/june-21/releases/download/v0.9.2/vst-june-21-0.9.2-linux.zip
