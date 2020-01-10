@@ -10,7 +10,7 @@ You can also find many presets here : http://www.llamamusic.com/mks50/mks-50_pat
 
 It's still a work in progress, so not all presets will work as in the real gear, some presets might not be working.
 
-T
+
 *Have fun*
 
 
