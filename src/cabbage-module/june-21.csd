@@ -15,7 +15,7 @@
  
 <Cabbage>  
 bounds(0, 0, 0, 0)
-form caption("June-21 v{VERSION}"), size(800, 580), colour(26,26,26), pluginid("June-21") bundle("./imgs", "./presets","./libjsl.so", "libjsl.dll")
+form caption("June-21 v{VERSION}"), size(800, 580), colour(26,26,26), pluginid("June-21") bundle("./imgs", "./presets","./libjsl.so", "libjsl.dll","libjsl.dylib")
 
 keyboard bounds(90, 454, 588, 122)  
 

@@ -3,7 +3,7 @@
 ; Based on the Csound 6.09 Installer script by Mike Goggins. 
 
 #define MyAppName "June-21"
-#define MyAppVersion "0.9"
+#define MyAppVersion "{VERSION}"
 #define MyAppPublisher "MikeRodd"
 #define MyAppURL "https://github.com/mikerodd/june-21"
 #define BuildDir "/x64"
@@ -25,7 +25,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf64}\pluginfolder
 DisableProgramGroupPage=yes
 LicenseFile= "Utils/LICENSE"
-OutputBaseFilename=June-21_x64_{#MyAppVersion}_Setup
+OutputBaseFilename=setup_june-21_{#MyAppVersion}_x64
 SetupIconFile=Utils/june-21.ico
 Compression=lzma
 SolidCompression=yes
