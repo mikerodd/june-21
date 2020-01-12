@@ -17,7 +17,7 @@
 bounds(0, 0, 0, 0)
 form caption("June-21 v{VERSION}"), size(800, 580), colour(26,26,26), pluginid("June-21") bundle("./imgs", "./presets","./libjsl.so", "libjsl.dll","libjsl.dylib")
 
-keyboard bounds(90, 454, 588, 122)  
+keyboard bounds(14, 456, 588, 122)  
 
 
 
@@ -75,7 +75,7 @@ vslider bounds(426, 240, 32, 65) range(0, 3, 0, 1, 1) channel("hpffreq") $vslide
 
 button bounds(406, 94, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("PRESET", "PRESET") channel("grpPreset") value(1) fontcolour:1(0, 0, 0, 255)
 button bounds(406, 118, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("MEMORY", "MEMORY") channel("grpMemory") fontcolour:1(0, 0, 0, 255)
-button bounds(406, 142, 52, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("FILE", "FILE") channel("grpCartridge")  fontcolour:1(0, 0, 0, 255) , 
+button bounds(406, 142, 60, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("FILE", "FILE") channel("grpCartridge")  fontcolour:1(0, 0, 0, 255) , 
 
 
 
@@ -248,7 +248,7 @@ label bounds(410, 256, 20, 12) text("2") align("right")
 label bounds(410, 272, 20, 12) text("1") align("right")
 label bounds(410, 288, 20, 12) text("0") align("right")
 
-filebutton bounds(462, 142, 31, 20)  populate("*.SYX") text("...", "...") channel("openFile") colour:0(118, 118, 118, 255)
+filebutton bounds(469, 142, 24, 20)  populate("*.SYX") text("...", "...") channel("openFile") colour:0(118, 118, 118, 255)
 
 image bounds(718, 266, 20, 46)  file("imgs/dyn-link2.png")
 image bounds(322, 132, 20, 46)  file("imgs/dyn-link2.png")
@@ -281,25 +281,29 @@ label bounds(742, 364, 40, 12) text("RANGE")
 
 
 combobox bounds(726, 476, 71, 16) text("6 (juno)", "8", "16", "32") channel("maxvoice")
-label bounds(726, 462, 52, 12) text("# voices")
-label bounds(726, 496, 42, 12) text("used:")
+label bounds(674, 478, 52, 12) text("# voices") align("right")
+label bounds(684, 496, 42, 12) text("used:") align("right")
 
 
 
-label bounds(768, 496, 31, 12) identchannel("voicecount") text("0")
+label bounds(726, 496, 31, 12) identchannel("voicecount") text("0")
+label bounds(652, 512, 75, 12) text("sample rate:") align("right")
+label bounds(726, 512, 60, 12) identchannel("samplerate")
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
--n -d -+rtmidi=NULL -M0 -m0d --midi-key-cps=4  --midi-velocity=5  --opcode-lib=./libjsl.so ; OSX: libjsl.dylib; Windows: libjsl.dll
--n -d -+rtmidi=NULL -M0 -m0d --opcode-lib=./libjsl.so  ;--midi-key=4 --midi-velocity-amp=5
+-n -d -+rtmidi=NULL -M0 -m0d 
+--opcode-lib=./libjsl.so   ; OSX: libjsl.dylib; Windows: libjsl.dll
+;--use-system-sr
 </CsOptions>
 <CsInstruments>
 ; groupbox bounds(494, 52, 300, 29) ,  outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0) 
 
 ; Initialize the global variables. 
-sr=44100
+; no need for that : provided by Cabbage (to be verified)
+;sr=44100
 ;kr=441
-ksmps = 10
+;ksmps = 10
 nchnls = 2
 0dbfs = 1
 
@@ -495,10 +499,10 @@ givcfenvdu[] fillarray 0, 0.012, 0.044, 0.06, 0.0888, 0.12, 0.16, 0.208, 0.272, 
 gkpitchb = 0           // Pitchbend
 gkvibrat = 0           // vibrato
 gkmaxvoices = 6
-gkvoices[] fillarray -1, -1, -1, -1, -1, -1, -1, -1, 
-                     -1, -1, -1, -1, -1, -1, -1, -1,
-                     -1, -1, -1, -1, -1, -1, -1, -1,
-                     -1, -1, -1, -1, -1, -1, -1, -1
+gkvoices[] fillarray -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, 
+                     -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
+                     -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
+                     -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000
 gkmidinotes[]   fillarray -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,                           
@@ -517,7 +521,7 @@ gScurbank = gSBankPreset                                                       /
 giNameInput = 0                                                                // Name input mode indicator
 gicurletter = 0                                                                // current edited letter
 gSName = "             "                                                       // current tone name
-gSbufame = "             "                                                     // current tone name in buffer
+gSbufname = "             "                                                     // current tone name in buffer
 
 ;Author: Iain McCurdy (2012)
 ;http://iainmccurdy.org/csound.html
@@ -575,8 +579,6 @@ endop
 opcode dispLCD, i, S
     Sdisp xin
 
-    iLid chnget "lid"
-    iLid3 = iLid  * .6 + 0.4
     
     iIdent = 0
     label3:
@@ -595,9 +597,10 @@ endop
 // ----------------------------------------------------------------------------------------------------------------
 // Begin of Synth
 // ----------------------------------------------------------------------------------------------------------------
-opcode June21,a,kk
-    kcps,kvel xin
+opcode June21,a,kkk
+    kcps,kvel,kmidinote xin
 
+    kimdead init 0     ; will be 1 if I need to die (quietly with no click...)
   
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -645,6 +648,7 @@ giPreset       chnget "grpPreset"
 giMemory       chnget "grpMemory"
 giCartridge    chnget "grpCartridge"
 
+
 // ----------------------------------------------------------------------------------------------------------------
 // ENV Block 
 // ----------------------------------------------------------------------------------------------------------------
@@ -669,7 +673,13 @@ giCartridge    chnget "grpCartridge"
     endif 
 kEnvL = kEnv / 127
 kEnvVCF = kEnv
-kEnvG  linsegr 0, 0.0001, 1,0.02,0
+kEnvG  transegr     0, 0.0001, -4,
+                    1,0.05,-4,
+                    0
+kEnvGS  transegr     0, 0.0001, 0,
+                    1,0.3,0,
+                    0
+
 
 // ----------------------------------------------------------------------------------------------------------------
 // LFO Block
@@ -879,8 +889,7 @@ aOutVCFBlock reson atmp ,1.25 * kcutoff, kcutoff* 8  / iVcfReso, 2
 // ----------------------------------------------------------------------------------------------------------------
 // VCA Block
 // ----------------------------------------------------------------------------------------------------------------
-
-
+aOutVCABlock init 0
 if (iVcaEnv == 0) then
     aOutVCABlock = aOutVCFBlock * kEnvL // Normal
 elseif (iVcaEnv == 1) then
@@ -891,6 +900,14 @@ elseif (iVcaEnv == 3) then
     aOutVCABlock = aOutVCFBlock * kEnvG * gidynVcaRes[kvel]    // DGT  
 endif
 
+// if i'm in release mode and another or my note is played, or i've already beed told i'm dead
+krel release 
+if (((krel == 1) && (gkmidinotes[kmidinote] != -1)) || (kimdead != 0))  then 
+        
+//    printks "%d ", 0.1,gkmidinotes[kmidinote]
+    aOutVCABlock   =  aOutVCABlock   * kEnvGS  
+    kimdead = 1 
+endif 
 //aTmpOut = aOutVCABlock 
 //goto theend
 
@@ -901,6 +918,7 @@ endif
 // ----------------------------------------------------------------------------------------------------------------
 // Output
 // ----------------------------------------------------------------------------------------------------------------
+
 xout	aOutVCABlock  * giPostAmp * 1.2 / 127 
 
 
@@ -922,7 +940,7 @@ endin
 // One note 
 // ----------------------------------------------------------------------------------------------------------------
 instr	2	// Main instrument
-    asuml June21, p4, p5
+    asuml June21, p4, p5,p6
     chnmix asuml, "tochorus"
 endin
     
@@ -958,12 +976,11 @@ endin
 instr	100	// Midi Listener
     ichan  = 0 
     insno = 2                                           ; The main instrument
-    kvoice = -1
-    
+    kvoice = -1000
 	kstatus, kchan, kdata1, kdata2  midiin				;READ IN MIDI  kdata1 : note, kdata2 : velo
 	
 	kmaxvoice chnget "maxvoice" 
-	
+
 	if (kmaxvoice == 1) then
 	    gkmaxvoices = 6 
 	else 
@@ -974,25 +991,37 @@ instr	100	// Midi Listener
         if (kstatus == 144) then						;IF MIDI MESSAGE IS A NOTE...
 	        if (kdata2 > 0) then						;IF VELOCITY IS MORE THAN ZERO, I.E. NOT A NOTE OFF
                 kdx = 0                                 ; Get an available voice (if any) 
-                kvoice = -1 
-                loop:
-                    if (gkvoices[kdx] == -1) then
+                loop1:
+                    if (gkvoices[kdx] == - kdata1) then ; is a voice with the same note available ? 
                         kvoice = kdx
                         goto endloop
                     endif 
-                loop_lt kdx, 1, gkmaxvoices, loop
+                loop_lt kdx, 1, gkmaxvoices, loop1
+                if (kdx != gkmaxvoices)  goto endloop
+                kdx = 0                                 ; Get an available voice (if any) 
+                loop2:
+                    if (gkvoices[kdx] < 0) then
+                        kvoice = kdx
+                        goto endloop
+                    endif 
+                loop_lt kdx, 1, gkmaxvoices, loop2
                 endloop:
-	            if (kvoice != -1) then                  ; Can we play this note ? 
-	                gkvoices[kvoice] = kdata1
+	            if (kvoice != -1000)  then                  ; Can we play this note ? 
+  	                gkvoices[kvoice] = kdata1
 	                gkmidinotes[kdata1] = kvoice 
 	                ktmp = kvoice
-	 	            event "i",insno +(kdata1 * 0.001), 0, -1, cpsmidinn(kdata1), kdata2	;TRIGGER INSTRUMENT WITH A HELD NOTE. NOTE NUMBER TRANSMITTED AS p4, VELOCITY AS p5
+	 	            event "i",insno +(kdata1 * 0.001), 0, -1, cpsmidinn(kdata1), kdata2,kdata1	;TRIGGER INSTRUMENT WITH A HELD NOTE. NOTE NUMBER TRANSMITTED AS p4, VELOCITY AS p5
+                    /* reinit emitnote
+                    emitnote:
+                        kHandle  nstance insno +(i(kdata1) * 0.001), 0, -1, cpsmidinn(i(kdata1)), i(kdata2)
+                    rireturn   */
+	
                 endif
 	        else								        ;OTHERWISE (I.E. MUST BE A NOTE OFF / ZERO VELOCITY)
                 kvoice  = gkmidinotes[kdata1] 
-	            if (kvoice != -1) then 
+	            if (kvoice != -1000) then 
 	                kbranch = 4
-	                gkvoices[kvoice] = -1
+	                gkvoices[kvoice] = - gkvoices[kvoice]
                     gkmidinotes[kdata1] = - 1 
 	                turnoff2	insno + (kdata1 * 0.001), 4, 1			;TURN OFF INSTRUMENT WITH THIS SPECIFIC FRACTIONAL NOTE NUMBER
                 endif 
@@ -1000,9 +1029,9 @@ instr	100	// Midi Listener
 	    elseif kstatus==128 then					    ;IF MESSAGE USES A 'NOTE OFF' STATUS BYTE (128)
 	        turnoff2	insno+(kdata1*0.001),4,1	    ;TURN OFF INSTRUMENT WITH THIS SPECIFIC FRACTIONAL NOTE NUMBER
             kvoice  = gkmidinotes[kdata1] 
-	        printk 0.5, kdata1
+	        //printk 0.5, kdata1
 	        if (kvoice != -1) then 
-	            gkvoices[kvoice] = -1
+	            gkvoices[kvoice] = - gkvoices[kvoice]
                 gkmidinotes[kdata1] = - 1 
             endif 
         elseif (kstatus == 224) then                    ; Pitch bend
@@ -1028,7 +1057,7 @@ endin
 instr updateGUI
 
  
-    ktrig changed chnget:k("btb1"), chnget:k("btb2"), chnget:k("btb3"), chnget:k("btb4") , chnget:k("btb5"), chnget:k("btb6"), chnget:k("btb7"), chnget:k("btb8") , chnget:k("btn1"), chnget:k("btn2"), chnget:k("btn3"), chnget:k("btn4") , chnget:k("btn5"), chnget:k("btn6"), chnget:k("btn7"), chnget:k("btn8"),chnget:k("lid"), chnget:k("grpPreset"), chnget:k("grpMemory"), chnget:k("grpCartridge")
+    ktrig changed chnget:k("btb1"), chnget:k("btb2"), chnget:k("btb3"), chnget:k("btb4") , chnget:k("btb5"), chnget:k("btb6"), chnget:k("btb7"), chnget:k("btb8") , chnget:k("btn1"), chnget:k("btn2"), chnget:k("btn3"), chnget:k("btn4") , chnget:k("btn5"), chnget:k("btn6"), chnget:k("btn7"), chnget:k("btn8"), chnget:k("grpPreset"), chnget:k("grpMemory"), chnget:k("grpCartridge")
     
     if ktrig == 1  then 
         event "i", 1002, 0, 0           // Tone changed
@@ -1061,7 +1090,7 @@ instr updateGUI
             
     ktrig changed chnget:k("btpanic")
     if ktrig == 1 then
-        turnoff2 1,0,0
+        turnoff2 2,0,0
     endif 
     
 endin
@@ -1076,8 +1105,10 @@ instr 1004  // open a cartridge (.SYX file)
     if (strcmp(STmp,gScurcart) != 0) then 
         gScurcart = STmp
         chnset  1 ,  "grpCartridge"
+        printf_i "name: %s\n",1,gScurcart 
+        event "i", 1002, 0, 0
+        printf_i "après l'event\n",1
     endif
-    event "i", 1002, 0, 0
     
 endin    
 
@@ -1088,6 +1119,7 @@ instr 1002 // Tone changed
     gicurprog = 0
     iBank = 0 
     kblink = 0
+    printf_i "tone changed \n",1
 
     iTmp chnget "grpPreset"
     if (iTmp == 1) then
@@ -1121,25 +1153,12 @@ instr 1002 // Tone changed
             gicurprog = gicurprog + iIdent 
         endif
     loop_le iIdent, 1, 8, labelb2
-
     
     
+    printf_i "bank :%s\n",1,gScurbank
     gSName getjuname gScurbank,gicurprog  ,iBank  ; use of plugin to get the tone name from the midi bulk dump from synth
-    //printf_i"init gsname to %s\n",1, gSName
-
-    iLid chnget "lid"
-    iLid = iLid * 0.7
-    SDisplay2 sprintf "alpha(%f)" , iLid
-    chnset SDisplay2, "light"
-
-    iLid2 = iLid * 0.4
-    SDisplay sprintf "alpha(%f)" , iLid2 
-    chnset SDisplay, "backled"
-
                                     
     iLid3 dispLCD gSName
-    
-   
    
     iParm  getjuparm gScurbank, gicurprog, "dcoaftr"
     chnset iParm, "dcoaftr"
@@ -1230,13 +1249,13 @@ endin
 // ----------------------------------------------------------------------------------------------------------------
 instr 1005 // Copy the current tone in the buffer
     ; we're in copy mode 
-     printf_i "copy mode cart:%s, proc:%d\n", 1, gScurbank, gicurprog
+     //printf_i "copy mode cart:%s, proc:%d\n", 1, gScurbank, gicurprog
      iParm  setjuparm gScurbank, gicurprog, "vcalevl", 10
 
     iParm  chnget "lforate"  
     iParm2  setjuparm gScurbank, gicurprog, "lforate", iParm
     iParm  chnget "lfodely"  
-    printf_i "lfodely : %d\n",1, iParm
+    //printf_i "lfodely : %d\n",1, iParm
     iParm2  setjuparm gScurbank, gicurprog, "lfodely", iParm
     iParm  chnget "pulse"
     iParm2  setjuparm gScurbank, gicurprog, "pulse", iParm
@@ -1315,15 +1334,15 @@ endin
 // Paste the buffer into the current tone 
 // ----------------------------------------------------------------------------------------------------------------
 instr 1006   // Paste the buffer in the current tone 
-    if ((strcmp(gScurbank,gSBankPreset) != 0) && (strcmp(gScurbank,gSBankPreset) != 0)) then        
+    if ((strcmp(gScurbank,gSBankPreset) != 0) && (strcmp(gScurbank,gSBankMemory) != 0)) then        
         
           ; this is the cartridge, let's go ! 
         //printf_i "paste mode cart:%s, proc:%d\n", 1, gScurbank, gicurprog
         Stmp strsub gSName, 6
-        printf_i "call jupaste bank:'%s', prog:%d, name:'%s'\n", 1, gScurbank, gicurprog, gSbufname
+        //printf_i "call jupaste bank:'%s', prog:%d, name:'%s'\n", 1, gScurbank, gicurprog, gSbufname
         
         iTmp jupaste gScurbank, gicurprog, gSbufname
-        printf_i "return %d\n", 1, iTmp
+        //printf_i "return %d\n", 1, iTmp
         gkCopy = 1
         event_i "i", 1002, 0, 0
 
@@ -1399,8 +1418,12 @@ endin
 
 instr 3   // init data 
 
-gidcoenv[] loadarray "dat/gidcoenv.dat"
-//itmp initjubuf
+    gidcoenv[] loadarray "dat/gidcoenv.dat"
+
+    SIdent sprintfk "text(%d Hz)", sr
+    chnset SIdent, "samplerate"
+
+
 
 endin 
 
