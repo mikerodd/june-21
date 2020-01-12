@@ -1105,9 +1105,7 @@ instr 1004  // open a cartridge (.SYX file)
     if (strcmp(STmp,gScurcart) != 0) then 
         gScurcart = STmp
         chnset  1 ,  "grpCartridge"
-        printf_i "name: %s\n",1,gScurcart 
-        event "i", 1002, 0, 0
-        printf_i "après l'event\n",1
+        a1 subinstr 1002
     endif
     
 endin    
@@ -1119,7 +1117,6 @@ instr 1002 // Tone changed
     gicurprog = 0
     iBank = 0 
     kblink = 0
-    printf_i "tone changed \n",1
 
     iTmp chnget "grpPreset"
     if (iTmp == 1) then
@@ -1155,7 +1152,6 @@ instr 1002 // Tone changed
     loop_le iIdent, 1, 8, labelb2
     
     
-    printf_i "bank :%s\n",1,gScurbank
     gSName getjuname gScurbank,gicurprog  ,iBank  ; use of plugin to get the tone name from the midi bulk dump from synth
                                     
     iLid3 dispLCD gSName
@@ -1422,9 +1418,6 @@ instr 3   // init data
 
     SIdent sprintfk "text(%d Hz)", sr
     chnset SIdent, "samplerate"
-
-
-
 endin 
 
   
