@@ -21,8 +21,9 @@
         <ul>
           {% if site.show_downloads %}
             <li class="download"><a class="buttons" href="{{ page.currentwinrelease_url }}">Windows</a></li>
-            <li class="download"><a class="buttons" href="{{ page.currentlinuxrelease_url }}">Linux</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/mikerodd/june-21/raw/master/src/doc/manual.pdf">Manual</a></li>
+            <li class="download"><a class="buttons" href="{{ page.currentmacrelease_url }}">Linux</a></li>          
+            <li class="download"><a class="buttons" href="{{ page.currentlinuxrelease_url }}">Mac</a></li>
+            <li class="download"><a class="buttons" href="https://github.com/mikerodd/june-21/raw/master/src/doc/manual.pdf">Manual</a></li>
           
           {% endif %}
           <li><a class="buttons github" href="{{ site.github.repository_url }}">View On GitHub</a></li>
