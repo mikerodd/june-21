@@ -815,7 +815,8 @@ if (kSubLevel != 0) then
         aTmp = - aTmp * kSubLevel
     endif 
     aOsc3 = aTmp
-
+else 
+   aOsc3 = 0
 endif 
 
 ; -- Noise part
