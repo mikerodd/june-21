@@ -73,9 +73,9 @@ vslider bounds(200, 380, 31, 44) range(0, 1, 0, 1, 1) channel("chorus") $vslider
 vslider bounds(708, 228, 25, 66) range(0, 3, 0, 1, 1) channel("vcfenv") $vsliderstyle  
 vslider bounds(426, 240, 32, 65) range(0, 3, 0, 1, 1) channel("hpffreq") $vsliderstyle  
 
-button bounds(406, 94, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("PRESET", "PRESET") channel("grpPreset") value(1) fontcolour:1(0, 0, 0, 255)
-button bounds(406, 118, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("MEMORY", "MEMORY") channel("grpMemory") fontcolour:1(0, 0, 0, 255)
-button bounds(406, 142, 60, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("FILE", "FILE") channel("grpCartridge")  fontcolour:1(0, 0, 0, 255) , 
+button bounds(406, 82, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("PRESET", "PRESET") channel("grpPreset") value(1) fontcolour:1(0, 0, 0, 255)
+button bounds(406, 106, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("MEMORY", "MEMORY") channel("grpMemory") fontcolour:1(0, 0, 0, 255)
+button bounds(406, 130, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("USERCART", "USERCART") channel("grpCartridge")  identchannel("CartName") fontcolour:1(0, 0, 0, 255) 
 
 
 
@@ -248,7 +248,7 @@ label bounds(410, 256, 20, 12) text("2") align("right")
 label bounds(410, 272, 20, 12) text("1") align("right")
 label bounds(410, 288, 20, 12) text("0") align("right")
 
-filebutton bounds(469, 142, 24, 20)  populate("*.SYX") text("...", "...") channel("openFile") colour:0(118, 118, 118, 255)
+filebutton bounds(406, 154, 86, 20)  populate("*.SYX") text("Open File...", "Open File..") channel("openFile") colour:0(118, 118, 118, 255)
 
 image bounds(718, 266, 20, 46)  file("imgs/dyn-link2.png")
 image bounds(322, 132, 20, 46)  file("imgs/dyn-link2.png")
@@ -264,10 +264,10 @@ label bounds(30, 436, 70, 12) text("DYNAMICS") align("right")
 
 
 
-button bounds(406, 60, 45, 20) text("Copy", "Copy") channel("btcopy") identchannel("btcopyident") colour:0(118, 118, 118, 255) colour:1(118, 118, 118, 255)
-button bounds(450, 60, 42, 20) text("Paste", "Paste") channel("btpaste") identchannel("btpasteident") colour:0(118, 118, 118, 255) colour:1(120, 120, 120, 255)
+button bounds(406, 56, 45, 20) text("Copy", "Copy") channel("btcopy") identchannel("btcopyident") colour:0(118, 118, 118, 255) colour:1(118, 118, 118, 255)
+button bounds(450, 56, 42, 20) text("Paste", "Paste") channel("btpaste") identchannel("btpasteident") colour:0(118, 118, 118, 255) colour:1(120, 120, 120, 255)
 
-groupbox bounds(496, 52, 300, 32), outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0)   {
+groupbox bounds(496, 50, 300, 32), outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0)   {
 hslider bounds(26, 8, 253, 20) range(0, 63, 0, 1, 1) channel("letter")  identchannel("letterident")
 button bounds(4, 8, 20, 20) text("<", "<") channel("left") latched(0)
 button bounds(280, 8, 20, 20) text(">", ">") channel("right") latched(0)
@@ -523,8 +523,24 @@ gicurletter = 0                                                                /
 gSName = "             "                                                       // current tone name
 gSbufname = "             "                                                     // current tone name in buffer
 
+
+
+
+// ----------------------------------------------------------------------------------------------------------------
+;returns the name of a file path
+// ----------------------------------------------------------------------------------------------------------------
+opcode FilNam, S, S
+    Spath  xin
+    ipos   strrindex Spath, "/"	;look for the rightmost '/'
+    Snam   strsub    Spath, ipos+1	;extract the substring 
+       xout      Snam
+endop
+  
+
+// ----------------------------------------------------------------------------------------------------------------
 ;Author: Iain McCurdy (2012)
 ;http://iainmccurdy.org/csound.html
+// ----------------------------------------------------------------------------------------------------------------
 opcode	StChorus,aa,aakkakk
 	ainL,ainR,krate,kdepth,aoffset,kwidth,kmix	xin			;READ IN INPUT ARGUMENTS
 	ilfoshape	ftgentmp	0, 0, 131072, 19, 1, 0.5, 0,  0.5	;POSITIVE DOMAIN ONLY SINE WAVE
@@ -606,34 +622,34 @@ opcode June21,a,kkk
 // ----------------------------------------------------------------------------------------------------------------
 // Gets
 // ----------------------------------------------------------------------------------------------------------------
-iLfoRate        chnget "lforate"  
-iLfoDely        chnget "lfodely"  
-iPulse          chnget "pulse"
-iSawtooth       chnget "sawtooth"
-iSawtooth       = iSawtooth
-iSub            chnget "sub"
-iSub             = iSub
-iSubLvl         chnget "sublevl" 
+kLfoRate        chnget "lforate"  
+kLfoDely        chnget "lfodely"  
+kPulse          chnget "pulse"
+kSawtooth       chnget "sawtooth"
+kSawtooth       = kSawtooth
+kSub            chnget "sub"
+kSub             = kSub
+ktmpSubLvl         chnget "sublevl" 
 kpwpwm          chnget "pwpwm"
-iNoisLvl        chnget "noislvl"
-iNoisLvl         = iNoisLvl
-iPwmRate        chnget "pwmrate"
-iDcoRng         chnget "dcorng"
-iDcoLfo         chnget "dcolfo"
-iDcoEnvd        chnget "dcoenvd"
-iDcoEnv         chnget "dcoenv"    
-iDcoEnv = 3 - iDcoEnv   // slide upside down
-iHpfFreq        chnget "hpffreq" 
-iVcfFreq        chnget "vcffreq" 
-iVcfReso        chnget "vcfreso" 
-iVcfEnvd        chnget "vcfenvd" 
-iVcfEnv         chnget "vcfenv" 
-iVcfEnv = 3 - iVcfEnv   // slide upside down
-iVcfKybd        chnget "vcfkybd"
-iVcfLfo         chnget "vcflfo" 
-iVcaEnvd        chnget "vcaenvd" 
-iVcaEnv         chnget "vcaenv" 
-iVcaEnv = 3 - iVcaEnv   // slide upside down
+kNoisLvl        chnget "noislvl"
+kNoisLvl         = kNoisLvl
+kPwmRate        chnget "pwmrate"
+kDcoRng         chnget "dcorng"
+kDcoLfo         chnget "dcolfo"
+kDcoEnvd        chnget "dcoenvd"
+kDcoEnv         chnget "dcoenv"    
+kDcoEnv = 3 - kDcoEnv   // slide upside down
+kHpfFreq        chnget "hpffreq" 
+kVcfFreq        chnget "vcffreq" 
+kVcfReso        chnget "vcfreso" 
+kVcfEnvd        chnget "vcfenvd" 
+kVcfEnv         chnget "vcfenv" 
+kVcfEnv = 3 - kVcfEnv   // slide upside down
+kVcfKybd        chnget "vcfkybd"
+kVcfLfo         chnget "vcflfo" 
+/* iVcaEnvd        chnget "vcaenvd"  */
+kVcaEnv         chnget "vcaenv" 
+kVcaEnv = 3 - kVcaEnv   // slide upside down
 iEnvT1          chnget "envt1"
 iEnvT2          chnget "envt2"
 iEnvT3          chnget "envt3"
@@ -641,9 +657,9 @@ iEnvT4          chnget "envt4"
 iEnvL1          chnget "envl1"
 iEnvL2          chnget "envl2"
 iEnvL3          chnget "envl3"
-iDcoBnd         chnget "dcobnd"
+kDcoBnd         chnget "dcobnd"
 
-giPostAmp      chnget "vcalevl"
+gkPostAmp      chnget "vcalevl"
 giPreset       chnget "grpPreset"
 giMemory       chnget "grpMemory"
 giCartridge    chnget "grpCartridge"
@@ -653,9 +669,7 @@ giCartridge    chnget "grpCartridge"
 // ENV Block 
 // ----------------------------------------------------------------------------------------------------------------
 //kres expon ia, idur, ib
-//printf_i "courbe : %f %f %f %f %f %f %f \n",1, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2]*(iEnvL1-iEnvL2), iEnvL2, gienvt1[iEnvT3], iEnvL3, gienvt1[iEnvT4]
     if (iEnvL1 > iEnvL2) then 
-        //kEnv  linsegr  0, gienvt1[iEnvT1], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt3[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
         kEnv  transegr      0, gienvt1[iEnvT1],  0, 
                        iEnvL1, gienvt1[iEnvT2],  0, 
                        iEnvL2, gienvt3[iEnvT3], -4,
@@ -663,7 +677,6 @@ giCartridge    chnget "grpCartridge"
                        0
                        
     else
-        //kEnv linsegr 0, gienvt1[iEnvT1*iEnvL1/127], iEnvL1, gienvt1[iEnvT2], iEnvL2, gienvt4[iEnvT3], iEnvL3, gienvt4[iEnvT4],0
         kEnv transegr     0, gienvt1[iEnvT1*iEnvL1/127],  0,
                      iEnvL1, gienvt1[iEnvT2]           ,  0,
                      iEnvL2, gienvt4[iEnvT3]           , -4,
@@ -684,19 +697,19 @@ kEnvGS  transegr     0, 0.0001, 0,
 // ----------------------------------------------------------------------------------------------------------------
 // LFO Block
 // ----------------------------------------------------------------------------------------------------------------
-if (iLfoDely > 10) then 
+if (kLfoDely > 10) then 
     itmp = 1 
 else 
     itmp = 0 
 endif 
 
-kLfo            linseg 0,gilfodels[iLfoDely] , 0,itmp ,1 // Delay for LFO1 
-aLFO            lfo kLfo, gilforate[iLfoRate], 1                                // Rate for LFO 
+kLfo            linseg 0,gilfodels[i(kLfoDely)] , 0,itmp ,1 // Delay for LFO1 
+aLFO            lfo kLfo, gilforate[kLfoRate], 1                                // Rate for LFO 
 
 
 
-if (iPwmRate != 0) then
-    kLfoPw          lfo kpwpwm/2, gipwmrate[iPwmRate], 1                        // Rate for LFO PWM
+if (kPwmRate != 0) then
+    kLfoPw          lfo kpwpwm/2, gipwmrate[kPwmRate], 1                        // Rate for LFO PWM
     kLfoPw          = kLfoPw - kpwpwm/2
 else 
     kLfoPw = kpwpwm                                                     // Basicely No LFO PWM
@@ -709,36 +722,36 @@ endif
 // ----------------------------------------------------------------------------------------------------------------
 
 
-kbnd = gkpitchb * iDcoBnd / (12 * 64)
+kbnd = gkpitchb * kDcoBnd / (12 * 64)
 
 // Note
-kNote           =  kcps * (8  / (2^(iDcoRng + 2)))                        // Base note calculation : note * dcoRng correction 
-iNote = i(kcps) * (8  / (2^(iDcoRng + 2)))
-kNote           = (kNote  +  aLFO * (kNote * (gilfovals[iDcoLfo] + gkvibrat/1500) / 2)) * powoftwo(kbnd)   // note + lfo oscilation
+kNote           =  kcps * (8  / (2^(kDcoRng + 2)))                        // Base note calculation : note * dcoRng correction 
+kNotecps         = kcps * (8  / (2^(kDcoRng + 2)))
+kNote           = (kNotecps  +  aLFO * (kNotecps * (gilfovals[kDcoLfo] + gkvibrat/1500) / 2)) * powoftwo(kbnd)   // note + lfo oscilation
     
-if (iDcoEnv == 0) then    // Norm 
-    kNote = kNote + (iNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
-elseif (iDcoEnv == 1) then // Inv : 
-    kNote = kNote - (iNote/(130.9 * 8)) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
-elseif (iDcoEnv == 2) then // D-Norm 
-    kNote = kNote + (iNote/130.9) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
-elseif (iDcoEnv == 3) then // D-Inv 
-    kNote = kNote - (iNote/(130.9* 8)) * gidcoenv[128 *round(kEnvVCF) +  iDcoEnvd] 
+if (kDcoEnv == 0) then    // Norm 
+    kNote = kNote + (kNotecps/130.9) * gidcoenv[128 *round(kEnvVCF) +  kDcoEnvd] 
+elseif (kDcoEnv == 1) then // Inv : 
+    kNote = kNote - (kNotecps/(130.9 * 8)) * gidcoenv[128 *round(kEnvVCF) +  kDcoEnvd] 
+elseif (kDcoEnv == 2) then // D-Norm 
+    kNote = kNote + (kNotecps/130.9) * gidcoenv[128 *round(kEnvVCF) +  kDcoEnvd] 
+elseif (kDcoEnv == 3) then // D-Inv 
+    kNote = kNote - (kNotecps/(130.9* 8)) * gidcoenv[128 *round(kEnvVCF) +  kDcoEnvd] 
 endif
 
 
 
 ; -- Square part
-if (iPulse == 0) then 
+if (kPulse == 0) then 
     aOsc1 = 0
 else
-    if (iPulse == 1) then
-        aTmp  vco2  giAmp , kNote,10,0,0  // Square 
+    if (kPulse == 1) then
+        aTmp  vco2  giAmp , kNote, 10, 0, 0  // Square 
         aTmp = - aTmp
-    elseif (iPulse == 2) then 
-        aTmp   vco2  giAmp, kNote,2,0.75
+    elseif (kPulse == 2) then 
+        aTmp   vco2  giAmp, kNote, 2, 0.75
         aTmp = - aTmp
-    elseif (iPulse == 3) then
+    elseif (kPulse == 3) then
         aTmp   vco2  giAmp, kNote ,2,  0.5 - (kLfoPw)*0.49/127  
         aTmp = - aTmp    // move amplitude to signal up according to pw  -  kLfoPw/127
     endif 
@@ -748,27 +761,27 @@ endif
 
 
 ; -- Sawtooth part
-if (iSawtooth == 0) then 
+if (kSawtooth == 0) then 
     aOsc2  = 0
 else
     aSaw1 vco2  giAmp, kNote ,0
     
-    if (iSawtooth == 1) then
+    if (kSawtooth == 1) then
         aTmp           =  - aSaw1   
         
-    elseif (iSawtooth  == 2) then
+    elseif (kSawtooth  == 2) then
         aSquare1x2      vco2  1,kNote * 2, 10     // note * 2  
         aTmp           = (- aSaw1 + giAmp)  * (- aSquare1x2  + 1) / 4
 
-    elseif (iSawtooth == 3) then
+    elseif (kSawtooth == 3) then
         asquarepwm      vco2  1, kNote * 2, 2 ,  0.5 - (kLfoPw)*0.49/127  
         aTmp           = (- aSaw1 + giAmp) * (- asquarepwm + 1) / 2   // saw03
     
-    elseif (iSawtooth == 4) then
+    elseif (kSawtooth == 4) then
         asquare         vco2  1, kNote * 8, 10, 0.5, 0.5  // Gate for Sawtooth waves 
         aTmp           = (- aSaw1 + giAmp) * (- asquare  + 1)   // saw04
 
-    elseif (iSawtooth == 5) then
+    elseif (kSawtooth == 5) then
         aSquared2       vco2  1, kNote*2,10     // note / 2  
         asquared8       vco2  1, kNote* 8, 10, 0.5, 0.5  // note / 8
         aSquare1x201    =   (- aSquared2     + 1) / 2    // Gate for Sawtooth waves 
@@ -780,37 +793,37 @@ else
 endif
 
 ; -- Sub part
-if (iSubLvl == 0) then 
+if (ktmpSubLvl == 0) then 
     kSubLevel = 0
 else
-    kSubLevel = (2^(iSubLvl)) / 8
+    kSubLevel = (2^(ktmpSubLvl)) / 8
 endif
 
 
 if (kSubLevel != 0) then 
-    if (iSub == 0) then 
+    if (kSub == 0) then 
         aTmp   vco2  giAmp , kNote/2,10
         aTmp = -aTmp * kSubLevel
 
-    elseif (iSub == 1) then
+    elseif (kSub == 1) then
         aTmp vco2  giAmp, kNote/2 ,2,0.75
         aTmp = - aTmp * kSubLevel
 
-    elseif (iSub == 2) then
+    elseif (kSub == 2) then
         aSub1 vco2  1, kNote*2 ,10
         aSub2 vco2  1, kNote/2 ,10
         aTmp =   ((- aSub2 + 1) * (- aSub1 + 1) / 2 ) * kSubLevel 
 
-    elseif (iSub == 3) then
+    elseif (kSub == 3) then
         aSub1 vco2  giAmp, kNote*4 ,10
         aSub2 vco2  1, kNote/2 ,10
         aTmp =  ((- aSub2 + 1) * (- aSub1 + 1) / 2 )  * kSubLevel
 
-    elseif (iSub == 4) then
+    elseif (kSub == 4) then
         aTmp   vco2, giAmp , kNote/4,10
         aTmp = - aTmp * kSubLevel
 
-    elseif (iSub == 5) then
+    elseif (kSub == 5) then
         aTmp vco2   giAmp , kNote/4 ,2,0.75
         aTmp = - aTmp * kSubLevel
     endif 
@@ -820,10 +833,11 @@ else
 endif 
 
 ; -- Noise part
-aOsc4   noise  iNoisLvl / 6, -0.9
+aOsc4   noise  kNoisLvl / 6, -0.9
 
 ; Output VCO Block
-aOutVcoblock    =  aOsc1 * .25 + aOsc2 * .25 + aOsc3 * .25 + aOsc4 * .25
+aOutVcoblock =  aOsc1 * .2 + aOsc2 * .2 + aOsc3 * .2 + aOsc4 * .2
+
 
 //aTmpOut = aOutVcoblock    
 //goto theend
@@ -832,13 +846,13 @@ aOutVcoblock    =  aOsc1 * .25 + aOsc2 * .25 + aOsc3 * .25 + aOsc4 * .25
 // ----------------------------------------------------------------------------------------------------------------
 // HPF Block
 // ----------------------------------------------------------------------------------------------------------------
-if (iHpfFreq == 0) then
+if (kHpfFreq == 0) then
     aOutHPFBlock        pareq aOutVcoblock,106, 2, 0.7071067812
-elseif (iHpfFreq == 1) then
+elseif (kHpfFreq == 1) then
     aOutHPFBlock        = aOutVcoblock    
-elseif (iHpfFreq == 2) then
+elseif (kHpfFreq == 2) then
     aOutHPFBlock        mvchpf aOutVcoblock,124
-elseif (iHpfFreq == 3) then
+elseif (kHpfFreq == 3) then
     aOutHPFBlock        mvchpf aOutVcoblock ,220
 endif
 
@@ -853,20 +867,20 @@ endif
 //  kx = <cutoff Freq> + <lfo impact> + <env impact (with or without dynamics> + + correction
 //  <key follow impact>  : a ration of the frequency
 
-if (iVcfEnv == 0) then       // Normal
-    kx1 = (iVcfFreq + (  aLFO * iVcfLfo / 4  + kEnvVCF * iVcfEnvd / 127)) / 12   - 3.2 
-elseif (iVcfEnv == 1) then   // Inverted
-    kx1 = (iVcfFreq - ( aLFO * iVcfLfo / 4 + kEnvVCF * iVcfEnvd / 127)) / 12   - 3.2 
-elseif (iVcfEnv == 2) then   // D-Norm
-    kx1 = (iVcfFreq + ( aLFO * iVcfLfo / 4 +  (kvel / 127) * kEnvVCF * iVcfEnvd / 127)) / 12   - 3.2 
-elseif (iVcfEnv == 3) then   // dyn
-    kx1 = (iVcfFreq + ( aLFO * iVcfLfo / 4  + (kvel / 220) *  iVcfEnvd )) / 12   - 3.2 
+if (kVcfEnv == 0) then       // Normal
+    kx1 = (kVcfFreq + (  aLFO * kVcfLfo / 4  + kEnvVCF * kVcfEnvd / 127)) / 12   - 3.2 
+elseif (kVcfEnv == 1) then   // Inverted
+    kx1 = (kVcfFreq - ( aLFO * kVcfLfo / 4 + kEnvVCF * kVcfEnvd / 127)) / 12   - 3.2 
+elseif (kVcfEnv == 2) then   // D-Norm
+    kx1 = (kVcfFreq + ( aLFO * kVcfLfo / 4 +  (kvel / 127) * kEnvVCF * kVcfEnvd / 127)) / 12   - 3.2 
+elseif (kVcfEnv == 3) then   // dyn
+    kx1 = (kVcfFreq + ( aLFO * kVcfLfo / 4  + (kvel / 220) *  kVcfEnvd )) / 12   - 3.2 
 endif
 
 if kcps > 261.63 then        // Keyboard impact curves are not the same between lower than C4 and upper than C4 (C4 is the pivot)
-    kx2 = (givcfenvdu[iVcfKybd] * (kcps - 261.63) + 261.63)/261.63
+    kx2 = (givcfenvdu[kVcfKybd] * (kcps - 261.63) + 261.63)/261.63
 else 
-    kx2 = (givcfenvdl[iVcfKybd] * (kcps - 261.63) + 261.63)/261.63
+    kx2 = (givcfenvdl[kVcfKybd] * (kcps - 261.63) + 261.63)/261.63
 endif 
 
 kcutoff = 100 * powoftwo( kx1) * kx2 
@@ -880,7 +894,7 @@ if kcutoff> 10000 then
 endif
 
 atmp moogvcf aOutHPFBlock        , kcutoff , 0
-aOutVCFBlock reson atmp ,1.25 * kcutoff, kcutoff* 8  / iVcfReso, 2
+aOutVCFBlock reson atmp ,1.25 * kcutoff, kcutoff* 8  / kVcfReso, 2
 
 
 
@@ -891,24 +905,25 @@ aOutVCFBlock reson atmp ,1.25 * kcutoff, kcutoff* 8  / iVcfReso, 2
 // VCA Block
 // ----------------------------------------------------------------------------------------------------------------
 aOutVCABlock init 0
-if (iVcaEnv == 0) then
-    aOutVCABlock = aOutVCFBlock * kEnvL // Normal
-elseif (iVcaEnv == 1) then
-    aOutVCABlock = aOutVCFBlock * kEnvG   // GT
-elseif (iVcaEnv  == 2) then 
-    aOutVCABlock = aOutVCFBlock * kEnvL * gidynVcaRes[kvel]      // D-Normal  
-elseif (iVcaEnv == 3) then 
-    aOutVCABlock = aOutVCFBlock * kEnvG * gidynVcaRes[kvel]    // DGT  
+
+if (kVcaEnv == 0) then
+    aEnv interp	kEnvL	
+elseif (kVcaEnv == 1) then
+    aEnv interp	kEnvG
+elseif (kVcaEnv  == 2) then 
+    aEnv interp	kEnvL * gidynVcaRes[kvel]
+elseif (kVcaEnv == 3) then 
+    aEnv interp	kEnvG * gidynVcaRes[kvel]
 endif
+aOutVCABlock = aOutVCFBlock * aEnv 
 
 // if i'm in release mode and another or my note is played, or i've already beed told i'm dead
-krel release 
+/* krel release 
 if (((krel == 1) && (gkmidinotes[kmidinote] != -1)) || (kimdead != 0))  then 
-        
-//    printks "%d ", 0.1,gkmidinotes[kmidinote]
-    aOutVCABlock   =  aOutVCABlock   * kEnvGS  
+    aEnvG interp kEnvGS
+    //aOutVCABlock   =  aOutVCABlock   * aEnvG
     kimdead = 1 
-endif 
+endif  */
 //aTmpOut = aOutVCABlock 
 //goto theend
 
@@ -919,13 +934,14 @@ endif
 // ----------------------------------------------------------------------------------------------------------------
 // Output
 // ----------------------------------------------------------------------------------------------------------------
-
-xout	aOutVCABlock  * giPostAmp * 1.2 / 127 
+aTmpOut   atone aOutVCABlock   , 40    // filter below 40 Hz
+atmpout2 dcblock2 aOutVCABlock
+xout	atmpout2	* gkPostAmp / 127 
 
 
 theend:      
 
-//outs  aTmpOut * giPostAmp * 1.2 /127, aTmpOut * giPostAmp * 1.2 /127        
+//xout  aTmpOut * gkPostAmp * 1.2 /127
 endop
 
 
@@ -937,13 +953,6 @@ instr	1	// Dummy (to capture Cabbage Midi)
     // Nothing ...
 endin 
 
-// ----------------------------------------------------------------------------------------------------------------
-// One note 
-// ----------------------------------------------------------------------------------------------------------------
-instr	2	// Main instrument
-    asuml June21, p4, p5,p6
-    chnmix asuml, "tochorus"
-endin
     
         
         
@@ -962,7 +971,10 @@ instr EFFECT
     if (kchorus == 1) then 
         aoffset = 0
         aoutChorusL,aoutChorusR 	StChorus	asuml ,asuml , gicrsrate[kCrsRate], 0.2	, aoffset, 0.5, 0.5
-	    outs aoutChorusL,aoutChorusR 	
+        aL dcblock2 aoutChorusL
+        aR dcblock2 aoutChorusR
+        
+	    outs aL, aR
     else
 	    outs asuml , asuml
     endif 
@@ -976,7 +988,7 @@ endin
 // ----------------------------------------------------------------------------------------------------------------
 instr	100	// Midi Listener
     ichan  = 0 
-    insno = 2                                           ; The main instrument
+    insno = 200                                           ; The main instrument
     kvoice = -1000
 	kstatus, kchan, kdata1, kdata2  midiin				;READ IN MIDI  kdata1 : note, kdata2 : velo
 	
@@ -1050,6 +1062,14 @@ instr	100	// Midi Listener
 
 endin 
 
+// ----------------------------------------------------------------------------------------------------------------
+// One note 
+// ----------------------------------------------------------------------------------------------------------------
+instr	200	// Main instrument
+    asuml June21, p4, p5,p6
+    chnmix asuml, "tochorus"
+endin
+
                                                               
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -1106,6 +1126,10 @@ instr 1004  // open a cartridge (.SYX file)
     if (strcmp(STmp,gScurcart) != 0) then 
         gScurcart = STmp
         chnset  1 ,  "grpCartridge"
+        STmp FilNam gScurcart 
+        ipos strindex STmp ,"."
+        Stmp2 sprintf "text(%s, %s)" , strsub(STmp,0,ipos), strsub(STmp,0,ipos)
+        chnset Stmp2, "CartName"
         a1 subinstr 1002
     endif
     
@@ -1294,8 +1318,8 @@ instr 1005 // Copy the current tone in the buffer
     iParm2  setjuparm gScurbank, gicurprog, "vcfkybd", iParm
     iParm chnget "vcflfo" 
     iParm2  setjuparm gScurbank, gicurprog, "vcflfo", iParm
-    iParm chnget "vcaenvd" 
-    iParm2  setjuparm gScurbank, gicurprog, "vcaenvd", iParm
+/*    iParm chnget "vcaenvd" 
+    iParm2  setjuparm gScurbank, gicurprog, "vcaenvd", iParm*/
     iParm chnget "vcaenv" 
     iParm  = 3 - iParm // slide upside down
     iParm2  setjuparm gScurbank, gicurprog, "vcaenv", iParm
