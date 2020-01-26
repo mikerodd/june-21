@@ -917,13 +917,15 @@ elseif (kVcaEnv == 3) then
 endif
 aOutVCABlock = aOutVCFBlock * aEnv 
 
+/*  NOT ready for that yet : generate a lot of clicks
 // if i'm in release mode and another or my note is played, or i've already beed told i'm dead
-/* krel release 
+ krel release 
 if (((krel == 1) && (gkmidinotes[kmidinote] != -1)) || (kimdead != 0))  then 
     aEnvG interp kEnvGS
     //aOutVCABlock   =  aOutVCABlock   * aEnvG
     kimdead = 1 
-endif  */
+endif  
+*/
 //aTmpOut = aOutVCABlock 
 //goto theend
 
@@ -934,9 +936,7 @@ endif  */
 // ----------------------------------------------------------------------------------------------------------------
 // Output
 // ----------------------------------------------------------------------------------------------------------------
-aTmpOut   atone aOutVCABlock   , 40    // filter below 40 Hz
-atmpout2 dcblock2 aOutVCABlock
-xout	atmpout2	* gkPostAmp / 127 
+xout	aOutVCABlock* gkPostAmp / 127 
 
 
 theend:      
@@ -973,7 +973,6 @@ instr EFFECT
         aoutChorusL,aoutChorusR 	StChorus	asuml ,asuml , gicrsrate[kCrsRate], 0.2	, aoffset, 0.5, 0.5
         aL dcblock2 aoutChorusL
         aR dcblock2 aoutChorusR
-        
 	    outs aL, aR
     else
 	    outs asuml , asuml
@@ -1111,7 +1110,7 @@ instr updateGUI
             
     ktrig changed chnget:k("btpanic")
     if ktrig == 1 then
-        turnoff2 2,0,0
+        turnoff2 200,0,0
     endif 
     
 endin
