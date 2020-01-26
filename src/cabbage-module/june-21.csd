@@ -338,7 +338,7 @@ gilfovals[] fillarray 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.001567
 // Values of lfo delay in sec from 0-127 "LFO DLY"
 // approximate formula used:  exp([LDO DLY]/14.2-3)/10
 // NB : I  extrapolated those values from my 30 years old Juno-2, results weren't stable between measures...
-gilfodels[] fillarray 0.069000, 0.064100, 0.059200, 0.054300, 0.049400, 0.044500, 0.039600, 0.034700, 
+gilfodels[] fillarray 0       , 0.064100, 0.059200, 0.054300, 0.049400, 0.044500, 0.039600, 0.034700, 
                       0.029800, 0.024900, 0.020000, 0.018300, 0.016600, 0.014900, 0.013200, 0.011500, 
                       0.009800, 0.008100, 0.006400, 0.004700, 0.003000, 0.007500, 0.012000, 0.016500, 
                       0.021000, 0.025500, 0.030000, 0.034500, 0.039000, 0.043500, 0.048000, 0.053200, 
@@ -508,7 +508,8 @@ gkmidinotes[]   fillarray -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,                           
                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
 
-
+gkeycount = 0         // count of key pressed
+gaLFO = 0             // LFO 
 
 gSBankPreset = "./presets/FACTORYA.SYX"
 gSBankMemory = "./presets/FACTORYB.SYX"
@@ -622,8 +623,6 @@ opcode June21,a,kkk
 // ----------------------------------------------------------------------------------------------------------------
 // Gets
 // ----------------------------------------------------------------------------------------------------------------
-kLfoRate        chnget "lforate"  
-kLfoDely        chnget "lfodely"  
 kPulse          chnget "pulse"
 kSawtooth       chnget "sawtooth"
 kSawtooth       = kSawtooth
@@ -672,7 +671,7 @@ giCartridge    chnget "grpCartridge"
     if (iEnvL1 > iEnvL2) then 
         kEnv  transegr      0, gienvt1[iEnvT1],  0, 
                        iEnvL1, gienvt1[iEnvT2],  0, 
-                       iEnvL2, gienvt3[iEnvT3], -4,
+                       iEnvL2, gienvt3[iEnvT3], -2,
                        iEnvL3, gienvt4[iEnvT4], -4,
                        0
                        
@@ -695,19 +694,8 @@ kEnvGS  transegr     0, 0.0001, 0,
 
 
 // ----------------------------------------------------------------------------------------------------------------
-// LFO Block
+// LFO PW Block
 // ----------------------------------------------------------------------------------------------------------------
-if (kLfoDely > 10) then 
-    itmp = 1 
-else 
-    itmp = 0 
-endif 
-
-kLfo            linseg 0,gilfodels[i(kLfoDely)] , 0,itmp ,1 // Delay for LFO1 
-aLFO            lfo kLfo, gilforate[kLfoRate], 1                                // Rate for LFO 
-
-
-
 if (kPwmRate != 0) then
     kLfoPw          lfo kpwpwm/2, gipwmrate[kPwmRate], 1                        // Rate for LFO PWM
     kLfoPw          = kLfoPw - kpwpwm/2
@@ -720,23 +708,21 @@ endif
 // ----------------------------------------------------------------------------------------------------------------
 // DCO Block
 // ----------------------------------------------------------------------------------------------------------------
-
-
 kbnd = gkpitchb * kDcoBnd / (12 * 64)
 
 // Note
 kNote           =  kcps * (8  / (2^(kDcoRng + 2)))                        // Base note calculation : note * dcoRng correction 
 kNotecps         = kcps * (8  / (2^(kDcoRng + 2)))
-kNote           = (kNotecps  +  aLFO * (kNotecps * (gilfovals[kDcoLfo] + gkvibrat/1500) / 2)) * powoftwo(kbnd)   // note + lfo oscilation
+kNote           = (kNotecps  +  gaLFO * (kNotecps * (gilfovals[kDcoLfo] + gkvibrat/1500) / 2)) * powoftwo(kbnd)   // note + lfo oscilation
     
 if (kDcoEnv == 0) then    // Norm 
-    kNote = kNote + (kNotecps/130.9) * gidcoenv[128 *round(kEnvVCF) +  kDcoEnvd] 
+    kNote = kNote + (kNotecps/130.9) * gidcoenv[128 * round(kEnvVCF) +  kDcoEnvd] 
 elseif (kDcoEnv == 1) then // Inv : 
-    kNote = kNote - (kNotecps/(130.9 * 8)) * gidcoenv[128 *round(kEnvVCF) +  kDcoEnvd] 
+    kNote = kNote - (kNotecps/(130.9 * 8)) * gidcoenv[128 * round(kEnvVCF) +  kDcoEnvd] 
 elseif (kDcoEnv == 2) then // D-Norm 
-    kNote = kNote + (kNotecps/130.9) * gidcoenv[128 *round(kEnvVCF) +  kDcoEnvd] 
+    kNote = kNote + (kNotecps/130.9) * gidcoenv[128 * round(kEnvVCF) +  kDcoEnvd]  * (kvel / 127)
 elseif (kDcoEnv == 3) then // D-Inv 
-    kNote = kNote - (kNotecps/(130.9* 8)) * gidcoenv[128 *round(kEnvVCF) +  kDcoEnvd] 
+    kNote = kNote - (kNotecps/(130.9* 8)) * gidcoenv[128 * round(kEnvVCF) +  kDcoEnvd]  * (kvel / 127)
 endif
 
 
@@ -868,13 +854,13 @@ endif
 //  <key follow impact>  : a ration of the frequency
 
 if (kVcfEnv == 0) then       // Normal
-    kx1 = (kVcfFreq + (  aLFO * kVcfLfo / 4  + kEnvVCF * kVcfEnvd / 127)) / 12   - 3.2 
+    kx1 = (kVcfFreq + (  gaLFO * kVcfLfo / 4  + kEnvVCF * kVcfEnvd / 127)) / 12   - 3.2 
 elseif (kVcfEnv == 1) then   // Inverted
-    kx1 = (kVcfFreq - ( aLFO * kVcfLfo / 4 + kEnvVCF * kVcfEnvd / 127)) / 12   - 3.2 
+    kx1 = (kVcfFreq - ( gaLFO * kVcfLfo / 4 + kEnvVCF * kVcfEnvd / 127)) / 12   - 3.2 
 elseif (kVcfEnv == 2) then   // D-Norm
-    kx1 = (kVcfFreq + ( aLFO * kVcfLfo / 4 +  (kvel / 127) * kEnvVCF * kVcfEnvd / 127)) / 12   - 3.2 
+    kx1 = (kVcfFreq + ( gaLFO * kVcfLfo / 4 +  (kvel / 127) * kEnvVCF * kVcfEnvd / 127)) / 12   - 3.2 
 elseif (kVcfEnv == 3) then   // dyn
-    kx1 = (kVcfFreq + ( aLFO * kVcfLfo / 4  + (kvel / 220) *  kVcfEnvd )) / 12   - 3.2 
+    kx1 = (kVcfFreq + ( gaLFO * kVcfLfo / 4  + (kvel / 220) *  kVcfEnvd )) / 12   - 3.2 
 endif
 
 if kcps > 261.63 then        // Keyboard impact curves are not the same between lower than C4 and upper than C4 (C4 is the pivot)
@@ -957,10 +943,36 @@ endin
         
         
 
-// ----------------------------------------------------------------------------------------------------------------
-// Chorus block
-// ----------------------------------------------------------------------------------------------------------------
 instr EFFECT
+
+
+    // ----------------------------------------------------------------------------------------------------------------
+    // LFO block
+    // ----------------------------------------------------------------------------------------------------------------
+    kLfoRate        chnget "lforate"  
+    kLfoDely        chnget "lfodely"  
+
+    if (kLfoDely > 10) then 
+        ktmp = 1 
+    else 
+        ktmp = 0 
+    endif 
+    if (gkeycount == 0) then 
+        reinit lforeinit     // LFO delay is restarted when no note are pressed
+    endif
+    lforeinit:
+    if kLfoDely = 0 then
+        kLfoAmp = 1
+    else 
+        kLfoAmp            linseg 0,gilfodels[i(kLfoDely)] , 0,i(ktmp) ,1 // Delay for LFO1 
+    endif
+    rireturn 
+    gaLFO            lfo kLfoAmp, gilforate[kLfoRate], 1                                // Rate for LFO 
+
+
+    // ----------------------------------------------------------------------------------------------------------------
+    // Chorus block
+    // ----------------------------------------------------------------------------------------------------------------
     asuml chnget "tochorus"
     denorm asuml
     
@@ -991,6 +1003,8 @@ instr	100	// Midi Listener
     kvoice = -1000
 	kstatus, kchan, kdata1, kdata2  midiin				;READ IN MIDI  kdata1 : note, kdata2 : velo
 	
+	
+//	printks "voices :%3d %3d %3d %3d %3d %3d\n",1, gkvoices[0], gkvoices[1], gkvoices[2], gkvoices[3], gkvoices[4], gkvoices[5]
 	kmaxvoice chnget "maxvoice" 
 
 	if (kmaxvoice == 1) then
@@ -1003,6 +1017,7 @@ instr	100	// Midi Listener
         if (kstatus == 144) then						;IF MIDI MESSAGE IS A NOTE...
 	        if (kdata2 > 0) then						;IF VELOCITY IS MORE THAN ZERO, I.E. NOT A NOTE OFF
                 kdx = 0                                 ; Get an available voice (if any) 
+                gkeycount = gkeycount + 1               ; add a note to keycount
                 loop1:
                     if (gkvoices[kdx] == - kdata1) then ; is a voice with the same note available ? 
                         kvoice = kdx
@@ -1030,18 +1045,20 @@ instr	100	// Midi Listener
 	
                 endif
 	        else								        ;OTHERWISE (I.E. MUST BE A NOTE OFF / ZERO VELOCITY)
+                gkeycount = gkeycount - 1               
                 kvoice  = gkmidinotes[kdata1] 
 	            if (kvoice != -1000) then 
 	                kbranch = 4
 	                gkvoices[kvoice] = - gkvoices[kvoice]
                     gkmidinotes[kdata1] = - 1 
 	                turnoff2	insno + (kdata1 * 0.001), 4, 1			;TURN OFF INSTRUMENT WITH THIS SPECIFIC FRACTIONAL NOTE NUMBER
+	
                 endif 
 	        endif								
 	    elseif kstatus==128 then					    ;IF MESSAGE USES A 'NOTE OFF' STATUS BYTE (128)
+            gkeycount = gkeycount - 1               
 	        turnoff2	insno+(kdata1*0.001),4,1	    ;TURN OFF INSTRUMENT WITH THIS SPECIFIC FRACTIONAL NOTE NUMBER
             kvoice  = gkmidinotes[kdata1] 
-	        //printk 0.5, kdata1
 	        if (kvoice != -1) then 
 	            gkvoices[kvoice] = - gkvoices[kvoice]
                 gkmidinotes[kdata1] = - 1 
@@ -1054,7 +1071,6 @@ instr	100	// Midi Listener
 	
 	endif								;END OF CONDITIONAL BRANCH
 
-    //printk 0.5, cpsmidinn(kdata1)
     kactive	active	insno  		;...check number of active midi notes 
     SIdent sprintfk "text(%d)", kactive
     chnset SIdent, "voicecount"
