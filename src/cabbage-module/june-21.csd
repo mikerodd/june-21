@@ -1463,9 +1463,11 @@ endin
   
 </CsInstruments>
 <CsScore>
-i 100 0 3600            ; run midi scanning for 1 hour
-i "EFFECT" 0 z          ;causes Csound to run for about 7000 years...
-i "updateGUI"  0 [3600*24*7] ;read var stored in instr1
+; run everything for ever ...
+i 100 0 z             
+i "EFFECT" 0 z        
+i "updateGUI"  0 z 
+; ... extect init data !
 i 3 0 0 
 
 
