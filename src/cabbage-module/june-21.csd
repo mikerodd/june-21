@@ -1,3 +1,4 @@
+
 /* bounds(0, 0, 0, 0)
  This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -15,7 +16,7 @@
  
 <Cabbage>  
 bounds(0, 0, 0, 0)
-form caption("June-21 v{VERSION}"), size(800, 580), colour(26,26,26), pluginid("June-21") bundle("./imgs", "./presets","./libjsl.so", "libjsl.dll","libjsl.dylib")
+form caption("June-21 v{VERSION}"), size(800, 580), colour(26,26,26), pluginId("June") bundle("./imgs", "./presets","./libjsl.so", "libjsl.dll","libjsl.dylib")
 
 keyboard bounds(14, 456, 588, 122)  
 
@@ -27,35 +28,35 @@ image bounds(50, 4, 300, 45) file("imgs/june-21.png")
 
 
 
-#define rsliderstyle outlinecolour(255, 0, 0, 255) markercolour(255, 0, 0, 255) trackercolour(255, 0, 0, 255)
-#define vsliderstyle  trackercolour(255, 0, 0, 255)
+#define rsliderstyle outlineColour(255, 0, 0, 255) markerColour(255, 0, 0, 255) trackerColour(255, 0, 0, 255)
+#define vsliderstyle  trackerColour(255, 0, 0, 255)
 
 
 
 rslider bounds(8, 102, 44, 44), range(0, 127, 0, 1, 1),  channel("lforate"),  $rsliderstyle 
 rslider bounds(56, 102, 44, 44), range(0, 127, 0, 1, 1),  channel("lfodely"),  $rsliderstyle 
 rslider bounds(188, 102, 44, 44), range(0, 127, 0, 1, 1), channel("dcolfo") ,  $rsliderstyle 
-rslider bounds(236, 102, 44, 44), range(0, 127, 0, 1, 1), , channel("dcoenvd"), $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(310, 240, 44, 44) range(0, 127, 0, 1, 1) channel("pwpwm")   $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(358, 240, 44, 44) range(0, 127, 0, 1, 1) channel("pwmrate")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(488, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcffreq")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(536, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcfreso")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(632, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcfenvd") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(308, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envt1")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(236, 102, 44, 44), range(0, 127, 0, 1, 1), , channel("dcoenvd"), $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
+rslider bounds(310, 240, 44, 44) range(0, 127, 0, 1, 1) channel("pwpwm")   $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
+rslider bounds(358, 240, 44, 44) range(0, 127, 0, 1, 1) channel("pwmrate")  $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
+rslider bounds(488, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcffreq")  $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
+rslider bounds(536, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcfreso")  $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
+rslider bounds(632, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcfenvd") $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
+rslider bounds(308, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envt1")  $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
 rslider bounds(404, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envt2")  $rsliderstyle 
 rslider bounds(500, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envt3")  $rsliderstyle 
 rslider bounds(596, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envt4")  $rsliderstyle 
-rslider bounds(236, 380, 44, 44) range(0, 127, 0, 1, 1) channel("crsrate")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(584, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcflfo")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(742, 240, 44, 44) range(0, 15, 0, 1, 1) channel("vcfkybd")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
-rslider bounds(644, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envkybd")  $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(236, 380, 44, 44) range(0, 127, 0, 1, 1) channel("crsrate")  $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
+rslider bounds(584, 240, 44, 44) range(0, 127, 0, 1, 1) channel("vcflfo")  $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
+rslider bounds(742, 240, 44, 44) range(0, 15, 0, 1, 1) channel("vcfkybd")  $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
+rslider bounds(644, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envkybd")  $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
 rslider bounds(8, 378, 44, 44) range(0, 127, 0, 1, 1) channel("vcalevl") $rsliderstyle 
-rslider bounds(356, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl1") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(356, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl1") $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
 rslider bounds(452, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl2") $rsliderstyle 
 rslider bounds(548, 380, 44, 44) range(0, 127, 0, 1, 1) channel("envl3") $rsliderstyle 
 
-rslider bounds(0, 0, 47, 31) range(0.2, 1, 0.5, 1, 0.01) channel("lid") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255) text("light") visible(0)
-rslider bounds(740, 380, 44, 44) range(0, 12, 0, 1, 1) channel("dcobnd") $rsliderstyle markercolour(255, 0, 0, 255) outlinecolour(255, 0, 0, 255)
+rslider bounds(0, 0, 47, 31) range(0.2, 1, 0.5, 1, 0.01) channel("lid") $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255) text("light") visible(0)
+rslider bounds(740, 380, 44, 44) range(0, 12, 0, 1, 1) channel("dcobnd") $rsliderstyle markerColour(255, 0, 0, 255) outlineColour(255, 0, 0, 255)
 
 
 
@@ -73,9 +74,9 @@ vslider bounds(200, 380, 31, 44) range(0, 1, 0, 1, 1) channel("chorus") $vslider
 vslider bounds(708, 228, 25, 66) range(0, 3, 0, 1, 1) channel("vcfenv") $vsliderstyle  
 vslider bounds(426, 240, 32, 65) range(0, 3, 0, 1, 1) channel("hpffreq") $vsliderstyle  
 
-button bounds(406, 82, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("PRESET", "PRESET") channel("grpPreset") value(1) fontcolour:1(0, 0, 0, 255)
-button bounds(406, 106, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("MEMORY", "MEMORY") channel("grpMemory") fontcolour:1(0, 0, 0, 255)
-button bounds(406, 130, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radiogroup("1") text("USERCART", "USERCART") channel("grpCartridge")  identchannel("CartName") fontcolour:1(0, 0, 0, 255) 
+button bounds(406, 82, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radioGroup("1") text("PRESET", "PRESET") channel("grpPreset") value(1) fontColour:1(0, 0, 0, 255)
+button bounds(406, 106, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radioGroup("1") text("MEMORY", "MEMORY") channel("grpMemory") fontColour:1(0, 0, 0, 255)
+button bounds(406, 130, 86, 20) colour:0(118, 118, 118, 255) colour:1(255, 0, 0, 255) radioGroup("1") text("USERCART", "USERCART") channel("grpCartridge")  identChannel("CartName") fontColour:1(0, 0, 0, 255) 
 
 
 
@@ -130,58 +131,58 @@ label bounds(640, 362, 50, 12) text("FOLLOW")
 
 
 
-groupbox bounds(496, 4, 297, 49),  outlinecolour(160, 160, 160, 0) {
+groupbox bounds(496, 4, 297, 49),  outlineColour(160, 160, 160, 0) {
 image     file("imgs/panel.png") bounds(0, 0, 295, 47)
-image     file("imgs/backlcd.png") alpha(0) bounds(0, 2, 295, 47) identchannel("backled") alpha(0.2)
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(3, 11, 18, 27) identchannel("pos0")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(21, 11, 18, 27) identchannel("pos1")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(39, 11, 18, 27) identchannel("pos2")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(58, 11, 18, 27) identchannel("pos3")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(76, 11, 18, 27) identchannel("pos4")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(94, 11, 18, 27) identchannel("pos5")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(112, 11, 18, 27) identchannel("pos6")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(131, 11, 18, 27) identchannel("pos7")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(149, 11, 18, 27) identchannel("pos8")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(167, 11, 18, 27) identchannel("pos9")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(185, 11, 18, 27) identchannel("pos10")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(203, 11, 18, 27) identchannel("pos11")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(222, 11, 18, 27) identchannel("pos12")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(240, 11, 18, 27) identchannel("pos13")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(258, 11, 18, 27) identchannel("pos14")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(276, 11, 18, 27) identchannel("pos15")
-image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(3, 37, 20, 5) identchannel("underline") crop(0,25, 40, 10) visible(0) 
+image     file("imgs/backlcd.png") alpha(0) bounds(0, 2, 295, 47) identChannel("backled") alpha(0.2)
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(3, 11, 18, 27) identChannel("pos0")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(21, 11, 18, 27) identChannel("pos1")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(39, 11, 18, 27) identChannel("pos2")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(58, 11, 18, 27) identChannel("pos3")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(76, 11, 18, 27) identChannel("pos4")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(94, 11, 18, 27) identChannel("pos5")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(112, 11, 18, 27) identChannel("pos6")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(131, 11, 18, 27) identChannel("pos7")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(149, 11, 18, 27) identChannel("pos8")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(167, 11, 18, 27) identChannel("pos9")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(185, 11, 18, 27) identChannel("pos10")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(203, 11, 18, 27) identChannel("pos11")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(222, 11, 18, 27) identChannel("pos12")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(240, 11, 18, 27) identChannel("pos13")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(258, 11, 18, 27) identChannel("pos14")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(276, 11, 18, 27) identChannel("pos15")
+image     file("imgs/lcdcharsv3.png") alpha(0.7) bounds(3, 37, 20, 5) identChannel("underline") crop(0,25, 40, 10) visible(0) 
 
-image     file("imgs/alpha.png") bounds(0, 0, 295, 47) identchannel("light") alpha(0.35)
+image     file("imgs/alpha.png") bounds(0, 0, 295, 47) identChannel("light") alpha(0.35)
 }
 
 
 
-groupbox bounds(496, 86, 305, 90),  outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0) {
-button bounds(4, 19, 31, 17)  colour:0(118, 118, 118, 255) text("1", "1") colour:1(255, 0, 0, 255) channel("btb1") radiogroup("btbank") value(1)
-button bounds(41, 19, 31, 17)  colour:0(118, 118, 118, 255) text("2", "2") colour:1(255, 0, 0, 255) channel("btb2") radiogroup("btbank") 
-button bounds(78, 19, 31, 17) colour:0(118, 118, 118, 255) text("3", "3") colour:1(255, 0, 0, 255) channel("btb3") radiogroup("btbank") 
-button bounds(115, 19, 31, 17) colour:0(118, 118, 118, 255) text("4", "4") colour:1(255, 0, 0, 255) channel("btb4") radiogroup("btbank") 
-button bounds(153, 19, 31, 17) colour:0(118, 118, 118, 255) text("5", "5") colour:1(255, 0, 0, 255) channel("btb5") radiogroup("btbank") 
-button bounds(189, 19, 31, 17) colour:0(118, 118, 118, 255) text("6", "6") colour:1(255, 0, 0, 255) channel("btb6") radiogroup("btbank") 
-button bounds(226, 19, 31, 17) colour:0(118, 118, 118, 255) text("7", "7") colour:1(255, 0, 0, 255) channel("btb7") radiogroup("btbank") 
-button bounds(264, 19, 31, 17) colour:0(118, 118, 118, 255) text("8", "8") colour:1(255, 0, 0, 255) channel("btb8") radiogroup("btbank") 
+groupbox bounds(496, 86, 305, 90),  outlineColour(160, 160, 160, 0) colour(35, 35, 35, 0) {
+button bounds(4, 19, 31, 17)  colour:0(118, 118, 118, 255) text("1", "1") colour:1(255, 0, 0, 255) channel("btb1") radioGroup("btbank") value(1)
+button bounds(41, 19, 31, 17)  colour:0(118, 118, 118, 255) text("2", "2") colour:1(255, 0, 0, 255) channel("btb2") radioGroup("btbank") 
+button bounds(78, 19, 31, 17) colour:0(118, 118, 118, 255) text("3", "3") colour:1(255, 0, 0, 255) channel("btb3") radioGroup("btbank") 
+button bounds(115, 19, 31, 17) colour:0(118, 118, 118, 255) text("4", "4") colour:1(255, 0, 0, 255) channel("btb4") radioGroup("btbank") 
+button bounds(153, 19, 31, 17) colour:0(118, 118, 118, 255) text("5", "5") colour:1(255, 0, 0, 255) channel("btb5") radioGroup("btbank") 
+button bounds(189, 19, 31, 17) colour:0(118, 118, 118, 255) text("6", "6") colour:1(255, 0, 0, 255) channel("btb6") radioGroup("btbank") 
+button bounds(226, 19, 31, 17) colour:0(118, 118, 118, 255) text("7", "7") colour:1(255, 0, 0, 255) channel("btb7") radioGroup("btbank") 
+button bounds(264, 19, 31, 17) colour:0(118, 118, 118, 255) text("8", "8") colour:1(255, 0, 0, 255) channel("btb8") radioGroup("btbank") 
 
-button bounds(4, 64, 31, 17)  colour:0(118, 118, 118, 255) text("1", "1") colour:1(255, 0, 0, 255) channel("btn1") radiogroup("btnumber")  value(1)
-button bounds(41, 64, 31, 17)  colour:0(118, 118, 118, 255) text("2", "2") colour:1(255, 0, 0, 255) channel("btn2") radiogroup("btnumber") 
-button bounds(78, 64, 31, 17) colour:0(118, 118, 118, 255) text("3", "3") colour:1(255, 0, 0, 255) channel("btn3") radiogroup("btnumber") 
-button bounds(115, 64, 31, 17) colour:0(118, 118, 118, 255) text("4", "4") colour:1(255, 0, 0, 255) channel("btn4") radiogroup("btnumber") 
-button bounds(153, 64, 31, 17) colour:0(118, 118, 118, 255) text("5", "5") colour:1(255, 0, 0, 255) channel("btn5") radiogroup("btnumber") 
-button bounds(189, 64, 31, 17) colour:0(118, 118, 118, 255) text("6", "6") colour:1(255, 0, 0, 255) channel("btn6") radiogroup("btnumber") 
-button bounds(226, 64, 31, 17) colour:0(118, 118, 118, 255) text("7", "7") colour:1(255, 0, 0, 255) channel("btn7") radiogroup("btnumber") 
-button bounds(264, 64, 31, 17) colour:0(118, 118, 118, 255) text("8", "8") colour:1(255, 0, 0, 255) channel("btn8") radiogroup("btnumber") 
+button bounds(4, 64, 31, 17)  colour:0(118, 118, 118, 255) text("1", "1") colour:1(255, 0, 0, 255) channel("btn1") radioGroup("btnumber")  value(1)
+button bounds(41, 64, 31, 17)  colour:0(118, 118, 118, 255) text("2", "2") colour:1(255, 0, 0, 255) channel("btn2") radioGroup("btnumber") 
+button bounds(78, 64, 31, 17) colour:0(118, 118, 118, 255) text("3", "3") colour:1(255, 0, 0, 255) channel("btn3") radioGroup("btnumber") 
+button bounds(115, 64, 31, 17) colour:0(118, 118, 118, 255) text("4", "4") colour:1(255, 0, 0, 255) channel("btn4") radioGroup("btnumber") 
+button bounds(153, 64, 31, 17) colour:0(118, 118, 118, 255) text("5", "5") colour:1(255, 0, 0, 255) channel("btn5") radioGroup("btnumber") 
+button bounds(189, 64, 31, 17) colour:0(118, 118, 118, 255) text("6", "6") colour:1(255, 0, 0, 255) channel("btn6") radioGroup("btnumber") 
+button bounds(226, 64, 31, 17) colour:0(118, 118, 118, 255) text("7", "7") colour:1(255, 0, 0, 255) channel("btn7") radioGroup("btnumber") 
+button bounds(264, 64, 31, 17) colour:0(118, 118, 118, 255) text("8", "8") colour:1(255, 0, 0, 255) channel("btn8") radioGroup("btnumber") 
 
-button bounds(205, 10, 72, 1) colour:0(255, 0, 0, 255)  colour:1(255, 0, 0, 255) radiogroup("666") 
-button bounds(10, 10, 72, 1) colour:0(255, 0, 0, 255) colour:1(255, 0, 0, 255) radiogroup("666") 
-button bounds(205, 53, 72, 1) colour:0(255, 0, 0, 255)  colour:1(255, 0, 0, 255) radiogroup("666") 
-button bounds(10, 53, 72, 1) colour:0(255, 0, 0, 255) colour:1(255, 0, 0, 255) radiogroup("666")  
+button bounds(205, 10, 72, 1) colour:0(255, 0, 0, 255)  colour:1(255, 0, 0, 255) radioGroup("666") 
+button bounds(10, 10, 72, 1) colour:0(255, 0, 0, 255) colour:1(255, 0, 0, 255) radioGroup("666") 
+button bounds(205, 53, 72, 1) colour:0(255, 0, 0, 255)  colour:1(255, 0, 0, 255) radioGroup("666") 
+button bounds(10, 53, 72, 1) colour:0(255, 0, 0, 255) colour:1(255, 0, 0, 255) radioGroup("666")  
 
-label bounds(74, 3, 142, 11) text("BANK") fontcolour(255, 0, 0, 255) 
-label bounds(74, 46, 142, 11) text("NUMBER") fontcolour(255, 0, 0, 255) 
+label bounds(74, 3, 142, 11) text("BANK") fontColour(255, 0, 0, 255) 
+label bounds(74, 46, 142, 11) text("NUMBER") fontColour(255, 0, 0, 255) 
 
 }
 
@@ -264,11 +265,11 @@ label bounds(30, 436, 70, 12) text("DYNAMICS") align("right")
 
 
 
-button bounds(406, 56, 45, 20) text("Copy", "Copy") channel("btcopy") identchannel("btcopyident") colour:0(118, 118, 118, 255) colour:1(118, 118, 118, 255)
-button bounds(450, 56, 42, 20) text("Paste", "Paste") channel("btpaste") identchannel("btpasteident") colour:0(118, 118, 118, 255) colour:1(120, 120, 120, 255)
+button bounds(406, 56, 45, 20) text("Copy", "Copy") channel("btcopy") identChannel("btcopyident") colour:0(118, 118, 118, 255) colour:1(118, 118, 118, 255)
+button bounds(450, 56, 42, 20) text("Paste", "Paste") channel("btpaste") identChannel("btpasteident") colour:0(118, 118, 118, 255) colour:1(120, 120, 120, 255)
 
-groupbox bounds(496, 50, 300, 32), outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0)   {
-hslider bounds(26, 8, 253, 20) range(0, 63, 0, 1, 1) channel("letter")  identchannel("letterident")
+groupbox bounds(496, 50, 300, 32), outlineColour(160, 160, 160, 0) colour(35, 35, 35, 0)   {
+hslider bounds(26, 8, 253, 20) range(0, 63, 0, 1, 1) channel("letter")  identChannel("letterident")
 button bounds(4, 8, 20, 20) text("<", "<") channel("left") latched(0)
 button bounds(280, 8, 20, 20) text(">", ">") channel("right") latched(0)
 
@@ -286,18 +287,18 @@ label bounds(684, 496, 42, 12) text("used:") align("right")
 
 
 
-label bounds(726, 496, 31, 12) identchannel("voicecount") text("0")
+label bounds(726, 496, 31, 12) identChannel("voicecount") text("0")
 label bounds(652, 512, 75, 12) text("sample rate:") align("right")
-label bounds(726, 512, 60, 12) identchannel("samplerate")
+label bounds(726, 512, 60, 12) identChannel("samplerate")
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
--n -d -+rtmidi=NULL -M0 -m0d 
---opcode-lib=./libjsl.so   ; OSX: libjsl.dylib; Windows: libjsl.dll
+-n -d -+rtmidi=NULL -M0 -m0d --opcode-lib=/home/michel/Bureau/libjsl.so   
+; OSX: libjsl.dylib; Windows: libjsl.dll
 ;--use-system-sr
 </CsOptions>
 <CsInstruments>
-; groupbox bounds(494, 52, 300, 29) ,  outlinecolour(160, 160, 160, 0) colour(35, 35, 35, 0) 
+; groupbox bounds(494, 52, 300, 29) ,  outlineColour(160, 160, 160, 0) colour(35, 35, 35, 0) 
 
 ; Initialize the global variables. 
 ; no need for that : provided by Cabbage (to be verified)
@@ -591,7 +592,7 @@ endop
 
 
 // ----------------------------------------------------------------------------------------------------------------
-// Display LCD characters, use channel "lid" and identchannels pos[1-16] 
+// Display LCD characters, use channel "lid" and identChannels pos[1-16] 
 // ----------------------------------------------------------------------------------------------------------------
 opcode dispLCD, i, S
     Sdisp xin
