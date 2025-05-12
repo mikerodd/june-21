@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # modify this if needed
-innodir=~/.wine/drive_c/users/michel/Local\ Settings/Application\ Data/Programs/Inno\ Setup\ 6
+innodir=~/.wine/drive_c/Program\ Files\ \(x86\)/Inno\ Setup\ 6/
 
 builddir=tmpDir
 j21dir=june-21
